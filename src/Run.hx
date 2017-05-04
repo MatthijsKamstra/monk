@@ -49,13 +49,13 @@ class Run {
 					isJpegOptim = true;
 				case 'clear':
 					trace('clear www');
+					// [mck] make sure there is an yes and no possibility
 					FileSystem.deleteDirectory('${projectFolder}/${App.EXPORT_FOLDER}');
 				case 'test':
 					initTest();
 				case 'scaffold', 'scafold', 'skafold', 'skaffold':
 					initScaffold();
 				case 'prepare':
-					// trace ('prepare');
 					imagePrepare(projectFolder);
 				case 'generate':
 					initGenerate();
@@ -82,18 +82,16 @@ class Run {
 		var posts:Array<Post> = getPosts(projectFolder);
 		var photos:Array<Photo> = getPhotos(projectFolder);
 		// var tags:Array<String> = Post.getPostTags(posts);
-		// FileSystem.copyDirectoryRecursively('${srcDir}/content', '${binDir}/content');
 
 		// Start HTML generation
-		// var layoutHtml = getAndValidateLayoutHtml(srcDir, config, posts, pages);
-		// generateHtmlPages(posts, pages, tags, layoutHtml, srcDir, binDir, config);
 		generateHtmlPages(posts, pages, photos);
 		// generateRssFeed(posts, binDir, config);
-
-		// trace('Generated index page, ${pages.length} page(s), and ${posts.length} post(s).');
-
 	}
 
+	/**
+	 *  scaffold a Monk project with images, folders, config, etc
+	 *  the whole shabang
+	 */
 	function initScaffold(){
 		Sys.println (':: ${App.MONK} :: scaffold');
 
@@ -116,11 +114,11 @@ class Run {
 
 			var fileName = _arr[i];
 
-			if(fileName.startsWith(".")) continue; // ignore invisible (OSX) files like ".DS_Store"
-			if(fileName.startsWith('_')) continue; // ignore files starting with "_"
+			if(fileName.startsWith(".")) continue; 			// ignore invisible (OSX) files like ".DS_Store"
+			if(fileName.startsWith('_')) continue; 			// ignore files starting with "_"
 
 			// [mck] ignore these files/folders
-			if(fileName == App.EXPORT_FOLDER) continue;					// ignore www (export) folder
+			if(fileName == App.EXPORT_FOLDER) continue;		// ignore www (export) folder
 			if(fileName == 'config.json') continue;			// ignore config.json
 			if(fileName.startsWith('theme')) continue;		// ignore any folder that starts with "theme"
 
@@ -232,27 +230,35 @@ class Run {
 	// ____________________________________ generate ____________________________________
 
 	function generateHtmlPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
-		generateHtmlFilesForPages(pages);
+		generateHtmlFilesForPages(pages, photos);
 		generateHtmlFilesForPosts(posts, pages);
 		generatePhotos(photos, pages);
 	}
 
-	private function generateHtmlFilesForPages(pages:Array<Page>) {
+	private function generateHtmlFilesForPages(pages:Array<Page>, photos:Array<Photo>) {
 		// var template = haxe.Resource.getString('pagesTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/page.html' );
 		for (page in pages) {
-			var nav = '';
+			var nav_pages = '';
 			for(p in pages){
 				var klass = '';
 				if(page.title == p.title) klass = ' class="active"';
-				nav += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
+				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
 			}
-			var obj = {
-				 content : page.content,
-				 navigation: nav,
-				 title: page.title
-			}
-			createWithGenTemplate(App.EXPORT_FOLDER, '${page.url}.html', template, obj);
+			var nav_photo = '';
+			// for(ph in photos){
+			// 	var klass = '';
+			// 	// if(page.title == p.title) klass = ' class="active"';
+			// 	nav_photo += '<li${klass}><a href="${ph.url}.html">${ph.title}</a></li>';
+			// }
+			var templateObj = {
+				title: page.title,
+				page_navigation : nav_pages,
+				post_navigation : '<!-- post_navigation -->',
+				photo_navigation : nav_photo,
+				content: page.content
+			};
+			createWithGenTemplate(App.EXPORT_FOLDER, '${page.url}.html', template, templateObj);
 		}
 	}
 
@@ -281,18 +287,11 @@ class Run {
 		// var str = haxe.Resource.getString('indexTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/index.html' );
 
-
 		var tempSubArr = [];
-
-		var nav_pages = '';
-		for(p in pages){
-			var klass = '';
-			nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
-		}
 
 		// create photo folders
 		for (photo in photos){
-
+			// store unique names in arr
 			if(tempSubArr.indexOf(photo.folders) == -1) tempSubArr.push(photo.folders);
 
 			// create directories
@@ -332,10 +331,14 @@ class Run {
 							<img src="${thumb}" class="full" data-folder="${photo.folders}" data-img="${photo.fileName}.jpg" width="${photo.width}" height="${photo.height}">
 						</div>
 					'.replace('\t','').replace('\n',''); // strip tabs and returns
-
-
 				}
 			}
+			var nav_pages = '';
+			for(p in pages){
+				var klass = '';
+				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
+			}
+
 			var nav_photo = '';
 			for(folder in tempSubArr){
 				var klass = '';
@@ -357,7 +360,7 @@ class Run {
 			}
 
 			html = html.replace('${folder}/','');
-			// nav_pages = nav_pages.replace('${folder}/','');
+			nav_pages = nav_pages.replace('href="','href="../../');
 			nav_photo = nav_photo.replace('${App.PHOTOS}/','../../${App.PHOTOS}/');
 			var templateObj = {
 				title : 'foo',
@@ -617,35 +620,44 @@ class Run {
 	/**
 	 *  create files with templates
 	 *
-	 *  @param path -
-	 *  @param name -
-	 *  @param template -
-	 *  @param templateObj -
+	 *  @param path 			path to save file
+	 *  @param name 			name of file
+	 *  @param template 		string content of template
+	 *  @param templateObj 		object with extra data, lazy way of injecting data
 	 */
 	function createWithGenTemplate(path:String, name:String, template:String, templateObj:Dynamic) : Void {
 
 		// trace(path, name, 'template', 'html', nav, title);
 
+		// [mck] default config info
 		var defaultTemplateObj = {
 			site_title : config.monkTitle,
 			theme_dir : config.monkTheme,
 			backgroundcolor: config.monkBackgroundcolor,
 		}
-		// trace(templateObj);
 
+		// [mck] merge objects (defaultTemplateObj and templateObj)
 		var obj = Reflect.copy(defaultTemplateObj);
 		for( ff in Reflect.fields(templateObj) ){
 			Reflect.setField (obj, ff, Reflect.field(templateObj, ff));
 		}
 
-
-
-		trace(obj);
-
         var t = new haxe.Template(template);
         var output = t.execute(obj);
-		// [mck] if this is the root, do nothing, if this is other folder add css to correct folder
-		if('$path/$name' != '${App.EXPORT_FOLDER}/index.html') output =  output.replace('${config.monkTheme}','../../${config.monkTheme}').replace('href="favicon.ico"','href="../../favicon.ico"');
+
+
+		// [mck] if this is the root, do nothing, if this is other folder add css/favicon to correct folder
+		var slashArr = '$path/$name'.split('/');
+		var tpath = '';
+		switch (slashArr.length) {
+			case 2: tpath = '';
+			case 3: tpath = '../';
+			case 4: tpath = '../../';
+			case 5: tpath = '../../../';
+		}
+		// trace(slashArr, slashArr.length, tpath);
+		output =  output.replace('${config.monkTheme}','${tpath}${config.monkTheme}').replace('href="favicon.ico"','href="${tpath}favicon.ico"');
+
 		createFile(path, name, output);
 		// Sys.println('\tcreate template in "${path}/${name}"');
 	}

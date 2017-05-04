@@ -22,6 +22,9 @@ class Main {
 
 	var isHomepage : Bool = false;
 
+	var previousfromTop : Float = 0;
+	var scrollUpCounter : Int = 0;
+
 	public function new () {
 		console.log('${App.MONK} version: ${App.VERSION}' );
 
@@ -68,24 +71,35 @@ class Main {
 
 	function initScroll(){
 		var fromTop = new JQuery(document).scrollTop();
+		var navHeight = new JQuery('nav').height();
 
-		if(fromTop>50) {
+		if(fromTop>navHeight) {
 			new JQuery('.brand-name').addClass('brand-name-hide');
 			new JQuery('#brand').addClass('brand-img-show');
 			new JQuery('nav').addClass('hide');
 		}
 
-		if(fromTop<50) {
+		if(fromTop<navHeight) {
 			new JQuery('.brand-name').removeClass('brand-name-hide');
 			new JQuery('#brand').removeClass('brand-img-show');
 			new JQuery('nav').removeClass('hide');
 		}
 
+		// [mck] scroll up and show nav
+		if (fromTop < previousfromTop){
+			// [mck] TODO make this about distance not about times triggered
+			scrollUpCounter++;
+			// trace('upscroll code (${scrollUpCounter})');
+			if(scrollUpCounter >= 30){
+				new JQuery('.brand-name').removeClass('brand-name-hide');
+				new JQuery('#brand').removeClass('brand-img-show');
+				new JQuery('nav').removeClass('hide');
+			}
+		} else {
+			scrollUpCounter = 0;
+		}
+		previousfromTop = fromTop;
 
-
-
-		// if(fromTop>50) new JQuery('.brand-name').hide();
-		// if(fromTop<50) new JQuery('.brand-name').show();
 
 		for ( i in 0 ... divArr.length ) {
 			var div = divArr[i];
@@ -115,14 +129,12 @@ class Main {
 		for ( i in 0 ... _arr.length ) {
 			var _div = _arr[i];
 
-
 			var folderSizeName = Std.string(App.photoFileSizeArray[App.photoFileSizeArray.length-1]);
 			var w = new JQuery(window).width();
 			for ( i in 0 ... App.photoFileSizeArray.length ) {
 				var value = App.photoFileSizeArray[i];
 				if(w <= value) folderSizeName = Std.string(value);
 			}
-
 
 			var dataFolder = new JQuery(_div).find('img').attr('data-folder');
 			var dataImg = new JQuery(_div).find('img').attr('data-img');
@@ -134,30 +146,5 @@ class Main {
 		}
 	}
 
-
-/*
-	// slideArr = JQuery.makeArray(new JQuery('.slide'));
-
-	// trace(slideArr.length);
-
-	// for ( i in 0 ... slideArr.length ) {
-	// 	var el : js.html.DivElement = cast(slideArr[i]);
-
-	// 	map.set(el, false);
-
-	// 	trace(new JQuery(el).offset(), new JQuery(el).height());
-
-	// 	// trace(new JQuery('${slideArr[i]} img'));//.css({border:'2px solid pink'});
-	// 	// trace(new JQuery(el).find('img').css({border:'2px solid pink'}));
-	// 	// new JQuery(el).find('img').attr('src','https://dummyimage.com/3000x2000/0cf528/fff.jpg&text=test+image');
-
-
-	// 	trace(new JQuery(el).find('img').attr('data-folder'));
-	// 	trace(new JQuery(el).find('img').attr('data-img'));
-	// }
-*/
-
-	static public function main () {
-		var app = new Main ();
-	}
+	static public function main () { var app = new Main (); }
 }

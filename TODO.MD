@@ -8,6 +8,9 @@
 - color lib
 - markdown lib
 
+- extend info from config, just because we can
+
+
 
 color #FF9900
 

@@ -11,6 +11,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
     font-style: normal;
+    font-size: 120%;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
@@ -36,25 +37,75 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
 }
 
+/**
+ * grid.css
+ *
+ * @source: https://github.com/twbs/bootstrap/blob/v4-dev/dist/css/bootstrap-grid.css
+ * ___________________________________________
+ */
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px;
+	padding-left: 15px;
+}
 
+/* Extra small devices (phones, less than 768px) */
+@media (min-width: 576px) {
+	.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		width: 540px;
+		max-width: 100%;
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		width: 720px;
+		max-width: 100%;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		width: 960px;
+		max-width: 100%;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.container {
+		padding-right: 15px;
+		padding-left: 15px;
+		width: 1140px;
+		max-width: 100%;
+	}
+}
 
 /* brand
 -------------------------------------------- */
-
 #brand{
     z-index: 2;
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
-    line-height: 50px;
+    line-height: 60px;
 }
 
 #brand > img {
     position: absolute;
     border-radius: 0px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     left: 0px;
     top: 0px;
     transition-timing-function: ease-out;
@@ -80,12 +131,12 @@ h1, h2, h3, h4, h5, h6 {
     transition-delay: 0s;
 }
 
-#brand > .brand-name {
+#brand > a > .brand-name {
     margin: 0;
     padding: 0;
     left: 65px;
     font-family: 'Lato';
-    font-size: 1.6em;
+    font-size: 1.3em;
     color: white;
     position: absolute;
     white-space: nowrap;
@@ -95,11 +146,11 @@ h1, h2, h3, h4, h5, h6 {
     transition-timing-function: cubic-bezier(.48,.25,.54,1.18);
 }
 
-#brand > .brand-name:hover {
+#brand > a > .brand-name:hover {
     left: 55px;
 }
 
-#brand > .brand-name-hide {
+#brand > a > .brand-name-hide {
     left: -250px;
 }
 
@@ -109,6 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 -------------------------------------------- */
 nav.horizontal{
 
+    background-color: #212121;
     font-family: 'Lato';
 
     position: fixed;
@@ -124,7 +176,7 @@ nav.horizontal{
 }
 
 nav.horizontal.hide{
-    top: -50px;
+    top: -60px;
 }
 
 nav.horizontal ul {
@@ -136,12 +188,10 @@ nav.horizontal ul {
 }
 
 nav.horizontal li {
-	line-height: 40px;
 	text-align: left;
 	width: 110px;
-	border-bottom: none;
-	height: 50px;
-	line-height: 50px;
+	height: 60px;
+	line-height: 60px;
 	display: inline-block;
 	margin-right: -4px;
 }
@@ -151,13 +201,12 @@ nav.horizontal a {
     color: #fff;
     display: block;
     padding-left: 15px;
-    border-bottom: none;
-    border-bottom: 1px solid #888;
+    padding-right: 15px;
     transition: .3s background-color;
 }
 
 nav.horizontal a:hover {
-    background-color: #005f5f;
+    background-color: #FF4500;
 }
 
 nav.horizontal a.active {
@@ -197,40 +246,11 @@ nav.horizontal li ul li {
 
 
 
-
-
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px dashed;
-    border-top: 4px solid\9;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+/* post / pages
+-------------------------------------------- */
+.post, .page {
+    padding-top: 70px;
 }
-
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
 
 
 /* images

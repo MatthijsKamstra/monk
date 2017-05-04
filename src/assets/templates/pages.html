@@ -1,47 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
 	<meta name="description" content="">
 	<meta name="author" content="">
+
 	<link rel="icon" href="./favicon.ico">
 
 	<title>::site_title:: | ::title::</title>
 
-	<!-- Import Google Icon Font -->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Import Compiled and minified materialize.css -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<!-- normalize.css -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">
+
+	<!-- Lato Roboto light -->
+	<!-- https://fonts.google.com/specimen/Lato?selection.family=Lato|Roboto:300 -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:100i,300i,400i|Roboto:300" rel="stylesheet">
 
 	<!-- monk.css -->
-	<!--<link rel="stylesheet" href="::theme_dir::/monk.css">-->
+	<link rel="stylesheet" href="::theme_dir::/monk.css">
 </head>
 
 <body class="page">
 
-	<nav class="orange darken-3" role="navigation">
-		<div class="nav-wrapper container">
-			<a href="#!" class="brand-logo">Logo</a>
-			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-			<ul class="right hide-on-med-and-down">
-				::navigation::
-			</ul>
-			<ul class="side-nav" id="mobile-demo">
-				::navigation::
+	<div id="brand">
+		<a href="/"><p class="brand-name">Matthijs Kamstra</p></a>
+		<img src="https://pbs.twimg.com/profile_images/629553667339907073/mGoAh9j2.jpg" alt="logo">
+	</div>
+
+	<nav class="horizontal">
+		<div class="container">
+			<ul>
+				<li><a href="index.html">projects &#9662;</a>
+					<ul>
+						::photo_navigation::
+					</ul>
+				</li>
+				::page_navigation::
 			</ul>
 		</div>
 	</nav>
 
+	<!--test -->
 	<div class="container">
 		::content::
 	</div>
 
-	<!-- Import jQuery before materialize.js -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Monk scripts -->
 	<script src="::theme_dir::/monk.js"></script>
 </body>
