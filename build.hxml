@@ -1,0 +1,58 @@
+-lib markdown
+-cp src
+
+--each
+
+-main Main
+-js bin/monk.js
+-D source-map-content
+-D state=debug
+-debug
+-dce full
+
+
+--next
+
+-main Main
+-js src/assets/theme0/monk.js
+-dce full
+
+
+--next
+
+# Resources like templates
+-resource src/assets/templates/index.html@indexTemplate
+-resource src/assets/templates/post.html@postTemplate
+-resource src/assets/templates/pages.html@pagesTemplate
+-resource src/assets/dummy/about.md@about
+-resource src/assets/dummy/contact.md@contact
+-resource src/assets/dummy/post0.md@post0
+-resource src/assets/dummy/post1.md@post1
+-resource src/assets/theme0/monk.css@css
+-resource src/assets/theme0/monk.js@js
+-resource src/assets/favicon.ico@favicon
+-neko run.n
+-main Run
+
+-cmd cd ../monk-example
+-cmd echo 'MONK > start'
+# -cmd haxelib run monk test
+
+
+-cmd echo 'MONK > haxelib run monk scaffold'
+# -cmd sleep 1
+-cmd haxelib run monk scaffold
+# -cmd echo 'MONK > sleep 1 seconds'
+-cmd echo 'MONK > haxelib run monk generate'
+# -cmd sleep 1
+-cmd haxelib run monk generate
+# -cmd echo 'MONK > haxelib run monk foobar'
+# -cmd haxelib run monk foobar
+
+# -cmd sleep 2
+# -cmd cd ../monk-scaffold
+# -cmd echo 'MONK > haxelib run monk scaffold'
+# -cmd haxelib run monk scaffold
+
+-cmd echo 'MONK > done'
+
