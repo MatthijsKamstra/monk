@@ -22,6 +22,7 @@ class App {
 	public static inline var PAGES = 'pages';
 	public static inline var POSTS = 'posts';
 	public static inline var THUMB = 'thumb';
+	public static inline var IMG = 'img';
 
 	public static var BUILD : String = getBuildDate();
 

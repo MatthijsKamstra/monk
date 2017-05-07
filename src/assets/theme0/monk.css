@@ -5,8 +5,11 @@ html,body{
 	margin: 0;
 }
 
-/* MONK
+/* MONK default
 -------------------------------------------- */
+
+
+
 body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
@@ -18,6 +21,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
     font-style: italic;
 }
+b, strong {
+    font-weight: 900;
+}
+
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
     background-color: #9b4dca;
     border: 0.1rem solid #9b4dca;
@@ -35,6 +42,22 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
+}
+
+
+
+blockquote{
+    display:block;
+    background: #fff;
+    padding: 15px 20px 15px 45px;
+    margin: 0 0 20px;
+    position: relative;
+
+    border-left: 10px solid #FF4500;
+
+    -moz-box-shadow: 2px 2px 15px #ccc;
+    -webkit-box-shadow: 2px 2px 15px #ccc;
+    box-shadow: 2px 2px 15px #ccc;
 }
 
 /**
@@ -189,11 +212,12 @@ nav.horizontal ul {
 
 nav.horizontal li {
 	text-align: left;
-	width: 110px;
+	width: 120px;
 	height: 60px;
 	line-height: 60px;
 	display: inline-block;
 	margin-right: -4px;
+    white-space: nowrap;
 }
 
 nav.horizontal a {
@@ -249,9 +273,49 @@ nav.horizontal li ul li {
 /* post / pages
 -------------------------------------------- */
 .post, .page {
-    padding-top: 70px;
+    margin-top: 60px;
 }
 
+
+/* parallax
+-------------------------------------------- */
+.parallax-container{
+    /*border: 1px solid pink;
+    position: relative;
+    overflow: hidden;
+    height: 500px;*/
+
+
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+    position: relative;
+    overflow: hidden;
+    height: 420px;
+    width: 100%;
+    left: 0;
+}
+.parallax{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.parallax img {
+    /*display: none;*/
+    position: absolute;
+    left: 50%;
+    top: -50%;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
 
 /* images
 -------------------------------------------- */

@@ -71,11 +71,16 @@ class Run {
 	function initGenerate(){
 		Sys.println (':: ${App.MONK} :: generate');
 
+		// [mck] overwrite theme0 to be always up to date
+		setupTheme('${App.THEME_FOLDER_DEFAULT}');
+
 		// [mck] load existing config
 		config = Config.init('${projectFolder}/config.json');
 
 		// copy files from "theme" the same folder in "www" / export folder
 		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js']);
+		// copy img folder (might need to be extended to photo-folder/page-folder/post-folder)
+		copyFiles('${projectFolder}/${App.IMG}', fileExtArr);
 
 		// Start creating content files
 		var pages:Array<Page> = getPages(projectFolder);
@@ -102,6 +107,8 @@ class Run {
 
 		// create export files
 		createDir(App.EXPORT_FOLDER);
+		createDir(App.IMG);
+		createDummyImage(App.IMG,'test', 'test', 'green', 200);
 		createFavicon();
 		setupPostAndPages();
 		setupPhoto();
@@ -119,6 +126,7 @@ class Run {
 
 			// [mck] ignore these files/folders
 			if(fileName == App.EXPORT_FOLDER) continue;		// ignore www (export) folder
+			if(fileName == App.IMG) continue;				// ignore img folder
 			if(fileName == 'config.json') continue;			// ignore config.json
 			if(fileName.startsWith('theme')) continue;		// ignore any folder that starts with "theme"
 
@@ -184,11 +192,10 @@ class Run {
 	function setupPhoto(){
 		createDir(App.PHOTOS);
 		createDir('${App.PHOTOS}/monk');
-		// createDir('$PHOTO/haxe');
 		createDir('${App.PHOTOS}/_ignorefolder');
 
 		createDummyImage('${App.PHOTOS}/monk','white image','white');
-		createDummyImage('${App.PHOTOS}/monk','orange image','orange', 'OrangeRed');
+		createDummyImage('${App.PHOTOS}/monk','pink image','pink', 'pink');
 		createDummyImage('${App.PHOTOS}/monk','ignore image','_ignore', 'Plum');
 	}
 
@@ -574,6 +581,9 @@ class Run {
 	 *  @param fileArray -
 	 */
 	function copyFiles(folder:String,fileArray:Array<String>){
+
+		// trace(folder, fileArray);
+
 		var arr = FileSystem.readDirectory(folder);
 		for ( i in 0 ... arr.length ) {
 			var fileOrFolder = arr[i];

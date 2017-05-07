@@ -10,13 +10,11 @@
 -debug
 -dce full
 
-
 --next
 
 -main Main
 -js src/assets/theme0/monk.js
 -dce full
-
 
 --next
 

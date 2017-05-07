@@ -35,10 +35,10 @@ class Main {
 				initData();
 				initScroll();
 			} else {
-				console.log('not homepage, init dropdown, and sideNav');
+				// console.log('not homepage, init dropdown, and sideNav');
 
-				untyped __js__ ('$(".dropdown-button").dropdown();');
-				untyped __js__ ('$(".button-collapse").sideNav();');
+				// untyped __js__ ('$(".dropdown-button").dropdown();');
+				// untyped __js__ ('$(".button-collapse").sideNav();');
 			}
 		});
 
