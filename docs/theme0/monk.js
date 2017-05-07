@@ -14,10 +14,6 @@ var Main = function() {
 			_gthis.isHomepage = true;
 			_gthis.initData();
 			_gthis.initScroll();
-		} else {
-			window.console.log("not homepage, init dropdown, and sideNav");
-			$(".dropdown-button").dropdown();
-			$(".button-collapse").sideNav();
 		}
 	});
 	$(window).resize(function(e1) {

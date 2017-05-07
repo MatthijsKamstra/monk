@@ -1,14 +1,12 @@
 <!-- 
-meta-publishedOn: 2017-05-05 09:36:06
+meta-publishedOn: 2017-05-06 12:33:16
  
-meta-id: 09264a75974645926c12b1a6750fa7ad9e674b92
+meta-id: 5743f3cf9c82fde5e19091faeb5a13c584a3bab3
 -->
 
 # An exhibit of Markdown
 
 This note demonstrates some of what [Markdown][1] is capable of doing.
-
-*Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.*
 
 ## Basic formatting
 
