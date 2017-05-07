@@ -1,8 +1,9 @@
+
+
 # An exhibit of Markdown
 
 This note demonstrates some of what [Markdown][1] is capable of doing.
 
-*Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.*
 
 ## Basic formatting
 
@@ -34,6 +35,10 @@ Paragraphs must be separated by a blank line. Basic formatting of *italics* and 
 
     Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.
 
+```
+other code block
+```
+
 You can also make `inline code` to add code into other things.
 
 ### Quote
@@ -43,6 +48,13 @@ You can also make `inline code` to add code into other things.
 ## Headings
 
 There are six levels of headings. They correspond with the six levels of HTML headings. You've probably noticed them already in the page. Each level down uses one more hash character.
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
 
 ### Headings *can* also contain **formatting**
 
