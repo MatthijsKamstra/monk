@@ -38,6 +38,7 @@ I have work on and with Butterfly before and because of that I use a lot from th
 ```
 + folder
 	- config.json
+	+ img
 	+ pages
 	+ photo
 	+ post
@@ -79,6 +80,11 @@ That might change to
 
 
 ### Config
+
+
+```
+{"site_title":"MONK","social_button":false,"backgroundcolor":"#000000","theme_dir":"theme0"}
+```
 
 
 ### Meta-data
