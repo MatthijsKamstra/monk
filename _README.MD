@@ -15,7 +15,7 @@ But they are not as cool as Shaulin Monks so there might be some references to t
 
 ## WIP
 
-I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).
+I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).   
 
 This fixes a very specific need I have, not fixed by others generators. That doesn't mean they aren't good, just not in this case.
 
@@ -38,6 +38,7 @@ I have work on and with Butterfly before and because of that I use a lot from th
 ```
 + folder
 	- config.json
+	+ img
 	+ pages
 	+ photo
 	+ post
@@ -79,6 +80,11 @@ That might change to
 
 
 ### Config
+
+
+```
+{"site_title":"MONK","social_button":false,"backgroundcolor":"#000000","theme_dir":"theme0"}
+```
 
 
 ### Meta-data
