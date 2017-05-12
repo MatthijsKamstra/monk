@@ -7,7 +7,7 @@
 	"author": "Matthijs Kamstra aka [mck]",
 	"scripts": {
 		"prewatch": "haxe build_all.hxml",
-		"watch": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' -v -- haxe build_all.hxml  & livereload bin/"
+		"watch": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' 'src/assets/*/*.css' 'src/assets/*/*.html' 'src/assets/*/*.md' -v -- haxe build_all.hxml"
 	},
 	"dependencies": {
 	},
