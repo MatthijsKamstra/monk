@@ -225,11 +225,13 @@ class Run {
 	}
 
 	function setupConfig(name:String){
-		var obj : ConfigObj = {
+		// var obj : ConfigObj = {
+		var obj : Dynamic = {
 			"site_title" : config.monkTitle,
 			"theme_dir" : config.monkTheme,
 			"social_button": config.monkIsSocial,
-			"backgroundcolor" : config.monkBackgroundcolor
+			"backgroundcolor" : config.monkBackgroundcolor,
+			"description" : "Monk a static site generator"
 		}
 		createFile('', name, haxe.Json.stringify(obj));
 	}

@@ -31,9 +31,9 @@ class Main {
 		new JQuery(document).ready(function (e){
 			console.log('${App.MONK} doc ready');
 			if (new JQuery('body').hasClass('homepage')){
-				isHomepage = true;
-				initData();
-				initScroll();
+				// isHomepage = true;
+				// initData();
+				// initScroll();
 			} else {
 				// console.log('not homepage, init dropdown, and sideNav');
 

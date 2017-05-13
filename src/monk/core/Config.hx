@@ -31,6 +31,21 @@ class Config {
 			config.monkIsSocial = config.monkConfig.social_button;
 			config.monkBackgroundcolor = config.monkConfig.backgroundcolor;
 			config.monkTheme = config.monkConfig.theme_dir;
+
+			// [mck] make it possible to use *any* value in the config
+			var structsFields:Array<String> = Reflect.fields(config.monkConfig);
+			var classFields:Array<String> = Type.getInstanceFields(Type.getClass(config));
+
+			for (field in structsFields)
+			{
+				if (classFields.indexOf(field) > -1)
+				{
+					var value:Dynamic = Reflect.field(config.monkConfig, field);
+					Reflect.setField(config, field, value);
+				}
+			}
+
+
 			config.validate();
 			return config;
 		}
