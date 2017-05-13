@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -14,10 +14,12 @@
 	<title>MONK</title>
 
 	<!-- normalize.css -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">
+	<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">-->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Lato Roboto light -->
-	<!-- https://fonts.google.com/specimen/Lato?selection.family=Lato|Roboto:300 -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:100i,300i,400i|Roboto:300" rel="stylesheet">
 
 	<!-- monk.css -->
@@ -37,25 +39,40 @@
 		<img src="https://pbs.twimg.com/profile_images/629553667339907073/mGoAh9j2.jpg" alt="logo">
 	</div>
 
-	<nav class="horizontal">
+	<nav class="navbar navbar-fixed-top navbar-monk">
 		<div class="container">
-			<ul>
-				<li><a href="index.html">projects &#9662;</a>
-					<ul>
-						<li><a href="photos/monk/index.html">monk</a></li>
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">projects <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="photos/00_ccc/index.html">00_ccc</a></li><li><a href="photos/01_bbb/index.html">01_bbb</a></li><li><a href="photos/02_aaa/index.html">02_aaa</a></li><li><a href="photos/monk/index.html">monk</a></li>
 					</ul>
 				</li>
+				<li><a href="posts">news</a></li>
 				<li><a href="contact.html">contact</a></li><li><a href="about.html">about</a></li>
 			</ul>
-		</div>
-	</nav>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav><!--/.navbar-monk-->
 
 	<div id="main">
-		<div class="slide" data-width="3840" data-height="1920" style="background-image: url(photos/monk/thumb/orange.jpg);background-repeat: no-repeat;background-size: cover;"><a name="1" class="internal"></a><div class="post" style="top: 30%; left: 20%; width: 40%; height: 0%"><div class="content"><h1>orange</h1><p>Text over photo</p></div></div><img src="photos/monk/thumb/orange.jpg" class="full" data-folder="photos/monk" data-img="orange.jpg" width="3840" height="1920"></div><div class="slide" data-width="3840" data-height="1920" style="background-image: url(photos/monk/thumb/pink.jpg);background-repeat: no-repeat;background-size: cover;"><a name="1" class="internal"></a><div class="post" style="top: 20%; left: 10%; width: 0%; height: 10%"><div class="content"><h1>pink</h1><p>Text over photo</p></div></div><img src="photos/monk/thumb/pink.jpg" class="full" data-folder="photos/monk" data-img="pink.jpg" width="3840" height="1920"></div><div class="slide" data-width="3840" data-height="1920" style="background-image: url(photos/monk/thumb/white.jpg);background-repeat: no-repeat;background-size: cover;"><a name="1" class="internal"></a><div class="post" style="top: 30%; left: 20%; width: 0%; height: 0%"><div class="content"><h1>white</h1><p>Text over photo</p></div></div><img src="photos/monk/thumb/white.jpg" class="full" data-folder="photos/monk" data-img="white.jpg" width="3840" height="1920"></div>
+		<div class="slide" data-width="3840" data-height="1920" style="background-image: url(photos/00_ccc/thumb/ccc.jpg);background-repeat: no-repeat;background-size: cover;"><a name="1" class="internal"></a><div class="post" style="top: 0%; left: 0%; width: 0%; height: 20%"><div class="content"><h1>ccc</h1><p>Text over photo</p></div></div><img src="photos/00_ccc/thumb/ccc.jpg" class="full" data-folder="photos/00_ccc" data-img="ccc.jpg" width="3840" height="1920"></div>
 	</div>
 
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<!-- Monk scripts -->
 	<script src="theme0/monk.js"></script>
 </body>

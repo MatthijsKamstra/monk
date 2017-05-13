@@ -7,11 +7,10 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " version: " + "0.0.3");
+	window.console.log("MONK" + " version: " + "0.0.4");
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
 		if($("body").hasClass("homepage")) {
-			_gthis.isHomepage = true;
 			_gthis.initData();
 			_gthis.initScroll();
 		}
