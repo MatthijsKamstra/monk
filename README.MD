@@ -15,7 +15,7 @@ But they are not as cool as Shaulin Monks so there might be some references to t
 
 ## WIP
 
-I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).   
+I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).
 
 This fixes a very specific need I have, not fixed by others generators. That doesn't mean they aren't good, just not in this case.
 
@@ -84,6 +84,28 @@ That might change to
 
 ```
 {"site_title":"MONK","social_button":false,"backgroundcolor":"#000000","theme_dir":"theme0"}
+```
+
+
+### sort photo folders
+
+how to sort folders
+
+create folder with `00` -> `99`  and add `_` to use default folder sort.
+
+example:
+```
+	+ 00_ccc
+	+ 01_bbb
+	+ 03_aaa
+```
+
+will create the photo menu
+
+```
+	+ ccc
+	+ bbb
+	+ aaa
 ```
 
 

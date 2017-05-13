@@ -16,18 +16,29 @@ class Photo {
 	public var height(default, default) : Int;
 	/**
 	 *  total path
+	 *  @example: bla/bla/bla/photos/foobar/test.jpg
 	 */
 	public var path(default, default) : String;
-	/**
-	 *  folders structure without projectFolder and fileName
-	 *  @example: '/foobar/test/'
-	 */
-	public var folders(default, default) : String;
 	/**
 	 *  url without projectFolder
 	 *  @example: /photos/foobar/test.jpg
 	 */
 	public var url(default, default) : String;
+	/**
+	 *  folders structure without projectFolder and fileName
+	 *  @example: '/photos/00_test/'
+	 */
+	public var folders(default, default) : String;
+	/**
+	 *  folder without projectFolder and fileName
+	 *  @example: '/00_test/'
+	 */
+	public var folder(default, default) : String;
+	/**
+	 *  folder without projectFolder and fileName and way to sort folders
+	 *  @example: '/test/'
+	 */
+	public var cleanfolder(default, default) : String;
 	/**
 	 *  file name without extension
 	 */
@@ -61,19 +72,23 @@ class Photo {
 	}
 
 	public function parse(pathAndFileName:String) {
-		// trace(pathAndFileName);
-		// /Users/matthijs/Documents/workingdir/haxe/project-monk/monk-example//photos/00pattern/pattern-005.jpg
 		this.url = pathAndFileName.replace('${projectFolder}/', '');
 		this.path = pathAndFileName;
 
 		var fileOrFolder = url.substring(url.lastIndexOf('/')+1,url.length);
 
 		folders = url.substring(0,url.lastIndexOf('/'));
+		folder = folders.replace(App.PHOTOS + '/', '');
+		if(folder.indexOf('_')!=-1){
+			cleanfolder = folders.split('_')[1];
+		} else {
+			cleanfolder = folders;
+		}
 
 		fileName = fileOrFolder.split('.')[0];
 		fileExt = fileOrFolder.split('.')[1];
 
-		getDimentions();
+		getDimensions();
 		getJson();
 		getDescription();
 		getPost();
@@ -86,7 +101,7 @@ class Photo {
 		// return markdown;
 	}
 
-	private function getDimentions(){
+	private function getDimensions(){
 		// check dimensions of file
 		var p = new Process('identify', ['-format', '%w,%h', this.path ]);
 		// var p = new Process('identify', ['-format', '%w,%h', '$projectFolder/${App.EXPORT_FOLDER}/$_folder/$fileOrFolder' ]);

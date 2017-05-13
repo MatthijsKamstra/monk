@@ -59,6 +59,8 @@ class Run {
 					imagePrepare(projectFolder);
 				case 'generate':
 					initGenerate();
+				case 'update':
+					updateTheme();
 				default :
 					showHelp();
 			}
@@ -189,6 +191,11 @@ class Run {
 		}
 	}
 
+	function updateTheme (){
+		// [mck] overwrite theme0 to be always up to date
+		setupTheme('${App.THEME_FOLDER_DEFAULT}');
+	}
+
 	// ____________________________________ setup ____________________________________
 
 	function setupPhoto(){
@@ -299,6 +306,17 @@ class Run {
 		}
 	}
 
+
+	/**
+	 *  TODO use cleanfolder to generate folder structure, it will be more nice url
+	 *
+	 *  http://www.foo.bar/photos/aaa/
+	 *  instead of
+	 *  http://www.foo.bar/photos/03_aaa/
+	 *
+	 *  @param photos -
+	 *  @param pages -
+	 */
 	private function generatePhotos(photos:Array<Photo>,pages:Array<Page>){
 		createDir('${App.EXPORT_FOLDER}/${App.PHOTOS}');
 
@@ -443,6 +461,8 @@ class Run {
 			haxe.ds.ArraySort.sort(photos, function(a, b) {
 				var x = a.folders;
 				var y = b.folders;
+
+				// [mck] folders is good for sorting, cleanfolder wil be good for generation
 
 				if (x < y ) {
 					return -1;
@@ -723,10 +743,11 @@ haxelib run monk [action] [options]
 		scaffold 	: generate a folder structure with basic helper files
 		generate	: generate static site
 		clear		: cleanup www folder
+		update		: update/overwrite default "theme0" folder
 
 	[options]
 		-force 		: overwrite existing files
-		-optim 		: use jpg optimasation
+		-optim 		: use jpg optimization
 
 ');
 	}

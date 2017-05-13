@@ -37,10 +37,10 @@ nav.hide{
 }
 
 /* change default a href color to white */
-
-body > nav > div > ul > li > a,
-nav.navbar-monk > li > a {
+body > nav > div > ul > li > a
+{
 	color:white;
+    font-size: 18px;
 }
 
 /* brand
