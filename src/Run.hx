@@ -86,7 +86,9 @@ class Run {
 		var pages:Array<Page> = getPages(projectFolder);
 		var posts:Array<Post> = getPosts(projectFolder);
 		var photos:Array<Photo> = getPhotos(projectFolder);
-		// var tags:Array<String> = Post.getPostTags(posts);
+		var tags:Array<String> = Post.getPostTags(posts);
+
+		// trace(tags);
 
 		// Start HTML generation
 		generateHtmlPages(posts, pages, photos);
@@ -113,7 +115,7 @@ class Run {
 		setupPostAndPages();
 		setupPhoto();
 		setupTheme('${App.THEME_FOLDER_DEFAULT}');
-		setupConfig('config.json');
+		setupConfig();
 
 		// read rest folders
 		var _arr = FileSystem.readDirectory('${projectFolder}');
@@ -193,10 +195,17 @@ class Run {
 		createDir(App.PHOTOS);
 		createDir('${App.PHOTOS}/monk');
 		createDir('${App.PHOTOS}/_ignorefolder');
+		createDir('${App.PHOTOS}/00_ccc');
+		createDir('${App.PHOTOS}/01_bbb');
+		createDir('${App.PHOTOS}/02_aaa');
 
 		createDummyImage('${App.PHOTOS}/monk','white image','white');
 		createDummyImage('${App.PHOTOS}/monk','pink image','pink', 'pink');
 		createDummyImage('${App.PHOTOS}/monk','ignore image','_ignore', 'Plum');
+
+		createDummyImage('${App.PHOTOS}/00_ccc','ccc','ccc', 'green');
+		createDummyImage('${App.PHOTOS}/01_bbb','bbb','bbb', 'green');
+		createDummyImage('${App.PHOTOS}/02_aaa','aaa','aaa', 'green');
 	}
 
 	function setupPostAndPages(){
@@ -224,7 +233,7 @@ class Run {
 		createFile('${name}', 'page.html', haxe.Resource.getString('pagesTemplate'));
 	}
 
-	function setupConfig(name:String){
+	function setupConfig(){
 		// var obj : ConfigObj = {
 		var obj : Dynamic = {
 			"site_title" : config.monkTitle,
@@ -233,7 +242,7 @@ class Run {
 			"backgroundcolor" : config.monkBackgroundcolor,
 			"description" : "Monk a static site generator"
 		}
-		createFile('', name, haxe.Json.stringify(obj));
+		createFile('', 'config.json', haxe.Json.stringify(obj));
 	}
 
 	// ____________________________________ generate ____________________________________
