@@ -32,7 +32,7 @@ b, strong {
     transition-delay: 1s;
 }
 
-nav.hide{
+nav.hideup{
     top: -50px;
 }
 
@@ -174,6 +174,21 @@ body > nav > div > ul > li > a
 .content{
     text-shadow: 0px 0px 50px #ffffff;
 }
+.content h1,
+.content p{
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-left: 2px;
+    padding-right: 2px;
+    display: table;
+}
+.content h1{
+    white-space: nowrap;
+}
+.content p{
+    line-height: 25px;
+    margin-bottom: 0px;
+}
+
 .slide {
 	float: left;
 	margin: 0;

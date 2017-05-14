@@ -31,7 +31,7 @@ class Main {
 		new JQuery(document).ready(function (e){
 			console.log('${App.MONK} doc ready');
 			if (new JQuery('body').hasClass('homepage')){
-				// isHomepage = true;
+				isHomepage = true;
 				initData();
 				initScroll();
 			} else {
@@ -39,6 +39,8 @@ class Main {
 
 				// untyped __js__ ('$(".dropdown-button").dropdown();');
 				// untyped __js__ ('$(".button-collapse").sideNav();');
+
+				init();
 			}
 		});
 
@@ -54,6 +56,24 @@ class Main {
 			if(isHomepage)
 				initScroll();
 		});
+	}
+
+
+	function init(){
+		var padding = 0;
+		var margin = 0;
+
+		// [mck] there is a better way, but this is getting the job done right now!
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().css('padding-left'));
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('padding-left'));
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('padding-left'));
+
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().css('margin-left'));
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('margin-left'));
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('margin-left'));
+
+		new JQuery('.parallax-container').css('left','-${padding+margin}px');
+		new JQuery('.parallax-container').css('width','${new JQuery(window).width()}px');
 	}
 
 	function initData(){
@@ -76,29 +96,32 @@ class Main {
 		if(fromTop>navHeight) {
 			new JQuery('.brand-name').addClass('brand-name-hide');
 			new JQuery('#brand').addClass('brand-img-show');
-			new JQuery('nav').addClass('hide');
+			new JQuery('nav').addClass('hideup');
 		}
 
 		if(fromTop<navHeight) {
 			new JQuery('.brand-name').removeClass('brand-name-hide');
 			new JQuery('#brand').removeClass('brand-img-show');
-			new JQuery('nav').removeClass('hide');
+			new JQuery('nav').removeClass('hideup');
 		}
 
 		// [mck] scroll up and show nav
 		if (fromTop < previousfromTop){
 			// [mck] TODO make this about distance not about times triggered
-			scrollUpCounter++;
+			var distance = previousfromTop - fromTop;
 			// trace('upscroll code (${scrollUpCounter})');
-			if(scrollUpCounter >= 30){
+			if(distance >= 100){
+				trace('show brand');
 				new JQuery('.brand-name').removeClass('brand-name-hide');
 				new JQuery('#brand').removeClass('brand-img-show');
-				new JQuery('nav').removeClass('hide');
+				new JQuery('nav').removeClass('hideup');
+				// previousfromTop = fromTop;
 			}
-		} else {
-			scrollUpCounter = 0;
 		}
-		previousfromTop = fromTop;
+
+		if(fromTop >= previousfromTop) {
+			previousfromTop = fromTop;
+		}
 
 
 		for ( i in 0 ... divArr.length ) {
