@@ -87,6 +87,11 @@ That might change to
 ```
 
 
+
+## reminder!
+
+the folder sorted as first (either `alpha` or `00_zebra`) wil be the first images you will see on the homepage!
+
 ### sort photo folders
 
 how to sort folders
