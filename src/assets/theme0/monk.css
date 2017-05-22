@@ -128,7 +128,7 @@ body > nav > div > ul > li > a
     border-top: 1px solid silver;
     position: relative;
     overflow: hidden;
-    height: 420px;
+    height: 400px;
     width: 100%;
     left: 0;
 }
@@ -141,10 +141,9 @@ body > nav > div > ul > li > a
     z-index: -1;
 }
 .parallax img {
-    /*display: none;*/
+    display: none;
     position: absolute;
     left: 50%;
-    top: -50%;
     bottom: 0;
     min-width: 100%;
     min-height: 100%;

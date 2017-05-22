@@ -186,21 +186,21 @@ class Run {
 
 					// [mck] json file used for positioning short info over picture
 					if(FileSystem.exists('${folder}/${fileName}.json') || FileSystem.exists('${folder}/_${fileName}.json')  ){
-						Sys.println('\t\t+ ${fileName}.json or _${fileName}.json already exists');
+						Sys.println('\t\t>> ${fileName}.json or _${fileName}.json already exists');
 					} else {
 						createFile('${folder}', '${fileName}.json', haxe.Json.stringify(obj));
 					}
 
 					// [mck] md file used for short info over picture
 					if(FileSystem.exists('${folder}/${fileName}.md') || FileSystem.exists('${folder}/_${fileName}.md')  ){
-						Sys.println('\t\t+ ${fileName}.md or _${fileName}.md already exists');
+						Sys.println('\t\t>> ${fileName}.md or _${fileName}.md already exists');
 					} else {
 						createFile('${folder}', '${fileName}.md', '# ${fileName}\n\nText over photo\n\nAnother line about the photo!');
 					}
 
 					// [mck] more indepth story about the photo
 					if(FileSystem.exists('${folder}/${fileName}_post.md') || FileSystem.exists('${folder}/_${fileName}_post.md')){
-						Sys.println('\t\t+ ${fileName}_post.md or _${fileName}_post.md already exists');
+						Sys.println('\t\t>> ${fileName}_post.md or _${fileName}_post.md already exists');
 					} else {
 						createFile('${folder}', '${fileName}_post.md', '# ${fileName}\n\nMore indepth info about this image');
 					}

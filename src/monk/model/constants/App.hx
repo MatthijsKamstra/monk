@@ -5,13 +5,14 @@ import haxe.macro.Context;
 class App {
 
 	/**
+	 * 0.0.5	parallax js
 	 * 0.0.4	bootstrap again
 	 * 0.0.3	fix problems with url, clean css,
 	 * 0.0.2	added post, meta data, structure, the clever stuff
 	 * 0.0.1	initial
 	 */
 	public static inline var MONK = 'MONK';
-	public static inline var VERSION = '0.0.4';
+	public static inline var VERSION = '0.0.5';
 
 	public static var photoFileSizeArray = [3840, 2560, 1920, 1280, 1024, 640];
 	public static var photoFolderArray = ['3840', '2560', '1920', '1280', '1024', '640', 'thumb'];

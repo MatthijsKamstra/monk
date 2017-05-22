@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"tags": ["haxe", "generate", "projectTarget"],
 	"description": "Describe project Monk by Matthijs Kamstra aka [mck]",
-	"version": "0.0.1",
+	"version": "0.0.5",
 	"classPath": "src",
 	"releasenote": "",
 	"contributors": ["Matthijs Kamstra aka [mck]"]

@@ -32,34 +32,32 @@ class Main {
 			console.log('${App.MONK} doc ready');
 			if (new JQuery('body').hasClass('homepage')){
 				isHomepage = true;
-				initData();
-				initScroll();
+				initHomepage();
 			} else {
-				// console.log('not homepage, init dropdown, and sideNav');
-
-				// untyped __js__ ('$(".dropdown-button").dropdown();');
-				// untyped __js__ ('$(".button-collapse").sideNav();');
-
-				init();
+				initParallax();
 			}
 		});
 
 		new JQuery(window).resize(function (e){
 			console.debug('resized');
 			if(isHomepage){
-				initData();
-				initScroll();
+				initHomepage();
+			} else {
+				initParallax();
 			}
 		});
 
 		new JQuery(window).scroll(function (e){
-			if(isHomepage)
-				initScroll();
+			if(isHomepage){
+				scrollHomepage();
+			} else {
+				scrollParallax();
+			}
 		});
 	}
 
 
-	function init(){
+	function initParallax(){
 		var padding = 0;
 		var margin = 0;
 
@@ -74,9 +72,17 @@ class Main {
 
 		new JQuery('.parallax-container').css('left','-${padding+margin}px');
 		new JQuery('.parallax-container').css('width','${new JQuery(window).width()}px');
+
+		new JQuery('.parallax img').css({'display': 'block', "transform": "translate3d(-50%, 0px, 0px)"});
+
+		// [mck] set data
+		new JQuery('.parallax-container').attr('data-translate-y','0');
+
+
+		scrollParallax();
 	}
 
-	function initData(){
+	function initHomepage(){
 		divArr = [];
 		divMap = new Map();
 		var w = new JQuery(window).width();
@@ -87,9 +93,55 @@ class Main {
 		});
 		// [mck] start with first image
 		updateImage(0, divArr[0]);
+		// [mck] scroll homepage
+		scrollHomepage();
 	}
 
-	function initScroll(){
+
+	function scrollParallax (){
+		var fromTop = new JQuery(document).scrollTop();
+		// [mck] parallax list
+		var _arr = new JQuery('.parallax-container');
+		for ( i in 0 ... _arr.length ){
+			var containerHeight = new JQuery(_arr[i]).innerHeight();
+			var containerOffset = new JQuery(_arr[i]).offset().top;
+			var containerHeight = new JQuery(_arr[i]).height();
+			var imageHeight = new JQuery(_arr[i]).find('.parallax img').height();
+
+			var maxMove = (containerOffset+containerHeight)-(containerOffset-window.innerHeight);
+			var currentMove = (fromTop-(containerOffset-window.innerHeight));
+			var percentage = (currentMove/maxMove);
+			var maxImageMove = (imageHeight - containerHeight);
+
+			// new JQuery(_arr[i]).attr('data-container-top','${containerOffset-window.innerHeight}');
+			// new JQuery(_arr[i]).attr('data-container-bottom','${containerOffset+containerHeight}');
+			// new JQuery(_arr[i]).attr('data-container-fromtop','${fromTop}');
+			// new JQuery(_arr[i]).attr('data-container-max','${maxMove}');
+			// new JQuery(_arr[i]).attr({'data-percentage':percentage});
+
+			// check for visible part
+			if(fromTop <= containerOffset + containerHeight && fromTop + window.innerHeight >= containerOffset){
+				if(new JQuery(_arr[i]).hasClass('parallax-not-visible')){
+					new JQuery(_arr[i]).removeClass('parallax-not-visible');
+				}
+				new JQuery(_arr[i]).addClass('parallax-visible');
+			} else {
+				if(new JQuery(_arr[i]).hasClass('parallax-visible')){
+					new JQuery(_arr[i]).removeClass('parallax-visible');
+				}
+				new JQuery(_arr[i]).addClass('parallax-not-visible');
+			}
+
+			// [mck] only when visible
+			if(new JQuery(_arr[i]).hasClass('parallax-visible')){
+				// [mck] calculate the number of movement
+				var ypos = maxImageMove * percentage;
+				new JQuery(_arr[i]).find('.parallax img').css({'transform': 'translate3d(-50%, ${ypos}px, 0px)'});
+			}
+		}
+	}
+
+	function scrollHomepage(){
 		var fromTop = new JQuery(document).scrollTop();
 		var navHeight = new JQuery('nav').height();
 
@@ -123,7 +175,7 @@ class Main {
 			previousfromTop = fromTop;
 		}
 
-
+		// [mck] update image (homepage)
 		for ( i in 0 ... divArr.length ) {
 			var div = divArr[i];
 			var isDone = divMap.get(div);
@@ -140,6 +192,9 @@ class Main {
 				updateImage(i,div);
 			}
 		}
+
+
+
 	}
 
 	function updateImage(id, div){
