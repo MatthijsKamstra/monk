@@ -2,26 +2,16 @@
 
 
 
+
+
 - check for imagemagick
 - check for jpegoptim
 
-- color lib
-- markdown lib
 
 - extend info from config, just because we can
 
 
 
-color #FF9900
-
-
-- check if files are used instead resources
--
-
-no libs like
-
-- noor
-- etc
 
 
 # Meta-data
@@ -62,6 +52,24 @@ convert "$image" -resize 200x200 -depth 4 +dither -colors 7 -unique-colors txt
 ```
 
 # done
+
+
+- ~~projects should work everywhere~~
+
+- ~~color #FF9900~~
+
+~~no libs like~~
+
+- ~~noor~~
+- ~~etc~~
+
+
+- ~~color lib~~
+- ~~markdown lib~~
+
+
+- ~~check if files are used instead resources~~
+
 
 ```
 resolution=(3840 2560 1920 1280 1024 640)

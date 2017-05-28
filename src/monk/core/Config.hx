@@ -7,6 +7,7 @@ class Config {
 	// config file and default values used for generation
 	public var monkConfig : ConfigObj;
 	public var monkTitle : String = '${App.MONK}';
+	public var monkGenerator : String = '${App.MONK}-${App.VERSION}';
 	public var monkIsSocial : Bool = false;
 	public var monkBackgroundcolor : String = '#000000';
 	public var monkTheme : String = 'theme0';
@@ -31,6 +32,7 @@ class Config {
 			config.monkIsSocial = config.monkConfig.social_button;
 			config.monkBackgroundcolor = config.monkConfig.backgroundcolor;
 			config.monkTheme = config.monkConfig.theme_dir;
+			config.monkGenerator = '${App.MONK} ${App.VERSION}';
 
 			// [mck] make it possible to use *any* value in the config
 			var structsFields:Array<String> = Reflect.fields(config.monkConfig);

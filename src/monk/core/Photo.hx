@@ -120,7 +120,11 @@ class Photo {
 		var _json = path.replace('.${fileExt}','.json');
 		if(FileSystem.exists(_json)){
 			json = haxe.Json.parse( sys.io.File.getContent(_json));
-			style = 'style="top: ${json.top}%; left: ${json.left}%; width: ${json.width}%; height: ${json.height}%"';
+			var _top = (Std.is(json.top,String)) ? '${json.top}' : '${json.top}%';
+			var _left = (Std.is(json.left,String)) ? '${json.left}' : '${json.left}%';
+			var _width = (Std.is(json.width,String)) ? '${json.width}' : '${json.width}%';
+			var _height = (Std.is(json.height,String)) ? '${json.height}' : '${json.height}%';
+			style = 'style="top: ${_top}; left: ${_left}; width: ${_width}; height: ${_height}"';
 		}
 	}
 

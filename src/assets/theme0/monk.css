@@ -6,6 +6,7 @@ body {
 	font-weight: 300;
     font-style: normal;
     padding-top: 50px;
+    font-size: large;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
@@ -89,7 +90,7 @@ body > nav > div > ul > li > a
     padding: 0;
     left: 65px;
     font-family: 'Lato';
-    font-size: 2.4em;
+    font-size: 1.6em;
     color: white;
     position: absolute;
     white-space: nowrap;
@@ -176,17 +177,26 @@ body > nav > div > ul > li > a
 .content h1,
 .content p{
     background-color: rgba(255, 255, 255, 0.4);
-    padding-left: 2px;
-    padding-right: 2px;
-    display: table;
+    padding: 5px 10px;
 }
 .content h1{
+    display: table;
     white-space: nowrap;
 }
 .content p{
+    /*display: inline;*/
+    display: table;
     line-height: 25px;
-    margin-bottom: 0px;
 }
+.content p::after{
+    content: "";
+    display: table;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0);
+}
+
 
 .slide {
 	float: left;

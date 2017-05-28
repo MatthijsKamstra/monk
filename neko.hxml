@@ -1,6 +1,6 @@
 # Libraries you like to use (http://lib.haxe.org/)
 #-lib format
-#-lib markdown
+-lib markdown
 
 
 # Integrate files to classpath

@@ -2,14 +2,12 @@ package;
 
 import sys.FileSystem;
 import sys.io.File;
-import sys.io.Process;
 import sys.io.FileOutput;
 
 import monk.core.Config;
 import monk.core.Page;
 import monk.core.Post;
 import monk.core.Photo;
-import monk.generate.*;
 import monk.model.constants.App;
 
 using StringTools;
@@ -34,7 +32,7 @@ class Run {
 	public function new () {
 		Sys.println('${App.MONK} - ${App.VERSION}');
 
-		args = Sys.args ();
+		args = Sys.args();
 		projectFolder = args[args.length-1];
 
 		isJpegOptim = (args.indexOf('-optim')!= -1);
@@ -90,7 +88,7 @@ class Run {
 		var photos:Array<Photo> = getPhotos(projectFolder);
 		var tags:Array<String> = Post.getPostTags(posts);
 
-		// trace(tags);
+		trace(tags);
 
 		// Start HTML generation
 		generateHtmlPages(posts, pages, photos);
@@ -166,6 +164,7 @@ class Run {
 			if(FileSystem.isDirectory('$folder/$fileOrFolder')){
 				if(fileOrFolder.startsWith('_')) continue;
 				if(fileOrFolder.startsWith('.')) continue;
+				if(fileOrFolder == App.IMG) continue; // ignore IMG folder
 				imagePrepare('$folder/$fileOrFolder');
 			} else {
 				var fileName = fileOrFolder.split('.')[0];
@@ -177,10 +176,10 @@ class Run {
 				if(fileExtArr.indexOf(fileExt) != -1){
 					// [mck] create positioning file for text
 					var obj = {
-						"top": Std.random(5)*10,
-						"left": Std.random(5)*10,
-						"width": (Std.random(5)*10)+50,
-						"height": (Std.random(5)*10)+50,
+						"top": '${Std.random(5)*10}px',
+						"left": '${Std.random(5)*10}px',
+						"width": '${(Std.random(5)*10)+50}%',
+						"height": '${(Std.random(5)*10)+50}%',
 						"textcolor": "#ffffff"
 					}
 
@@ -204,8 +203,6 @@ class Run {
 					} else {
 						createFile('${folder}', '${fileName}_post.md', '# ${fileName}\n\nMore indepth info about this image');
 					}
-
-
 
 				}
 			}
@@ -268,7 +265,8 @@ class Run {
 			"theme_dir" : config.monkTheme,
 			"social_button": config.monkIsSocial,
 			"backgroundcolor" : config.monkBackgroundcolor,
-			"description" : "Monk a static site generator"
+			"description" : "Monk a static site generator",
+			"author" : "Matthijs Kamstra"
 		}
 		createFile('', 'config.json', haxe.Json.stringify(obj));
 	}
@@ -291,12 +289,7 @@ class Run {
 				if(page.title == p.title) klass = ' class="active"';
 				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
 			}
-			var nav_photo = '';
-			// for(ph in photos){
-			// 	var klass = '';
-			// 	// if(page.title == p.title) klass = ' class="active"';
-			// 	nav_photo += '<li${klass}><a href="${ph.url}.html">${ph.title}</a></li>';
-			// }
+			var nav_photo = convertPhotoList(photos, true);
 			var templateObj = {
 				title: page.title,
 				page_navigation : nav_pages,
@@ -325,6 +318,30 @@ class Run {
 			}
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', '${post.url}.html', template, obj);
 		}
+	}
+
+	/**
+	 *  create photo navigation list
+	 *
+	 *  @param photos 		array with all `Photo` in it
+	 *  @return String
+	 */
+	private function convertPhotoList(photos:Array<Photo>, isRoot:Bool = false):String{
+		var tempSubArr = [];
+		// create photo folders
+		for (photo in photos){
+			// store unique names in arr
+			if(tempSubArr.indexOf(photo.folders) == -1) tempSubArr.push(photo.folders);
+		}
+		var nav_photo = '';
+		for(folder in tempSubArr){
+			var klass = '';
+			// if(page.title == p.title) klass = ' class="active"';
+			// var temp = '';
+			nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
+		}
+		if(!isRoot) nav_photo = nav_photo.replace('${App.PHOTOS}/','../../${App.PHOTOS}/');
+		return nav_photo;
 	}
 
 
@@ -367,8 +384,6 @@ class Run {
 			FileSystem.deleteFile('${projectFolder}/${App.EXPORT_FOLDER}/${photo.url}');
 		}
 
-
-
 		// trace(tempSubArr.length);
 
 		for(folder in tempSubArr){
@@ -396,20 +411,21 @@ class Run {
 				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
 			}
 
-			var nav_photo = '';
-			for(folder in tempSubArr){
-				var klass = '';
-				// if(page.title == p.title) klass = ' class="active"';
-				var temp = '';
-				nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
-			}
+			// var nav_photo = '';
+			// for(folder in tempSubArr){
+			// 	var klass = '';
+			// 	// if(page.title == p.title) klass = ' class="active"';
+			// 	var temp = '';
+			// 	nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
+			// }
+
 
 			if(isFirst){
 				var templateObj = {
 					title : 'foo',
 					page_navigation : nav_pages,
 					post_navigation : '<!-- post_navigation -->',
-					photo_navigation : nav_photo,
+					photo_navigation : convertPhotoList(photos, true),
 					content: html
 				};
 				createWithGenTemplate(App.EXPORT_FOLDER, 'index.html', template, templateObj);
@@ -418,12 +434,12 @@ class Run {
 
 			html = html.replace('${folder}/','');
 			nav_pages = nav_pages.replace('href="','href="../../');
-			nav_photo = nav_photo.replace('${App.PHOTOS}/','../../${App.PHOTOS}/');
+
 			var templateObj = {
 				title : 'foo',
 				page_navigation : nav_pages,
 				post_navigation : '<!-- post_navigation -->',
-				photo_navigation : nav_photo,
+				photo_navigation : convertPhotoList(photos),
 				content: html
 			};
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${folder}', 'index.html', template, templateObj);
@@ -696,12 +712,17 @@ class Run {
 			site_title : config.monkTitle,
 			theme_dir : config.monkTheme,
 			backgroundcolor: config.monkBackgroundcolor,
+			generator: config.monkGenerator
 		}
 
 		// [mck] merge objects (defaultTemplateObj and templateObj)
 		var obj = Reflect.copy(defaultTemplateObj);
 		for( ff in Reflect.fields(templateObj) ){
 			Reflect.setField (obj, ff, Reflect.field(templateObj, ff));
+		}
+		// [mck] inject all data from config
+		for( ff in Reflect.fields(config.monkConfig) ){
+			Reflect.setField (obj, ff, Reflect.field(config.monkConfig, ff));
 		}
 
         var t = new haxe.Template(template);
@@ -763,6 +784,7 @@ haxelib run monk [action] [options]
 	[action]:
 		scaffold 	: generate a folder structure with basic helper files
 		generate	: generate static site
+		prepare		: generate .json and .md files for images (ignore _ and . files)
 		clear		: cleanup www folder
 		update		: update/overwrite default "theme0" folder
 
@@ -774,7 +796,7 @@ haxelib run monk [action] [options]
 	}
 
 	static public function main () {
-		var app = new Run ();
+		new Run ();
 	}
 }
 
