@@ -1,14 +1,14 @@
 # TODO
 
 
-
+- paralax on mobile should be working better!
 
 
 - check for imagemagick
 - check for jpegoptim
 
 
-- extend info from config, just because we can
+
 
 
 
@@ -53,6 +53,7 @@ convert "$image" -resize 200x200 -depth 4 +dither -colors 7 -unique-colors txt
 
 # done
 
+- extend info from config, just because we can
 
 - ~~projects should work everywhere~~
 

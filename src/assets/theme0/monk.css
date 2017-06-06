@@ -5,7 +5,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
     font-style: normal;
-    padding-top: 50px;
+    padding-top: 49px;
     font-size: large;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -125,8 +125,8 @@ body > nav > div > ul > li > a
     height: 500px;*/
 
 
-    border-bottom: 1px solid silver;
-    border-top: 1px solid silver;
+    border-bottom: 1px solid #F8F8F8;
+    border-top: 1px solid #F8F8F8;
     position: relative;
     overflow: hidden;
     height: 400px;
@@ -147,13 +147,34 @@ body > nav > div > ul > li > a
     left: 50%;
     bottom: 0;
     min-width: 100%;
-    min-height: 100%;
     width: 100%;
+    /*min-height: 100%;*/
+    /*height: 100%;*/
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }
+
+
+/**
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+*/
+
 
 /* images
 -------------------------------------------- */
@@ -214,10 +235,10 @@ body > nav > div > ul > li > a
 }
 .post {
 	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+    top: 40%;
+    left: 30px;
+	width: 500px;
+	height: inherit;
 	font: normal 1em/1.6em 'latolight',helvetica, arial, sans-serif;
 	/*z-index: 5;*/
 	-moz-opacity: 1;

@@ -30,7 +30,7 @@ class Run {
 	var isOverWrite : Bool = false;
 
 	public function new () {
-		Sys.println('${App.MONK} - ${App.VERSION}');
+		Sys.println('${App.MONK} - version: ${App.VERSION} - build: ${App.BUILD}');
 
 		args = Sys.args();
 		projectFolder = args[args.length-1];
@@ -73,9 +73,12 @@ class Run {
 
 		// [mck] overwrite theme0 to be always up to date
 		setupTheme('${App.THEME_FOLDER_DEFAULT}');
+		// favicon
+		createFavicon();
 
 		// [mck] load existing config
 		config = Config.init('${projectFolder}/config.json');
+
 
 		// copy files from "theme" the same folder in "www" / export folder
 		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js']);
@@ -88,7 +91,7 @@ class Run {
 		var photos:Array<Photo> = getPhotos(projectFolder);
 		var tags:Array<String> = Post.getPostTags(posts);
 
-		trace(tags);
+		Sys.println('\t+ tags -> list: ${tags}');
 
 		// Start HTML generation
 		generateHtmlPages(posts, pages, photos);
@@ -346,7 +349,7 @@ class Run {
 
 
 	/**
-	 *  TODO use cleanfolder to generate folder structure, it will be more nice url
+	 *  TODO use `cleanfolder` to generate folder structure, it will be more nice url
 	 *
 	 *  http://www.foo.bar/photos/aaa/
 	 *  instead of
@@ -394,7 +397,7 @@ class Run {
 					var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
 					html += '
 						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);background-repeat: no-repeat;background-size: cover;">
-							<a name="1" class="internal"></a>
+							<a name="${photo.fileName}" class="internal"></a>
 							<div class="post" ${photo.style}>
 								<div class="content">
 									${photo.description}
@@ -566,6 +569,8 @@ class Run {
 			var p = new Page();
 			p.parse(file);
 			pages.push(p);
+
+			Sys.println('\t+ pages -> read: ${_arr[i]}');
 		}
 		sortPages(pages);
 		return pages;
@@ -582,6 +587,8 @@ class Run {
 				var p = new Photo();
 				p.parse(file);
 				photos.push(p);
+
+				Sys.println('\t+ photos -> read: ${arr[i]}/${arr2[j]}');
 			}
 		}
 		sortPhotos(photos);
@@ -596,6 +603,8 @@ class Run {
 			var p = new Post();
 			p.parse(file);
 			posts.push(p);
+
+			Sys.println('\t+ posts -> read: ${_arr[i]}');
 		}
 		sortPosts(posts);
 		return posts;
@@ -764,11 +773,13 @@ class Run {
 
 	function createFavicon() : Void
 	{
-		var bytes = haxe.Resource.getBytes('favicon');
-		var fo:FileOutput = sys.io.File.write(projectFolder + App.EXPORT_FOLDER + '/favicon.ico', true);
-		fo.write(bytes);
-		fo.close();
-		Sys.println('\t+ favicon -> create!');
+		if(!FileSystem.exists(projectFolder + App.EXPORT_FOLDER + '/favicon.ico')){
+			var bytes = haxe.Resource.getBytes('favicon');
+			var fo:FileOutput = sys.io.File.write(projectFolder + App.EXPORT_FOLDER + '/favicon.ico', true);
+			fo.write(bytes);
+			fo.close();
+			Sys.println('\t+ favicon -> create!');
+		}
 	}
 
 

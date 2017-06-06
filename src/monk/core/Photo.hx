@@ -3,7 +3,6 @@ package monk.core;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-import sys.io.FileOutput;
 
 import monk.model.constants.App;
 
@@ -106,7 +105,7 @@ class Photo {
 		var p = new Process('identify', ['-format', '%w,%h', this.path ]);
 		// var p = new Process('identify', ['-format', '%w,%h', '$projectFolder/${App.EXPORT_FOLDER}/$_folder/$fileOrFolder' ]);
 		// read everything from stderr
-		var error = p.stderr.readAll().toString();
+		// var error = p.stderr.readAll().toString();
 		// trace("stderr:\n" + error);
 		// read everything from stdout
 		var stdout = p.stdout.readAll().toString();
@@ -118,13 +117,20 @@ class Photo {
 
 	private function getJson(){
 		var _json = path.replace('.${fileExt}','.json');
+		style = '';
 		if(FileSystem.exists(_json)){
 			json = haxe.Json.parse( sys.io.File.getContent(_json));
+			style = 'style="';
 			var _top = (Std.is(json.top,String)) ? '${json.top}' : '${json.top}%';
+			if(json.top != null) style += 'top: ${_top}; ';
 			var _left = (Std.is(json.left,String)) ? '${json.left}' : '${json.left}%';
+			if(json.left != null) style += 'left: ${_left}; ';
 			var _width = (Std.is(json.width,String)) ? '${json.width}' : '${json.width}%';
+			if(json.width != null) style += 'width: ${_width}; ';
 			var _height = (Std.is(json.height,String)) ? '${json.height}' : '${json.height}%';
-			style = 'style="top: ${_top}; left: ${_left}; width: ${_width}; height: ${_height}"';
+			if(json.height != null) style += 'height: ${_height}; ';
+			// style = 'style="top: ${_top}; left: ${_left}; width: ${_width}; height: ${_height}"';
+			style += '"';
 		}
 	}
 
