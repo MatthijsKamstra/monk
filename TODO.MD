@@ -1,36 +1,12 @@
 # TODO
 
-
 - paralax on mobile should be working better!
-
+- hide message/description
+- create link to deep-post homepage
+- paralax from lowest page to the top doesn't work
 
 - check for imagemagick
 - check for jpegoptim
-
-
-
-
-
-
-
-
-# Meta-data
-
-
-```
-meta-title: test me
-```
-
-used in title of document and in navigation
-otherwise the filename is used
-
-
-
-
-
-
-
-
 
 
 
@@ -40,35 +16,24 @@ extract colors out picture
 convert "$image" -resize 200x200 -depth 4 +dither -colors 7 -unique-colors txt
 ```
 
-
-
 ```
-
-		if [ "$extract_colors" = true ]
-		then
-			palette=$(convert "$image" -resize 200x200 -depth 4 +dither -colors 7 -unique-colors txt:- | tail -n +2 | awk 'BEGIN{RS=" "} /#/ {print}' 2>&1)
-
-
+if [ "$extract_colors" = true ]
+then
+	palette=$(convert "$image" -resize 200x200 -depth 4 +dither -colors 7 -unique-colors txt:- | tail -n +2 | awk 'BEGIN{RS=" "} /#/ {print}' 2>&1)
 ```
 
 # done
 
+- navigation bar should work better, start with dark theme
+- paralax start is funny on the top visual (-200px)
 - extend info from config, just because we can
-
 - ~~projects should work everywhere~~
-
 - ~~color #FF9900~~
-
 ~~no libs like~~
-
-- ~~noor~~
-- ~~etc~~
-
-
+	- ~~noor~~
+	- ~~etc~~
 - ~~color lib~~
 - ~~markdown lib~~
-
-
 - ~~check if files are used instead resources~~
 
 

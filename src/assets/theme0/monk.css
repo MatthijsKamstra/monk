@@ -44,6 +44,10 @@ body > nav > div > ul > li > a
     font-size: 18px;
 }
 
+.show-on-hover:hover > ul.dropdown-menu {
+    display: block;
+}
+
 /* brand
 -------------------------------------------- */
 #brand{

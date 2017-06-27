@@ -5,6 +5,7 @@ import haxe.macro.Context;
 class App {
 
 	/**
+	 * 0.0.9	paralax imageheight 0 bug,
 	 * 0.0.8	favicon, post default styling (without .json config), possible to define some
 	 * 0.0.7	fixed path projects/added info from config file
 	 * 0.0.6	ignore img folder when prepare
@@ -15,7 +16,7 @@ class App {
 	 * 0.0.1	initial
 	 */
 	public static inline var MONK = 'MONK';
-	public static inline var VERSION = '0.0.8';
+	public static inline var VERSION = '0.0.9';
 
 	public static var photoFileSizeArray = [3840, 2560, 1920, 1280, 1024, 640];
 	public static var photoFolderArray = ['3840', '2560', '1920', '1280', '1024', '640', 'thumb'];

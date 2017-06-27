@@ -65,7 +65,6 @@ class Run {
 		}
 	}
 
-
 	// ____________________________________ init function ____________________________________
 
 	function initGenerate(){
@@ -79,9 +78,8 @@ class Run {
 		// [mck] load existing config
 		config = Config.init('${projectFolder}/config.json');
 
-
-		// copy files from "theme" the same folder in "www" / export folder
-		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js']);
+		// copy files from "theme" (defined in config) the same folder in "www" / export folder
+		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js','png','jpg']);
 		// copy img folder (might need to be extended to photo-folder/page-folder/post-folder)
 		copyFiles('${projectFolder}/${App.IMG}', fileExtArr);
 
@@ -252,6 +250,12 @@ class Run {
 	function setupTheme(name:String){
 		createDir('${name}');
 		createDir('${name}/img');
+
+		// trace(name);
+		// trace('${projectFolder}/${name}/img');
+
+
+		// copyFiles('${projectFolder}/${name}/img', ['png','jpg']);
 
 		createFile('${name}', 'monk.css', haxe.Resource.getString('css'));
 		createFile('${name}', 'monk.js', haxe.Resource.getString('js'));
