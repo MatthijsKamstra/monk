@@ -15,7 +15,7 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " version: " + "0.0.8");
+	window.console.log("MONK" + " version: " + "0.0.9");
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
 		if($("body").hasClass("homepage")) {
@@ -46,22 +46,7 @@ Main.main = function() {
 	var app = new Main();
 };
 Main.prototype = {
-	initParallax: function() {
-		var padding = 0;
-		var margin = 0;
-		padding += Std.parseInt($(".parallax-container").parent().css("padding-left"));
-		padding += Std.parseInt($(".parallax-container").parent().parent().css("padding-left"));
-		padding += Std.parseInt($(".parallax-container").parent().parent().parent().css("padding-left"));
-		margin += Std.parseInt($(".parallax-container").parent().css("margin-left"));
-		margin += Std.parseInt($(".parallax-container").parent().parent().css("margin-left"));
-		margin += Std.parseInt($(".parallax-container").parent().parent().parent().css("margin-left"));
-		$(".parallax-container").css("left","-" + (padding + margin) + "px");
-		$(".parallax-container").css("width","" + $(window).width() + "px");
-		$(".parallax img").css({ "display" : "block", "transform" : "translate3d(-50%, 0px, 0px)"});
-		$(".parallax-container").attr("data-translate-y","0");
-		this.scrollParallax();
-	}
-	,initHomepage: function() {
+	initHomepage: function() {
 		var _gthis = this;
 		this.divArr = [];
 		this.divMap = new haxe_ds_ObjectMap();
@@ -71,40 +56,8 @@ Main.prototype = {
 			_gthis.divArr.push(this);
 			_gthis.divMap.set(this,false);
 		});
-		this.updateImage(0,this.divArr[0]);
+		this.updateHomepageImages(0,this.divArr[0]);
 		this.scrollHomepage();
-	}
-	,scrollParallax: function() {
-		var fromTop = $(window.document).scrollTop();
-		var _arr = $(".parallax-container");
-		var _g1 = 0;
-		var _g = _arr.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var containerHeight = $(_arr[i]).innerHeight();
-			var containerOffset = $(_arr[i]).offset().top;
-			var containerHeight1 = $(_arr[i]).height();
-			var imageHeight = $(_arr[i]).find(".parallax img").height();
-			var maxMove = containerOffset + containerHeight1 - (containerOffset - window.innerHeight);
-			var currentMove = fromTop - (containerOffset - window.innerHeight);
-			var percentage = currentMove / maxMove;
-			var maxImageMove = imageHeight - containerHeight1;
-			if(fromTop <= containerOffset + containerHeight1 && fromTop + window.innerHeight >= containerOffset) {
-				if($(_arr[i]).hasClass("parallax-not-visible")) {
-					$(_arr[i]).removeClass("parallax-not-visible");
-				}
-				$(_arr[i]).addClass("parallax-visible");
-			} else {
-				if($(_arr[i]).hasClass("parallax-visible")) {
-					$(_arr[i]).removeClass("parallax-visible");
-				}
-				$(_arr[i]).addClass("parallax-not-visible");
-			}
-			if($(_arr[i]).hasClass("parallax-visible")) {
-				var ypos = maxImageMove * percentage;
-				$(_arr[i]).find(".parallax img").css({ "transform" : "translate3d(-50%, " + ypos + "px, 0px)"});
-			}
-		}
 	}
 	,scrollHomepage: function() {
 		var fromTop = $(window.document).scrollTop();
@@ -144,11 +97,11 @@ Main.prototype = {
 			var imgHeight = $(div).height();
 			var imgBottomOffset = imgOffset + imgHeight;
 			if(fromTop >= imgOffset && fromTop < imgBottomOffset) {
-				this.updateImage(i,div);
+				this.updateHomepageImages(i,div);
 			}
 		}
 	}
-	,updateImage: function(id,div) {
+	,updateHomepageImages: function(id,div) {
 		this.divMap.set(div,true);
 		if(id + 1 > this.divArr.length) {
 			return;
@@ -183,6 +136,57 @@ Main.prototype = {
 			}
 		}
 	}
+	,initParallax: function() {
+		var padding = 0;
+		var margin = 0;
+		padding += Std.parseInt($(".parallax-container").parent().css("padding-left"));
+		padding += Std.parseInt($(".parallax-container").parent().parent().css("padding-left"));
+		padding += Std.parseInt($(".parallax-container").parent().parent().parent().css("padding-left"));
+		margin += Std.parseInt($(".parallax-container").parent().css("margin-left"));
+		margin += Std.parseInt($(".parallax-container").parent().parent().css("margin-left"));
+		margin += Std.parseInt($(".parallax-container").parent().parent().parent().css("margin-left"));
+		$(".parallax-container").css("left","-" + (padding + margin) + "px");
+		$(".parallax-container").css("width","" + $(window).width() + "px");
+		$(".parallax img").css({ "display" : "block", "transform" : "translate3d(-50%, 0px, 0px)"});
+		$(".parallax-container").attr("data-translate-y","0");
+		this.scrollParallax();
+	}
+	,scrollParallax: function() {
+		var fromTop = $(window.document).scrollTop();
+		var _arr = $(".parallax-container");
+		var _g1 = 0;
+		var _g = _arr.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var containerHeight = $(_arr[i]).innerHeight();
+			var containerOffset = $(_arr[i]).offset().top;
+			var containerHeight1 = $(_arr[i]).height();
+			var imageHeight = $(_arr[i]).find(".parallax img").height();
+			if(imageHeight == 0) {
+				haxe_Timer.delay($bind(this,this.scrollParallax),100);
+				return;
+			}
+			var maxMove = containerOffset + containerHeight1 - (containerOffset - window.innerHeight);
+			var currentMove = fromTop - (containerOffset - window.innerHeight);
+			var percentage = currentMove / maxMove;
+			var maxImageMove = imageHeight - containerHeight1;
+			if(fromTop <= containerOffset + containerHeight1 && fromTop + window.innerHeight >= containerOffset) {
+				if($(_arr[i]).hasClass("parallax-not-visible")) {
+					$(_arr[i]).removeClass("parallax-not-visible");
+				}
+				$(_arr[i]).addClass("parallax-visible");
+			} else {
+				if($(_arr[i]).hasClass("parallax-visible")) {
+					$(_arr[i]).removeClass("parallax-visible");
+				}
+				$(_arr[i]).addClass("parallax-not-visible");
+			}
+			if($(_arr[i]).hasClass("parallax-visible")) {
+				var ypos = maxImageMove * percentage;
+				$(_arr[i]).find(".parallax img").css({ "transform" : "translate3d(-50%, " + ypos + "px, 0px)"});
+			}
+		}
+	}
 };
 Math.__name__ = true;
 var Std = function() { };
@@ -202,6 +206,32 @@ Std.parseInt = function(x) {
 };
 var haxe_IMap = function() { };
 haxe_IMap.__name__ = true;
+var haxe_Timer = function(time_ms) {
+	var me = this;
+	this.id = setInterval(function() {
+		me.run();
+	},time_ms);
+};
+haxe_Timer.__name__ = true;
+haxe_Timer.delay = function(f,time_ms) {
+	var t = new haxe_Timer(time_ms);
+	t.run = function() {
+		t.stop();
+		f();
+	};
+	return t;
+};
+haxe_Timer.prototype = {
+	stop: function() {
+		if(this.id == null) {
+			return;
+		}
+		clearInterval(this.id);
+		this.id = null;
+	}
+	,run: function() {
+	}
+};
 var haxe_ds_ObjectMap = function() {
 	this.h = { __keys__ : { }};
 };
@@ -302,6 +332,8 @@ js_Boot.__string_rec = function(o,s) {
 };
 var monk_model_constants_App = function() { };
 monk_model_constants_App.__name__ = true;
+var $_, $fid = 0;
+function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.__name__ = true;
 Array.__name__ = true;
 haxe_ds_ObjectMap.count = 0;

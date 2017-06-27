@@ -56,32 +56,6 @@ class Main {
 		});
 	}
 
-
-	function initParallax(){
-		var padding = 0;
-		var margin = 0;
-
-		// [mck] there is a better way, but this is getting the job done right now!
-		padding += Std.parseInt(new JQuery('.parallax-container').parent().css('padding-left'));
-		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('padding-left'));
-		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('padding-left'));
-
-		margin += Std.parseInt(new JQuery('.parallax-container').parent().css('margin-left'));
-		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('margin-left'));
-		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('margin-left'));
-
-		new JQuery('.parallax-container').css('left','-${padding+margin}px');
-		new JQuery('.parallax-container').css('width','${new JQuery(window).width()}px');
-
-		new JQuery('.parallax img').css({'display': 'block', "transform": "translate3d(-50%, 0px, 0px)"});
-
-		// [mck] set data
-		new JQuery('.parallax-container').attr('data-translate-y','0');
-
-
-		scrollParallax();
-	}
-
 	function initHomepage(){
 		divArr = [];
 		divMap = new Map();
@@ -92,53 +66,9 @@ class Main {
 			divMap.set(js.Lib.nativeThis, false);
 		});
 		// [mck] start with first image
-		updateImage(0, divArr[0]);
+		updateHomepageImages(0, divArr[0]);
 		// [mck] scroll homepage
 		scrollHomepage();
-	}
-
-
-	function scrollParallax (){
-		var fromTop = new JQuery(document).scrollTop();
-		// [mck] parallax list
-		var _arr = new JQuery('.parallax-container');
-		for ( i in 0 ... _arr.length ){
-			var containerHeight = new JQuery(_arr[i]).innerHeight();
-			var containerOffset = new JQuery(_arr[i]).offset().top;
-			var containerHeight = new JQuery(_arr[i]).height();
-			var imageHeight = new JQuery(_arr[i]).find('.parallax img').height();
-
-			var maxMove = (containerOffset+containerHeight)-(containerOffset-window.innerHeight);
-			var currentMove = (fromTop-(containerOffset-window.innerHeight));
-			var percentage = (currentMove/maxMove);
-			var maxImageMove = (imageHeight - containerHeight);
-
-			// new JQuery(_arr[i]).attr('data-container-top','${containerOffset-window.innerHeight}');
-			// new JQuery(_arr[i]).attr('data-container-bottom','${containerOffset+containerHeight}');
-			// new JQuery(_arr[i]).attr('data-container-fromtop','${fromTop}');
-			// new JQuery(_arr[i]).attr('data-container-max','${maxMove}');
-			// new JQuery(_arr[i]).attr({'data-percentage':percentage});
-
-			// check for visible part
-			if(fromTop <= containerOffset + containerHeight && fromTop + window.innerHeight >= containerOffset){
-				if(new JQuery(_arr[i]).hasClass('parallax-not-visible')){
-					new JQuery(_arr[i]).removeClass('parallax-not-visible');
-				}
-				new JQuery(_arr[i]).addClass('parallax-visible');
-			} else {
-				if(new JQuery(_arr[i]).hasClass('parallax-visible')){
-					new JQuery(_arr[i]).removeClass('parallax-visible');
-				}
-				new JQuery(_arr[i]).addClass('parallax-not-visible');
-			}
-
-			// [mck] only when visible
-			if(new JQuery(_arr[i]).hasClass('parallax-visible')){
-				// [mck] calculate the number of movement
-				var ypos = maxImageMove * percentage;
-				new JQuery(_arr[i]).find('.parallax img').css({'transform': 'translate3d(-50%, ${ypos}px, 0px)'});
-			}
-		}
 	}
 
 	function scrollHomepage(){
@@ -189,15 +119,12 @@ class Main {
 			var imgBottomOffset = imgOffset + imgHeight;
 			if(fromTop >= imgOffset && fromTop < imgBottomOffset) {
 				// [mck] because we load the next image as well, we only need this element
-				updateImage(i,div);
+				updateHomepageImages(i,div);
 			}
 		}
-
-
-
 	}
 
-	function updateImage(id, div){
+	function updateHomepageImages(id, div){
 		// [mck] set current div on true (is set)
 		divMap.set(div, true);
 		// [mck] make sure there is a next image
@@ -223,6 +150,83 @@ class Main {
 			}
 		}
 	}
+
+	function initParallax(){
+		var padding = 0;
+		var margin = 0;
+
+		// [mck] there is a better way, but this is getting the job done right now!
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().css('padding-left'));
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('padding-left'));
+		padding += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('padding-left'));
+
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().css('margin-left'));
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('margin-left'));
+		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('margin-left'));
+
+		new JQuery('.parallax-container').css('left','-${padding+margin}px');
+		new JQuery('.parallax-container').css('width','${new JQuery(window).width()}px');
+
+		new JQuery('.parallax img').css({'display': 'block', "transform": "translate3d(-50%, 0px, 0px)"});
+
+		// [mck] set data
+		new JQuery('.parallax-container').attr('data-translate-y','0');
+
+		scrollParallax();
+	}
+
+	function scrollParallax (){
+		var fromTop = new JQuery(document).scrollTop();
+		// [mck] parallax list
+		var _arr = new JQuery('.parallax-container');
+		for ( i in 0 ... _arr.length ){
+			var containerHeight = new JQuery(_arr[i]).innerHeight();
+			var containerOffset = new JQuery(_arr[i]).offset().top;
+			var containerHeight = new JQuery(_arr[i]).height();
+			var imageHeight = new JQuery(_arr[i]).find('.parallax img').height();
+
+			// [mck] make sure there is an height to work with
+			if(imageHeight == 0) {
+				haxe.Timer.delay(scrollParallax, 100);
+				return;
+			}
+
+			var maxMove = (containerOffset+containerHeight)-(containerOffset-window.innerHeight);
+			var currentMove = (fromTop-(containerOffset-window.innerHeight));
+			var percentage = (currentMove/maxMove);
+			var maxImageMove = (imageHeight - containerHeight);
+
+			// new JQuery(_arr[i]).attr('data-container-top','${containerOffset-window.innerHeight}');
+			// new JQuery(_arr[i]).attr('data-container-bottom','${containerOffset+containerHeight}');
+			// new JQuery(_arr[i]).attr('data-container-fromtop','${fromTop}');
+			// new JQuery(_arr[i]).attr('data-container-max','${maxMove}');
+			// new JQuery(_arr[i]).attr({'data-percentage':percentage});
+
+			// check for visible part
+			if(fromTop <= containerOffset + containerHeight && fromTop + window.innerHeight >= containerOffset){
+				if(new JQuery(_arr[i]).hasClass('parallax-not-visible')){
+					new JQuery(_arr[i]).removeClass('parallax-not-visible');
+				}
+				new JQuery(_arr[i]).addClass('parallax-visible');
+			} else {
+				if(new JQuery(_arr[i]).hasClass('parallax-visible')){
+					new JQuery(_arr[i]).removeClass('parallax-visible');
+				}
+				new JQuery(_arr[i]).addClass('parallax-not-visible');
+			}
+
+			// [mck] only when visible
+			if(new JQuery(_arr[i]).hasClass('parallax-visible')){
+				// [mck] calculate the number of movement
+				var ypos = maxImageMove * percentage;
+				new JQuery(_arr[i]).find('.parallax img').css({'transform': 'translate3d(-50%, ${ypos}px, 0px)'});
+			}
+		}
+	}
+
+
+
+
 
 	static public function main () { var app = new Main (); }
 }
