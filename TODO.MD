@@ -1,13 +1,33 @@
 # TODO
 
-- paralax on mobile should be working better!
-- hide message/description
-- create link to deep-post homepage
-- paralax from lowest page to the top doesn't work
 
-- check for imagemagick
-- check for jpegoptim
+top priority
 
+- [ ] post for photos working
+- [ ] create link to deep-post homepage
+- [ ] post working
+- [ ] homepage posts
+- [ ] normal post and photo post relationship
+- [ ] tags pages
+- [ ] social and seo added to the pages
+- [ ] google analytics
+
+seo
+
+- [x] change Google index info
+- [ ] update  share info <https://moz.com/blog/meta-data-templates-123>
+
+bugs
+
+- [ ] paralax strange 1px off
+- [ ] paralax on mobile should be working better!
+- [ ] paralax from lowest page to the top doesn't work
+
+nice-to-have
+
+- [x] hide message/description
+- [ ] check for imagemagick
+- [ ] check for jpegoptim
 
 
 extract colors out picture
@@ -24,17 +44,17 @@ then
 
 # done
 
-- navigation bar should work better, start with dark theme
-- paralax start is funny on the top visual (-200px)
-- extend info from config, just because we can
-- ~~projects should work everywhere~~
-- ~~color #FF9900~~
+- [x] navigation bar should work better, start with dark theme
+- [x] paralax start is funny on the top visual (-200px)
+- [x] extend info from config, just because we can
+- [x] ~~projects should work everywhere~~
+- [x] ~~color #FF9900~~
 ~~no libs like~~
-	- ~~noor~~
-	- ~~etc~~
-- ~~color lib~~
-- ~~markdown lib~~
-- ~~check if files are used instead resources~~
+	- [x] ~~noor~~
+	- [x] ~~etc~~
+- [x] ~~color lib~~
+- [x] ~~markdown lib~~
+- [x] ~~check if files are used instead resources~~
 
 
 ```
