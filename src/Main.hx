@@ -25,6 +25,8 @@ class Main {
 	var previousfromTop : Float = 0;
 	var scrollUpCounter : Int = 0;
 
+	static var isTextVisible :Bool = true;
+
 	public function new () {
 		console.log('${App.MONK} version: ${App.VERSION}' );
 
@@ -53,6 +55,19 @@ class Main {
 			} else {
 				scrollParallax();
 			}
+		});
+
+		new JQuery('#toggle-text').click(function (e){
+			e.preventDefault();
+			trace(e);
+			if(isTextVisible){
+				new JQuery(e.currentTarget).html('<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>');
+				new JQuery('.post').fadeTo(500,0);
+			} else {
+				new JQuery(e.currentTarget).html('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>');
+				new JQuery('.post').fadeTo(500,1);
+			}
+			isTextVisible = !isTextVisible;
 		});
 	}
 

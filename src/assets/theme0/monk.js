@@ -40,6 +40,18 @@ var Main = function() {
 			_gthis.scrollParallax();
 		}
 	});
+	$("#toggle-text").click(function(e3) {
+		e3.preventDefault();
+		console.log(e3);
+		if(Main.isTextVisible) {
+			$(e3.currentTarget).html("<span class=\"glyphicon glyphicon-eye-close\" aria-hidden=\"true\"></span>");
+			$(".post").fadeTo(500,0);
+		} else {
+			$(e3.currentTarget).html("<span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"></span>");
+			$(".post").fadeTo(500,1);
+		}
+		Main.isTextVisible = !Main.isTextVisible;
+	});
 };
 Main.__name__ = true;
 Main.main = function() {
@@ -336,6 +348,7 @@ var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.__name__ = true;
 Array.__name__ = true;
+Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
 Main.main();
