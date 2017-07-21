@@ -18,7 +18,7 @@ var Main = function() {
 	window.console.log("MONK" + " version: " + "0.1.0");
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
-		if($("body").hasClass("homepage")) {
+		if($("body").hasClass("monk-homepage")) {
 			_gthis.isHomepage = true;
 			_gthis.initHomepage();
 		} else {

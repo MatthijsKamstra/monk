@@ -32,7 +32,7 @@ class Main {
 
 		new JQuery(document).ready(function (e){
 			console.log('${App.MONK} doc ready');
-			if (new JQuery('body').hasClass('homepage')){
+			if (new JQuery('body').hasClass('monk-homepage')){
 				isHomepage = true;
 				initHomepage();
 			} else {

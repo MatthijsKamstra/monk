@@ -7,7 +7,6 @@ body {
     font-style: normal;
     padding-top: 49px;
     font-size: large;
-    background-color: #212121;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
@@ -113,44 +112,51 @@ body > nav > div > ul > li > a
     left: -250px;
 }
 
-
+/* monk background color
+-------------------------------------------- */
+body.monk-homepage,
+body.monk-info {
+    background-color: #212121;
+}
 
 /* monk-info
 -------------------------------------------- */
 body.monk-info {
     background-repeat: no-repeat;
     background-size: cover;
-	/* background-image: url('http://matthijskamstra.nl/photos/bots/thumb/10_IMG_4165.jpg'); */
 }
-
 /* weird border from parallax   */
 .monk-info .parallax-container {
     border: 0px solid #F8F8F8;
 }
 .container-info {
     background-color:rgba(255, 255, 255, 1);
-    padding-top: 40px;
+    padding-top: 10px;
     padding-bottom: 60px;
-    margin-top: -50px;
+    margin-top: -65px;
     margin-bottom: 100px;
+    border-radius: 3px;
 }
 
-/* post / pages
--------------------------------------------- */
-/*.post, .page {
-    margin-top: 60px;
-}*/
+.container-info img {
+    max-width: 100%;
+}
 
+/* monk-page
+-------------------------------------------- */
+.monk-page {
+
+}
+
+/* monk-post
+-------------------------------------------- */
+.monk-post {
+
+}
 
 /* parallax
 -------------------------------------------- */
-.parallax-container{
-    /*border: 1px solid pink;
-    position: relative;
-    overflow: hidden;
-    height: 500px;*/
-
-
+.parallax-container {
     border-bottom: 1px solid #F8F8F8;
     border-top: 1px solid #F8F8F8;
     position: relative;
@@ -159,14 +165,26 @@ body.monk-info {
     width: 100%;
     left: 0;
 }
-.parallax{
+.parallax {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: -1;
+
+    opacity: 0;
+
+    -webkit-transition: opacity 1s ease-in;
+       -moz-transition: opacity 1s ease-in;
+        -ms-transition: opacity 1s ease-in;
+         -o-transition: opacity 1s ease-in;
+            transition: opacity 1s ease-in;
 }
+.parallax-visible .parallax{
+     opacity: 1;
+}
+
 .parallax img {
     display: none;
     position: absolute;
@@ -174,13 +192,13 @@ body.monk-info {
     bottom: 0;
     min-width: 100%;
     width: 100%;
-    /*min-height: 100%;*/
-    /*height: 100%;*/
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }
+
+
 
 
 /**
