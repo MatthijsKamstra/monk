@@ -25,9 +25,11 @@ The more I work on it, the better it will become.
 ## sources
 
 This first "hit" I got was Expose, so Monk is heavily inspired by the work of Jack Qiao
+
 - <https://github.com/Jack000/Expose>
 
 I have work on and with Butterfly before and because of that I use a lot from that generator:
+
 - <https://github.com/ashes999/butterfly>
 
 
@@ -87,7 +89,6 @@ That might change to
 {
 	"site_title":"MONK",
 	"social_button":false,
-	"backgroundcolor":"#000000",
 	"theme_dir":"theme0"
 }
 ```

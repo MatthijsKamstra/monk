@@ -3,10 +3,11 @@
 
 top priority
 
-- [ ] post for photos working
-- [ ] create link to deep-post homepage
+- [x] info for photos working
+- [x] nice design for info
 - [ ] post working
 - [ ] homepage posts
+- [ ] create link to deep-post homepage
 - [ ] normal post and photo post relationship
 - [ ] tags pages
 - [ ] social and seo added to the pages
@@ -15,7 +16,7 @@ top priority
 seo
 
 - [x] change Google index info
-- [ ] update  share info <https://moz.com/blog/meta-data-templates-123>
+- [ ] update share info <https://moz.com/blog/meta-data-templates-123>
 
 bugs
 
