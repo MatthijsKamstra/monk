@@ -35,6 +35,9 @@ class Run {
 		args = Sys.args();
 		projectFolder = args[args.length-1];
 
+		Sys.println('\tfolder: ${projectFolder}');
+		Sys.println('\targs: ${args}\n');
+
 		isJpegOptim = (args.indexOf('-optim')!= -1);
 		isOverWrite = (args.indexOf('-force')!= -1);
 
@@ -263,6 +266,7 @@ class Run {
 		createFile('${name}', 'index-post.html', '');
 		createFile('${name}', 'post.html', haxe.Resource.getString('postTemplate'));
 		createFile('${name}', 'page.html', haxe.Resource.getString('pagesTemplate'));
+		createFile('${name}', 'info.html', haxe.Resource.getString('infoTemplate'));
 	}
 
 	function setupConfig(){
@@ -367,6 +371,7 @@ class Run {
 
 		// var str = haxe.Resource.getString('indexTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/index.html' );
+		var templateInfo = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/info.html' );
 
 		var tempSubArr = [];
 
@@ -388,6 +393,7 @@ class Run {
 					generatePhotoSizes(photo);
 				}
 			}
+
 			FileSystem.deleteFile('${projectFolder}/${App.EXPORT_FOLDER}/${photo.url}');
 		}
 
@@ -399,18 +405,20 @@ class Run {
 				// trace(photo.folders, folder, photo.fileName);
 				if (photo.folders == folder){
 					var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
+					var infoBtn = (photo.post != '') ? '<p><a href="${photo.fileName}.html">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
 					html += '
 						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);background-repeat: no-repeat;background-size: cover;">
 							<a name="${photo.fileName}" class="internal"></a>
 							<div class="post" ${photo.style}>
 								<div class="content">
-									${photo.description}
+									${photo.description} ${infoBtn}
 								</div>
 							</div>
 							<img src="${thumb}" class="full" data-folder="${photo.folders}" data-img="${photo.fileName}.jpg" width="${photo.width}" height="${photo.height}">
 						</div>
 					'.replace('\t','').replace('\n',''); // strip tabs and returns
 				}
+
 			}
 			var nav_pages = '';
 			for(p in pages){
@@ -425,7 +433,6 @@ class Run {
 			// 	var temp = '';
 			// 	nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
 			// }
-
 
 			if(isFirst){
 				var templateObj = {
@@ -450,6 +457,29 @@ class Run {
 				content: html
 			};
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${folder}', 'index.html', template, templateObj);
+
+			// [mck] generate all info files
+			for (photo in photos){
+				// trace(photo.fileName);
+				// trace('-> ${photo.post}\n');
+				var thumb = '${App.THUMB}/${photo.fileName}.jpg';
+				var big = '${App.photoFolderArray[0]}/${photo.fileName}.jpg';
+				if(photo.post != ''){
+					var templateObj = {
+						title : photo.fileName,
+						page_navigation : nav_pages,
+						post_navigation : '<!-- post_navigation -->',
+						photo_navigation : convertPhotoList(photos),
+						backgroundimage: thumb,
+						paralaximage: big,
+						content: photo.post
+					};
+					// trace('');
+					// trace(photo);
+					createWithGenTemplate('${App.EXPORT_FOLDER}/${photo.folders}', '${photo.fileName}.html', templateInfo, templateObj);
+				}
+			}
+
 		}
 	}
 

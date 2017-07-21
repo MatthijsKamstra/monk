@@ -20,6 +20,7 @@
 
 # Resources like templates
 -resource src/assets/templates/index.html@indexTemplate
+-resource src/assets/templates/info.html@infoTemplate
 -resource src/assets/templates/post.html@postTemplate
 -resource src/assets/templates/pages.html@pagesTemplate
 -resource src/assets/dummy/about.md@about
