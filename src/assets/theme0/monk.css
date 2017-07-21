@@ -7,6 +7,7 @@ body {
     font-style: normal;
     padding-top: 49px;
     font-size: large;
+    background-color: #212121;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
@@ -121,17 +122,16 @@ body.monk-info {
     background-size: cover;
 	/* background-image: url('http://matthijskamstra.nl/photos/bots/thumb/10_IMG_4165.jpg'); */
 }
-.monk-info {
 
+/* weird border from parallax   */
+.monk-info .parallax-container {
+    border: 0px solid #F8F8F8;
 }
-
 .container-info {
     background-color:rgba(255, 255, 255, 1);
-    height: 100%;
-    display: block;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top: 100px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    margin-top: -50px;
     margin-bottom: 100px;
 }
 

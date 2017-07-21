@@ -405,7 +405,7 @@ class Run {
 				// trace(photo.folders, folder, photo.fileName);
 				if (photo.folders == folder){
 					var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
-					var infoBtn = (photo.post != '') ? '<p><a href="${photo.fileName}.html">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
+					var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
 					html += '
 						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);background-repeat: no-repeat;background-size: cover;">
 							<a name="${photo.fileName}" class="internal"></a>
@@ -436,7 +436,7 @@ class Run {
 
 			if(isFirst){
 				var templateObj = {
-					title : 'foo',
+					title : 'Gallery',
 					page_navigation : nav_pages,
 					post_navigation : '<!-- post_navigation -->',
 					photo_navigation : convertPhotoList(photos, true),
@@ -450,7 +450,7 @@ class Run {
 			nav_pages = nav_pages.replace('href="','href="../../');
 
 			var templateObj = {
-				title : 'foo',
+				title : 'Gallery',
 				page_navigation : nav_pages,
 				post_navigation : '<!-- post_navigation -->',
 				photo_navigation : convertPhotoList(photos),
@@ -462,16 +462,16 @@ class Run {
 			for (photo in photos){
 				// trace(photo.fileName);
 				// trace('-> ${photo.post}\n');
-				var thumb = '${App.THUMB}/${photo.fileName}.jpg';
-				var big = '${App.photoFolderArray[0]}/${photo.fileName}.jpg';
+				var backgroundImage = '${App.THUMB}/${photo.fileName}.jpg';
+				var parallaxImage = '${App.photoFolderArray[0]}/${photo.fileName}.jpg';
 				if(photo.post != ''){
 					var templateObj = {
-						title : photo.fileName,
+						title : photo.folder + ' | ' + photo.fileName,
 						page_navigation : nav_pages,
 						post_navigation : '<!-- post_navigation -->',
 						photo_navigation : convertPhotoList(photos),
-						backgroundimage: thumb,
-						paralaximage: big,
+						backgroundimage: backgroundImage,
+						parallaximage: parallaxImage,
 						content: photo.post
 					};
 					// trace('');
