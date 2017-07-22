@@ -5,13 +5,14 @@ top priority
 
 - [x] info for photos working
 - [x] nice design for info
-- [ ] post working
-- [ ] homepage posts
+- [ ] news/post working
+- [ ] homepage news/posts with info about posts
 - [ ] create link to deep-post homepage
 - [ ] normal post and photo post relationship
 - [ ] tags pages
 - [ ] social and seo added to the pages
 - [ ] google analytics
+- [ ] local testing without server... should work
 
 seo
 
