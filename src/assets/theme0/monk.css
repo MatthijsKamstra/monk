@@ -239,10 +239,20 @@ body.monk-info {
 .content{
     text-shadow: 0px 0px 50px #ffffff;
 }
+.content:hover h1,
+.content:hover p {
+    background-color: rgba(255, 255, 255, 0.9);
+}
 .content h1,
 .content p{
     background-color: rgba(255, 255, 255, 0.4);
     padding: 5px 10px;
+
+    -webkit-transition: background-color 1s ease-in;
+       -moz-transition: background-color 1s ease-in;
+        -ms-transition: background-color 1s ease-in;
+         -o-transition: background-color 1s ease-in;
+            transition: background-color 1s ease-in;
 }
 .content h1{
     display: table;
