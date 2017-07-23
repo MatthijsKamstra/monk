@@ -2,55 +2,69 @@
 -------------------------------------------- */
 
 body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-style: normal;
     padding-top: 49px;
     font-size: large;
 }
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
     font-style: italic;
 }
-b, strong {
+
+b,
+strong {
     font-weight: 900;
 }
 
 
 /* navigation bar
 -------------------------------------------- */
-.navbar-monk{
-	border: 0;
-	border-radius: 0px;
-	margin-bottom: 0px;
 
-	background-color: #212121;
+.navbar-monk {
+    border: 0;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    background-color: #212121;
     font-family: 'Lato';
-
-	transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
     transition: top 1s;
     transition-delay: 1s;
 }
 
-nav.hideup{
+.navbar-news {
+    display: none !important;
+}
+
+nav.hideup {
     top: -50px;
 }
 
+
 /* change default a href color to white */
-body > nav > div > ul > li > a
-{
-	color:white;
+
+body>nav>div>ul>li>a {
+    color: white;
     font-size: 18px;
 }
 
-.show-on-hover:hover > ul.dropdown-menu {
+.show-on-hover:hover>ul.dropdown-menu {
     display: block;
 }
 
+
 /* brand
 -------------------------------------------- */
-#brand{
+
+#brand {
     z-index: 2030;
     display: flex;
     position: fixed;
@@ -59,7 +73,7 @@ body > nav > div > ul > li > a
     line-height: 50px;
 }
 
-#brand > img {
+#brand>img {
     position: absolute;
     border-radius: 0px;
     width: 50px;
@@ -71,7 +85,7 @@ body > nav > div > ul > li > a
     transition-delay: 1s;
 }
 
-#brand.brand-img-show > img {
+#brand.brand-img-show>img {
     border-radius: 100px;
     width: 50px;
     height: 50px;
@@ -81,7 +95,7 @@ body > nav > div > ul > li > a
     box-shadow: 0px 0px 12px 0px;
 }
 
-#brand.brand-img-show > img:hover {
+#brand.brand-img-show>img:hover {
     width: 70px;
     height: 70px;
     left: 5px;
@@ -89,7 +103,7 @@ body > nav > div > ul > li > a
     transition-delay: 0s;
 }
 
-#brand > a > .brand-name {
+#brand>a>.brand-name {
     margin: 0;
     padding: 0;
     left: 65px;
@@ -101,61 +115,72 @@ body > nav > div > ul > li > a
     transition: left 1s;
     /* http://cubic-bezier.com/#.48,.25,.54,1.18 */
     /*transition-timing-function: ease-out;*/
-    transition-timing-function: cubic-bezier(.48,.25,.54,1.18);
+    transition-timing-function: cubic-bezier(.48, .25, .54, 1.18);
 }
 
-#brand > a > .brand-name:hover {
+#brand>a>.brand-name:hover {
     left: 55px;
 }
 
-#brand > a > .brand-name-hide {
+#brand>a>.brand-name-hide {
     left: -250px;
 }
 
+
 /* monk background color
 -------------------------------------------- */
+
 body.monk-homepage,
 body.monk-info {
     background-color: #212121;
 }
 
+
 /* monk-info
 -------------------------------------------- */
+
 body.monk-info {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 /* weird border from parallax   */
+
 .monk-info .parallax-container {
     border: 0px solid #F8F8F8;
 }
+
 .container-info {
-    background-color:rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
     padding-top: 10px;
     padding-bottom: 60px;
     margin-top: -65px;
     margin-bottom: 100px;
     border-radius: 3px;
+    position: relative;
 }
 
 .container-info img {
     max-width: 100%;
 }
 
+
 /* monk-page
 -------------------------------------------- */
-.monk-page {
 
-}
+.monk-page {}
+
 
 /* monk-post
 -------------------------------------------- */
-.monk-post {
 
-}
+.monk-post {}
+
 
 /* parallax
 -------------------------------------------- */
+
 .parallax-container {
     border-bottom: 1px solid #F8F8F8;
     border-top: 1px solid #F8F8F8;
@@ -165,6 +190,7 @@ body.monk-info {
     width: 100%;
     left: 0;
 }
+
 .parallax {
     position: absolute;
     top: 0;
@@ -172,17 +198,16 @@ body.monk-info {
     right: 0;
     bottom: 0;
     z-index: -1;
-
     opacity: 0;
-
     -webkit-transition: opacity 1s ease-in;
-       -moz-transition: opacity 1s ease-in;
-        -ms-transition: opacity 1s ease-in;
-         -o-transition: opacity 1s ease-in;
-            transition: opacity 1s ease-in;
+    -moz-transition: opacity 1s ease-in;
+    -ms-transition: opacity 1s ease-in;
+    -o-transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
 }
-.parallax-visible .parallax{
-     opacity: 1;
+
+.parallax-visible .parallax {
+    opacity: 1;
 }
 
 .parallax img {
@@ -197,8 +222,6 @@ body.monk-info {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }
-
-
 
 
 /**
@@ -222,48 +245,55 @@ body.monk-info {
 
 /* images
 -------------------------------------------- */
+
 #main {
-	margin: 0;
+    margin: 0;
     padding: 0 0 0 0;
     min-width: 830px;
     min-height: 100%;
     overflow: hidden;
     position: relative;
 }
+
 .full {
     max-width: 100%;
     max-height: 100%;
-	width:100%;
-	height:100%;
+    width: 100%;
+    height: 100%;
 }
-.content{
+
+.content {
     text-shadow: 0px 0px 50px #ffffff;
 }
+
 .content:hover h1,
 .content:hover p {
     background-color: rgba(255, 255, 255, 0.9);
 }
+
 .content h1,
-.content p{
+.content p {
     background-color: rgba(255, 255, 255, 0.4);
     padding: 5px 10px;
-
     -webkit-transition: background-color 1s ease-in;
-       -moz-transition: background-color 1s ease-in;
-        -ms-transition: background-color 1s ease-in;
-         -o-transition: background-color 1s ease-in;
-            transition: background-color 1s ease-in;
+    -moz-transition: background-color 1s ease-in;
+    -ms-transition: background-color 1s ease-in;
+    -o-transition: background-color 1s ease-in;
+    transition: background-color 1s ease-in;
 }
-.content h1{
+
+.content h1 {
     display: table;
     white-space: nowrap;
 }
-.content p{
+
+.content p {
     /*display: inline;*/
     display: table;
     line-height: 25px;
 }
-.content p::after{
+
+.content p::after {
     content: "";
     display: table;
     clear: both;
@@ -272,37 +302,35 @@ body.monk-info {
     background-color: rgba(255, 255, 255, 0);
 }
 
-
 .slide {
-	float: left;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: auto;
-	clear: both;
-	overflow: hidden;
-	position: relative;
-	margin-bottom: -5px; /* for some reason I can't get this slides seamless */
-
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    clear: both;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: -5px;
+    /* for some reason I can't get this slides seamless */
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .post {
-	position: absolute;
+    position: absolute;
     top: 40%;
     left: 30px;
-	width: 500px;
-	height: inherit;
-	font: normal 1em/1.6em 'latolight',helvetica, arial, sans-serif;
-	/*z-index: 5;*/
-	-moz-opacity: 1;
+    width: 500px;
+    height: inherit;
+    font: normal 1em/1.6em 'latolight', helvetica, arial, sans-serif;
+    /*z-index: 5;*/
+    /* -moz-opacity: 1;
 	-webkit-opacity: 1;
 	opacity: 1;
 	-webkit-transition: opacity 0.5s ease-in;
 	-moz-transition: opacity 0.5s ease-in;
 	-ms-transition: opacity 0.5s ease-in;
 	-o-transition: opacity 0.5s ease-in;
-	transition: opacity 0.5s ease-in;
+	transition: opacity 0.5s ease-in; */
 }
-
-

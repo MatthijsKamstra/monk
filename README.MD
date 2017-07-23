@@ -46,6 +46,18 @@ I have work on and with Butterfly before and because of that I use a lot from th
 	+ post
 	+ theme0
 	+ www
+		- index.html
+		- about.html
+		- contact.html
+		- why.html
+		+ img
+		+ pages
+		+ photo
+			+ foobar1
+			+ foobar2
+			+ foobar3
+		+ post
+		+ theme0
 ```
 
 

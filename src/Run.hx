@@ -285,63 +285,103 @@ class Run {
 	// ____________________________________ generate ____________________________________
 
 	function generateHtmlPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
-		generateHtmlFilesForPages(pages, photos);
-		generateHtmlFilesForPosts(posts, pages);
-		generatePhotos(photos, pages);
+		generateHtmlFilesForPages(posts, pages, photos);
+		generateHtmlFilesForPosts(posts, pages, photos);
+		generatePhotos(posts, pages, photos);
 	}
 
-	private function generateHtmlFilesForPages(pages:Array<Page>, photos:Array<Photo>) {
+	private function generateHtmlFilesForPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
 		// var template = haxe.Resource.getString('pagesTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/page.html' );
 		for (page in pages) {
-			var nav_pages = '';
-			for(p in pages){
-				var klass = '';
-				if(page.title == p.title) klass = ' class="active"';
-				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
-			}
-			var nav_photo = convertPhotoList(photos, true);
 			var templateObj = {
 				title: page.title,
-				page_navigation : nav_pages,
-				post_navigation : '<!-- post_navigation -->',
-				photo_navigation : nav_photo,
+				page_navigation : convertPageList(pages),
+				post_navigation : convertPostList(posts),
+				photo_navigation : convertPhotoList(photos),
 				content: page.content
 			};
 			createWithGenTemplate(App.EXPORT_FOLDER, '${page.url}.html', template, templateObj);
 		}
 	}
 
-	private function generateHtmlFilesForPosts(posts:Array<Post>,pages:Array<Page>) {
+	private function generateHtmlFilesForPosts(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
 		createDir('${App.EXPORT_FOLDER}/${App.POSTS}');
 		// var str = haxe.Resource.getString('postTemplate');
-		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/post.html' );
+		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/post.html');
+		var newsTemplate = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/page.html');
+		var html = '<div class="row"><div class="col-md-8">';
 		for (post in posts) {
-			var nav = '';
-			for(p in pages){
-				var klass = '';
-				nav += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
-			}
 			var obj = {
-				 content : post.content,
-				 navigation: nav,
-				 title: post.title
+				 title: post.title,
+				 page_navigation: convertPageList(pages),
+				 content : post.content
 			}
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', '${post.url}.html', template, obj);
+			html += '<h1>${post.title}</h1>
+					<p><span class="glyphicon glyphicon-time"></span> ${post.createdOn}</p>
+					<p>${post.content}</p>
+					<a href="${App.EXPORT_FOLDER}/${App.POSTS}/${post.url}.html" class="btn btn-link" role="button">Read more</a>
+					<hr>';
 		}
+		html += '</div>';
+		html += '<div class="col-md-4">${convertPostList(posts)}</div>';
+		html += '</div>';
+
+		var templateObj = {
+			title : 'News',
+			page_navigation : convertPageList(pages,'../'),
+			post_navigation : convertPostList(posts, '../../'),
+			photo_navigation : convertPhotoList(photos,'../'),
+			content: html
+		};
+		createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', 'index.html', newsTemplate, templateObj);
 	}
 
 	/**
-	 *  create photo navigation list
+	 *  convert the pages array to a navigation list
 	 *
-	 *  @param photos 		array with all `Photo` in it
+	 *  @param pages 		array with `Page`
+	 *  @param path			hack the correct path
 	 *  @return String
 	 */
-	private function convertPhotoList(photos:Array<Photo>, isRoot:Bool = false):String{
+	private function convertPageList(pages:Array<Page>, path:String=''):String{
+		var nav = '';
+		for(page in pages){
+			var klass = '';
+			nav += '<li${klass}><a href="${path}${page.url}.html">${page.title}</a></li>';
+		}
+		return nav;
+	}
+
+	/**
+	 *  convert the posts array to a navigation list
+	 *
+	 *  @param posts		array with `Post`
+	 *  @param path			hack the correct path
+	 *  @return String
+	 */
+	private function convertPostList(posts:Array<Post>, path:String=''):String{
+		var nav = '';
+		for(post in posts){
+			var klass = '';
+			nav += '<li${klass}><a href="${path}${post.url}.html">${post.title}</a></li>';
+		}
+		return nav;
+	}
+
+	/**
+	 *  convert the photos array to a navigation list
+	 *
+	 *  @param photos 		array with `Photo`
+	 *  @param path			hack the correct path
+	 *  @return String
+	 */
+	private function convertPhotoList(photos:Array<Photo>, path:String=''):String{
 		var tempSubArr = [];
 		// create photo folders
 		for (photo in photos){
-			// store unique names in arr
+			// store unique folder names in arr
 			if(tempSubArr.indexOf(photo.folders) == -1) tempSubArr.push(photo.folders);
 		}
 		var nav_photo = '';
@@ -351,7 +391,7 @@ class Run {
 			// var temp = '';
 			nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
 		}
-		if(!isRoot) nav_photo = nav_photo.replace('${App.PHOTOS}/','../../${App.PHOTOS}/');
+		nav_photo = nav_photo.replace('${App.PHOTOS}/','${path}${App.PHOTOS}/');
 		return nav_photo;
 	}
 
@@ -366,12 +406,11 @@ class Run {
 	 *  @param photos -
 	 *  @param pages -
 	 */
-	private function generatePhotos(photos:Array<Photo>,pages:Array<Page>){
+	private function generatePhotos(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>){
 		createDir('${App.EXPORT_FOLDER}/${App.PHOTOS}');
 
-		// var str = haxe.Resource.getString('indexTemplate');
-		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/index.html' );
-		var templateInfo = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/info.html' );
+		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/index.html');
+		var templateInfo = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/info.html');
 
 		var tempSubArr = [];
 
@@ -393,11 +432,8 @@ class Run {
 					generatePhotoSizes(photo);
 				}
 			}
-
 			FileSystem.deleteFile('${projectFolder}/${App.EXPORT_FOLDER}/${photo.url}');
 		}
-
-		// trace(tempSubArr.length);
 
 		for(folder in tempSubArr){
 			var html = '';
@@ -418,28 +454,15 @@ class Run {
 						</div>
 					'.replace('\t','').replace('\n',''); // strip tabs and returns
 				}
-
-			}
-			var nav_pages = '';
-			for(p in pages){
-				var klass = '';
-				nav_pages += '<li${klass}><a href="${p.url}.html">${p.title}</a></li>';
 			}
 
-			// var nav_photo = '';
-			// for(folder in tempSubArr){
-			// 	var klass = '';
-			// 	// if(page.title == p.title) klass = ' class="active"';
-			// 	var temp = '';
-			// 	nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
-			// }
-
+			// http://www.foo.nl/index.html
 			if(isFirst){
 				var templateObj = {
 					title : 'Gallery',
-					page_navigation : nav_pages,
-					post_navigation : '<!-- post_navigation -->',
-					photo_navigation : convertPhotoList(photos, true),
+					page_navigation : convertPageList(pages),
+					post_navigation : convertPostList(posts),
+					photo_navigation : convertPhotoList(photos),
 					content: html
 				};
 				createWithGenTemplate(App.EXPORT_FOLDER, 'index.html', template, templateObj);
@@ -447,39 +470,40 @@ class Run {
 			}
 
 			html = html.replace('${folder}/','');
-			nav_pages = nav_pages.replace('href="','href="../../');
 
+			// http://www.foo.nl/bar/index.html
 			var templateObj = {
 				title : 'Gallery',
-				page_navigation : nav_pages,
-				post_navigation : '<!-- post_navigation -->',
-				photo_navigation : convertPhotoList(photos),
+				page_navigation : convertPageList(pages, '../../'),
+				post_navigation : convertPostList(posts, '../../'),
+				photo_navigation : convertPhotoList(photos, '../../'),
 				content: html
 			};
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${folder}', 'index.html', template, templateObj);
 
 			// [mck] generate all info files
 			for (photo in photos){
-				// trace(photo.fileName);
-				// trace('-> ${photo.post}\n');
 				var backgroundImage = '${App.THUMB}/${photo.fileName}.jpg';
 				var parallaxImage = '${App.photoFolderArray[0]}/${photo.fileName}.jpg';
+				var previewImage = '${App.photoFolderArray[3]}/${photo.fileName}.jpg';
+
+				var postHtml = '<a href="./index.html" role="button" class="bttn bttn-link"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back</a>';
+				postHtml += photo.post;
+				postHtml += '<img src="${previewImage}" alt="${photo.fileName}">';
+
 				if(photo.post != ''){
 					var templateObj = {
 						title : photo.folder + ' | ' + photo.fileName,
-						page_navigation : nav_pages,
-						post_navigation : '<!-- post_navigation -->',
-						photo_navigation : convertPhotoList(photos),
+						page_navigation : convertPageList(pages, '../../'),
+						post_navigation : convertPostList(posts, '../../'),
+						photo_navigation : convertPhotoList(photos, '../../'),
 						backgroundimage: backgroundImage,
 						parallaximage: parallaxImage,
-						content: photo.post
+						content: postHtml
 					};
-					// trace('');
-					// trace(photo);
 					createWithGenTemplate('${App.EXPORT_FOLDER}/${photo.folders}', '${photo.fileName}.html', templateInfo, templateObj);
 				}
 			}
-
 		}
 	}
 
@@ -528,7 +552,7 @@ class Run {
 	}
 
 
-	// ____________________________________ sort Pages/Posts ____________________________________
+	// ____________________________________ sort Photos/Pages/Posts ____________________________________
 
 	private function sortPhotos(photos:Array<Photo>){
 		if (photos.length > 0) {
