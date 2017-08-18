@@ -7,12 +7,26 @@ top priority
 - [x] nice design for info
 - [ ] news/post working
 - [ ] homepage news/posts with info about posts
-- [ ] create link to deep-post homepage
 - [ ] normal post and photo post relationship
 - [ ] tags pages
 - [ ] social and seo added to the pages
 - [ ] google analytics
 - [ ] local testing without server... should work
+- [x] create link to deep-post homepage
+- [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking (http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?)
+
+```
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1992499-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+```
 
 seo
 

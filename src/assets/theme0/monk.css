@@ -334,3 +334,40 @@ body.monk-info {
 	-o-transition: opacity 0.5s ease-in;
 	transition: opacity 0.5s ease-in; */
 }
+
+
+/* links / anchors */
+
+.internal {
+    /* border: 1px solid pink; */
+    position: absolute;
+    visibility: hidden;
+}
+
+a.link {
+    position: absolute;
+    color: white;
+    left: -30px;
+    top: 30px;
+    /* border: 1px solid pink; */
+    width: 100%;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s ease-in;
+    -moz-transition: opacity 0.5s ease-in;
+    -ms-transition: opacity 0.5s ease-in;
+    -o-transition: opacity 0.5s ease-in;
+    transition: opacity 0.5s ease-in;
+}
+
+a.link:hover {
+    -moz-opacity: 1;
+    -webkit-opacity: 1;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s ease-in;
+    -moz-transition: opacity 0.5s ease-in;
+    -ms-transition: opacity 0.5s ease-in;
+    -o-transition: opacity 0.5s ease-in;
+    transition: opacity 0.5s ease-in;
+}

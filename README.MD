@@ -101,7 +101,8 @@ That might change to
 {
 	"site_title":"MONK",
 	"social_button":false,
-	"theme_dir":"theme0"
+	"theme_dir":"theme0",
+	"any_var_you":"want_to_use"
 }
 ```
 

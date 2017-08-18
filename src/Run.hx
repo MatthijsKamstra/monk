@@ -444,9 +444,10 @@ class Run {
 					var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
 					html += '
 						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);background-repeat: no-repeat;background-size: cover;">
-							<a name="${photo.fileName}" class="internal"></a>
+							<a name="${photo.fileName}" class="internal"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
 							<div class="post" ${photo.style}>
 								<div class="content">
+									<a href="#${photo.fileName}" class="link"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
 									${photo.description} ${infoBtn}
 								</div>
 							</div>
