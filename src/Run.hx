@@ -19,7 +19,7 @@ class Run {
 	var args : Array<String>  = Sys.args ();
 	var current = Sys.getCwd ();
 
-	var fileExtArr = ['jpg', 'jpeg', 'png'];
+	var fileExtArr = ['jpg', 'jpeg', 'png', 'gif'];
 	// var fileSizeArr = [3840, 2560, 1920, 1280, 1024, 640];
 
 	var config : Config;
@@ -82,7 +82,7 @@ class Run {
 		config = Config.init('${projectFolder}/config.json');
 
 		// copy files from "theme" (defined in config) the same folder in "www" / export folder
-		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js','png','jpg']);
+		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js','png','jpg', 'gif']);
 		// copy img folder (might need to be extended to photo-folder/page-folder/post-folder)
 		copyFiles('${projectFolder}/${App.IMG}', fileExtArr);
 

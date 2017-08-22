@@ -5,6 +5,7 @@ import haxe.macro.Context;
 class App {
 
 	/**
+	 * 0.1.3	gif is also a valid image
 	 * 0.1.2	deeplink/anchor
 	 * 0.1.1	better generation for subnavigation (posts/pages/photos)
 	 * 0.1.0	description fixed, info about photos
@@ -19,7 +20,7 @@ class App {
 	 * 0.0.1	initial
 	 */
 	public static inline var MONK = 'MONK';
-	public static inline var VERSION = '0.1.2';
+	public static inline var VERSION = '0.1.3';
 
 	public static var photoFileSizeArray = [3840, 2560, 1920, 1280, 1024, 640];
 	public static var photoFolderArray = ['3840', '2560', '1920', '1280', '1024', '640', 'thumb'];

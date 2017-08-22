@@ -15,7 +15,7 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " version: " + "0.1.2");
+	window.console.log("MONK" + " version: " + "0.1.3");
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
 		if($("body").hasClass("monk-homepage")) {

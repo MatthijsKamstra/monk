@@ -5,6 +5,8 @@ top priority
 
 - [x] info for photos working
 - [x] nice design for info
+- [x] create link to deep-post homepage
+- [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking (http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?)
 - [ ] news/post working
 - [ ] homepage news/posts with info about posts
 - [ ] normal post and photo post relationship
@@ -12,8 +14,6 @@ top priority
 - [ ] social and seo added to the pages
 - [ ] google analytics
 - [ ] local testing without server... should work
-- [x] create link to deep-post homepage
-- [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking (http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?)
 
 ```
 <script>
