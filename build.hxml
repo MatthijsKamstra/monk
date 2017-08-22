@@ -40,10 +40,10 @@
 
 -cmd echo 'create docs'
 -cmd cd docs
-# -cmd echo 'MONK > haxelib run monk scaffold'
-# -cmd haxelib run monk scaffold
-# -cmd echo 'MONK > haxelib run monk generate'
-# -cmd haxelib run monk generate
+-cmd echo 'MONK > haxelib run monk scaffold'
+-cmd haxelib run monk scaffold
+-cmd echo 'MONK > haxelib run monk generate'
+-cmd haxelib run monk generate
 
 -cmd cd ../../monk-example
 -cmd echo 'MONK > haxelib run monk scaffold'

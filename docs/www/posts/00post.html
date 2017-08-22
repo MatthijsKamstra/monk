@@ -1,67 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta name="description" content="Monk a static site generator">
+    <meta name="author" content="Matthijs Kamstra">
+    <meta name="generator" content="MONK 0.1.3">
 
-	<link rel="icon" href="./favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 
-	<title>MONK | 00post</title>
+    <title>MONK | 00post</title>
 
-	<!-- normalize.css -->
-	<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">-->
+    <!-- normalize.css -->
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">-->
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<!-- Lato Roboto light -->
-	<link href="https://fonts.googleapis.com/css?family=Lato:100i,300i,400i|Roboto:300" rel="stylesheet">
+    <!-- Lato Roboto light -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100i,300i,400i|Roboto:300" rel="stylesheet">
 
-	<!-- monk.css -->
-	<link rel="stylesheet" href="../theme0/monk.css">
+    <!-- monk.css -->
+    <link rel="stylesheet" href="../theme0/monk.css">
 
 </head>
 
-<body class="post">
+<body class="monk-post">
 
-	<div id="brand">
-		<a href="/"><p class="brand-name">Matthijs Kamstra</p></a>
-		<img src="https://pbs.twimg.com/profile_images/629553667339907073/mGoAh9j2.jpg" alt="logo">
-	</div>
+    <div id="brand">
+        <a href="/">
+            <p class="brand-name">Matthijs Kamstra</p>
+        </a>
+        <img src="https://pbs.twimg.com/profile_images/629553667339907073/mGoAh9j2.jpg" alt="logo">
+    </div>
 
-	<nav class="navbar navbar-fixed-top navbar-monk">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <nav class="navbar navbar-fixed-top navbar-inverse navbar-monk">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			</div>
+            </div>
 
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">projects <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						null
-					</ul>
-				</li>
-				<li><a href="posts">news</a></li>
-				null
-			</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav><!--/.navbar-monk-->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">projects <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            null
+                        </ul>
+                    </li>
 
-	<div class="container">
-		<h1>An exhibit of Markdown</h1>
+                    <li class="navbar-news"><a href="posts/index.html">news</a></li>
+
+                    <li><a href="contact.html">contact</a></li><li><a href="about.html">about</a></li>
+
+                    <div class="pull-right">
+                        <li class="dropdown show-on-hover">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: transparent">
+                                <img src="../theme0/img/logo/fonk.png" width="50px">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="http://fonk.amsterdam/" target="_blank">Fonk</a></li>
+                                <li><a href="http://fonk.amsterdam/blog/" target="_blank">Fonk news</a></li>
+                            </ul>
+                        </li>
+                    </div>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!--/.navbar-monk-->
+
+    <div class="container">
+        <h1>An exhibit of Markdown</h1>
 <p>This note demonstrates some of what <a href="http://daringfireball.net/projects/markdown/">Markdown</a> is capable of doing.</p>
 <h2>Basic formatting</h2>
 <p>Paragraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.</p>
@@ -102,13 +125,14 @@
 <p><img src="https://dummyimage.com/600x400/19e33b/fff.png&amp;text=images+in+markdown" /></p>
 <h2>Finally</h2>
 <p>There's actually a lot more to Markdown than this. See the official <a href="http://daringfireball.net/projects/markdown/basics">introduction</a> and <a href="http://daringfireball.net/projects/markdown/syntax">syntax</a> for more information. However, be aware that this is not using the official implementation, and this might work subtly differently in some of the little things.</p>
-	</div>
+    </div>
 
-	<!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!-- Monk scripts -->
-	<script src="../theme0/monk.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Monk scripts -->
+    <script src="../theme0/monk.js"></script>
 </body>
+
 </html>
