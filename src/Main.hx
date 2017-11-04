@@ -209,7 +209,7 @@ class Main {
 			// console.group('start parallax ${i}');
 
 			var maxHeight33 = Std.int( new JQuery(window).height() / 3) ;
-			var height80 = Std.int (imageHeight * 0.80);
+			var height80 = Std.int (imageHeight * 0.80); // 80% from imageheight
 			// trace('${i}. windowheight: ${new JQuery(window).height()}');
 			// trace('${i}. maxHeight33: ${maxHeight33}');
 			// trace('${i}. height80: ${height80}');

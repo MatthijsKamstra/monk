@@ -198,7 +198,8 @@ class Run {
 					if(FileSystem.exists('${folder}/${fileName}.md') || FileSystem.exists('${folder}/_${fileName}.md')  ){
 						Sys.println('\t\t>> ${fileName}.md or _${fileName}.md already exists');
 					} else {
-						createFile('${folder}', '${fileName}.md', '# ${fileName}\n\nText over photo\n\nAnother line about the photo!');
+						// createFile('${folder}', '${fileName}.md', '# ${fileName}\n\nText over photo\n\nAnother line about the photo!');
+						createFile('${folder}', '${fileName}.md', '# ${fileName}\n\n# Paper joints\n\nPaper is not really strong (even when you use 200 grams paper) and bending it wil make it even weaker.\n\nSo joints are the way to make possible paper.\n\nVery happy with the result! And an added bonus: my hands look like \'[strandbeesten](http://www.strandbeest.com/photos.php)\'');
 					}
 
 					// [mck] more indepth story about the photo
@@ -443,15 +444,16 @@ class Run {
 					var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
 					var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
 					html += '
-						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);background-repeat: no-repeat;background-size: cover;">
+						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);">
 							<a name="${photo.fileName}" class="internal"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
-							<div class="post" ${photo.style}>
+							<div class="post" data-style="${(photo.style).urlEncode()}" ${photo.nostyle}>
 								<div class="content">
 									<a href="#${photo.fileName}" class="link"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
 									${photo.description} ${infoBtn}
 								</div>
 							</div>
 							<img src="${thumb}" class="full" data-folder="${photo.folders}" data-img="${photo.fileName}.jpg" width="${photo.width}" height="${photo.height}">
+							<br class="clearfix">
 						</div>
 					'.replace('\t','').replace('\n',''); // strip tabs and returns
 				}

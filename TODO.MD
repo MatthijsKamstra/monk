@@ -1,19 +1,30 @@
 # TODO
 
+Make site better
+
+- [ ] mobile homepage css doesn't work
+- [x] check javascript/paralax on mobile
+- [ ] photo post back button with anchor
+- [ ] social and seo added to the pages
+- [ ] google analytics
 
 top priority
 
 - [x] info for photos working
 - [x] nice design for info
 - [x] create link to deep-post homepage
-- [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking (http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?)
+- [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking
+- [x] http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?
 - [ ] news/post working
 - [ ] homepage news/posts with info about posts
 - [ ] normal post and photo post relationship
 - [ ] tags pages
-- [ ] social and seo added to the pages
-- [ ] google analytics
-- [ ] local testing without server... should work
+- [ ] local testing without server... should work : use `new Path()`
+- [ ] better images for about page
+- [ ] photo matthijs added to pages
+- [ ] make kamstra logo and implement
+
+
 
 ```
 <script>
@@ -36,7 +47,7 @@ seo
 bugs
 
 - [ ] paralax strange 1px off
-- [ ] paralax on mobile should be working better!
+- [x] paralax on mobile should be working better!
 - [ ] paralax from lowest page to the top doesn't work
 
 nice-to-have
@@ -44,6 +55,8 @@ nice-to-have
 - [x] hide message/description
 - [ ] check for imagemagick
 - [ ] check for jpegoptim
+- [ ] other markdown converters
+		- https://markdown-it.github.io/
 
 
 extract colors out picture

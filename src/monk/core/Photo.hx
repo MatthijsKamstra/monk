@@ -50,6 +50,7 @@ class Photo {
 	 *  css style for html to position photo description
 	 */
 	public var style (default, default) : String = '';
+	public var nostyle (default, default) : String = '';
 	/**
 	 *  description html (converted from markdown)
 	 */

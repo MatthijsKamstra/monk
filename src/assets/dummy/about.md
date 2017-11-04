@@ -4,7 +4,7 @@ meta-order: 2
 
 <div class="parallax-container">
 	<div class="parallax">
-		<img src="https://dummyimage.com/1200x800/9b59b6/8e44ad&text=1200x800">
+		<img src="https://dummyimage.com/1240x1755/9b59b6/8e44ad&text=1240x1755">
 	</div>
 </div>
 
