@@ -28,7 +28,7 @@ class Main {
 	static var isTextVisible :Bool = true;
 
 	public function new () {
-		console.log('${App.MONK} version: ${App.VERSION}' );
+		console.log('${App.MONK} - version: ${App.VERSION} - build: ${App.BUILD}');
 
 		new JQuery(document).ready(function (e){
 			console.log('${App.MONK} doc ready');
@@ -194,16 +194,36 @@ class Main {
 		var fromTop = new JQuery(document).scrollTop();
 		// [mck] parallax list
 		var _arr = new JQuery('.parallax-container');
+
 		for ( i in 0 ... _arr.length ){
-			var containerHeight = new JQuery(_arr[i]).innerHeight();
+			// var containerHeight = new JQuery(_arr[i]).innerHeight();
 			var containerOffset = new JQuery(_arr[i]).offset().top;
 			var containerHeight = new JQuery(_arr[i]).height();
 			var imageHeight = new JQuery(_arr[i]).find('.parallax img').height();
 
-			// [mck] make sure there is an height to work with
+			// [mck] make sure there is a height to work with
 			if(imageHeight == 0) {
 				haxe.Timer.delay(scrollParallax, 100);
 				return;
+			}
+			// console.group('start parallax ${i}');
+
+			var maxHeight33 = Std.int( new JQuery(window).height() / 3) ;
+			var height80 = Std.int (imageHeight * 0.80);
+			// trace('${i}. windowheight: ${new JQuery(window).height()}');
+			// trace('${i}. maxHeight33: ${maxHeight33}');
+			// trace('${i}. height80: ${height80}');
+
+			// [mck] make the image container height smaller then the image height, so it will paralax
+			if(imageHeight <= containerHeight) {
+				// trace('set height80 ${height80}');
+				new JQuery(_arr[i]).height(height80);
+			}
+
+			// [mck] make the image container 1/3 from the
+			if(height80 >= maxHeight33){
+				// trace('set maxHeight33 ${maxHeight33}');
+				new JQuery(_arr[i]).height(maxHeight33);
 			}
 
 			var maxMove = (containerOffset+containerHeight)-(containerOffset-window.innerHeight);
@@ -236,6 +256,7 @@ class Main {
 				var ypos = maxImageMove * percentage;
 				new JQuery(_arr[i]).find('.parallax img').css({'transform': 'translate3d(-50%, ${ypos}px, 0px)'});
 			}
+			// console.groupEnd();
 		}
 	}
 
