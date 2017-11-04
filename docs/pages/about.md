@@ -1,12 +1,12 @@
 <!-- 
-meta-id: 603bbd53bcfcc6f1e91ccfb148e79ce50443fa71
+meta-id: dad9398af3117b1d4126e344fc113b9fb7e31c62
 
 meta-order: 2
 -->
 
 <div class="parallax-container">
 	<div class="parallax">
-		<img src="https://dummyimage.com/1200x800/9b59b6/8e44ad&text=1200x800">
+		<img src="https://dummyimage.com/1240x1755/9b59b6/8e44ad&text=1240x1755">
 	</div>
 </div>
 
