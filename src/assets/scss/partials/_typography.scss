@@ -1,0 +1,45 @@
+/**
+Nunito
+	- regular 400				@include font($nunito, normal, 400);
+ 	- bold 700					@include font($nunito, normal, 700);
+
+Alegreya
+ 	- regular 400				@include font($alegreya, normal, 400);
+*/
+
+
+
+$alegreya		: 'Alegreya', serif;
+$nunito			: 'Nunito', sans-serif;
+
+
+//  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+// p {
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+// }
+
+
+// not sure this is the best solution
+body {
+	@include font($nunito, normal, 400);
+}
+
+.font_{
+	&nunito_{
+		&regular{
+			@include font($alegreya, normal, 400);
+		}
+		&bold{
+			@include font($alegreya, normal, 700);
+		}
+	}
+	&alegreya_{
+		&regular{
+			@include font($alegreya, normal, 400);
+		}
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	@include font($alegreya, normal, 700);
+}
