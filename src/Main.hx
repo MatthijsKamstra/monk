@@ -176,6 +176,10 @@ class Main {
 		for ( i in 0 ... alist.length ) {
 			var ahref : js.html.AnchorElement = cast alist[i];
 			var link = ahref.getAttribute('href');
+			if(link == null) continue;
+			// trace(ahref);
+			// trace(link);
+
 			if(link.indexOf('#') != -1 && link.length > 1){
 				new JQuery(ahref).addClass ('scroll-to-content');
 			}

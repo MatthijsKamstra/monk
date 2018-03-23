@@ -208,6 +208,9 @@ body.monk-info {
 .parallax-container:first-child{
     margin-top: 0px;
 }
+.parallax-container:last-child{
+    margin-bottom: 0px;
+}
 
 
 .parallax {

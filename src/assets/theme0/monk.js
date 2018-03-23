@@ -157,13 +157,11 @@ Main.prototype = {
 			var i = _g1++;
 			var ahref = alist[i];
 			var link = ahref.getAttribute("href");
+			if(link == null) {
+				continue;
+			}
 			if(link.indexOf("#") != -1 && link.length > 1) {
 				$(ahref).addClass("scroll-to-content");
-				console.log(link);
-				console.log(link.indexOf("#"));
-				console.log(link.length);
-				console.log(alist);
-				console.log("---");
 			}
 		}
 		$(".scroll-to-content").click(function(e) {
@@ -381,6 +379,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-23 15:58:13";
+monk_model_constants_App.BUILD = "2018-03-23 16:41:36";
 Main.main();
 })();
