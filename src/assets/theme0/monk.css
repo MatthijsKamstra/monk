@@ -5,7 +5,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-style: normal;
-    padding-top: 59px;
+    padding-top: 58px;
     font-size: large;
 }
 
@@ -78,8 +78,8 @@ body>nav>div>ul>li>a {
 #brand>img {
     position: absolute;
     border-radius: 0px;
-    width: 58px;
-    height: 58px;
+    width: 59px;
+    height: 59px;
     left: 0px;
     top: 0px;
     transition-timing-function: ease-out;
@@ -89,8 +89,8 @@ body>nav>div>ul>li>a {
 
 #brand.brand-img-show>img {
     border-radius: 100px;
-    width: 58px;
-    height: 58px;
+    width: 59px;
+    height: 59px;
     left: 10px;
     top: 10px;
     border: 1px solid #444;
