@@ -5,6 +5,7 @@ import haxe.macro.Context;
 class App {
 
 	/**
+	 * 0.2.0	static pages
 	 * 0.1.4	paralax fix for mobile screens (window height to big for resized image)
 	 * 0.1.3	gif is also a valid image
 	 * 0.1.2	deeplink/anchor
@@ -21,7 +22,7 @@ class App {
 	 * 0.0.1	initial
 	 */
 	public static inline var MONK = 'MONK';
-	public static inline var VERSION = '0.1.4';
+	public static inline var VERSION = '0.2.0';
 
 	public static var photoFileSizeArray = [3840, 2560, 1920, 1280, 1024, 640];
 	public static var photoFolderArray = ['3840', '2560', '1920', '1280', '1024', '640', 'thumb'];
@@ -34,6 +35,7 @@ class App {
 	public static inline var POSTS = 'posts';
 	public static inline var THUMB = 'thumb';
 	public static inline var IMG = 'img';
+	public static inline var STATICS = 'statics';
 
 	public static var BUILD : String = getBuildDate();
 

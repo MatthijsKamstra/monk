@@ -19,6 +19,7 @@
 --next
 
 # Resources like templates
+-resource src/assets/templates/google_analytics.html@googleAnalyticsTemplate
 -resource src/assets/templates/index.html@indexTemplate
 -resource src/assets/templates/info.html@infoTemplate
 -resource src/assets/templates/post.html@postTemplate

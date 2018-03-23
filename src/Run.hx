@@ -115,6 +115,7 @@ class Run {
 		createDir(App.EXPORT_FOLDER);
 		createDir(App.IMG);
 		createDummyImage(App.IMG,'test', 'test', 'green', 200);
+		createDummyImage(App.IMG,'social', 'social', 'white', 300); // should be minimal 280x150px
 		createFavicon();
 		setupPostAndPages();
 		setupPhoto();
@@ -274,11 +275,13 @@ class Run {
 		// var obj : ConfigObj = {
 		var obj : Dynamic = {
 			"site_title" : config.monkTitle,
+			"site_url": config.monkSiteUrl,
 			"theme_dir" : config.monkTheme,
 			"social_button": config.monkIsSocial,
 			"backgroundcolor" : config.monkBackgroundcolor,
 			"description" : "Monk a static site generator",
-			"author" : "Matthijs Kamstra"
+			"author" : "Matthijs Kamstra",
+			"googleAnalytics" : config.googleAnalytics
 		}
 		createFile('', 'config.json', haxe.Json.stringify(obj));
 	}
@@ -300,6 +303,7 @@ class Run {
 				page_navigation : convertPageList(pages),
 				post_navigation : convertPostList(posts),
 				photo_navigation : convertPhotoList(photos),
+				googleAnalyticsScript : convertAnalytics(),
 				content: page.content
 			};
 			createWithGenTemplate(App.EXPORT_FOLDER, '${page.url}.html', template, templateObj);
@@ -314,9 +318,9 @@ class Run {
 		var html = '<div class="row"><div class="col-md-8">';
 		for (post in posts) {
 			var obj = {
-				 title: post.title,
-				 page_navigation: convertPageList(pages),
-				 content : post.content
+				title: post.title,
+				page_navigation: convertPageList(pages),
+				content : post.content
 			}
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', '${post.url}.html', template, obj);
 			html += '<h1>${post.title}</h1>
@@ -334,9 +338,23 @@ class Run {
 			page_navigation : convertPageList(pages,'../'),
 			post_navigation : convertPostList(posts, '../../'),
 			photo_navigation : convertPhotoList(photos,'../'),
+			googleAnalyticsScript : convertAnalytics(),
 			content: html
 		};
 		createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', 'index.html', newsTemplate, templateObj);
+	}
+
+	private function convertAnalytics(){
+		var analytics = '';
+		// lame but just a simple check
+		if(config.googleAnalytics != null && config.googleAnalytics.length > 4){
+
+			var template = haxe.Resource.getString('googleAnalyticsTemplate');
+			var t = new haxe.Template(template);
+			var output = t.execute({"googleAnalytics" : config.googleAnalytics});
+			analytics = output;
+		}
+		return analytics;
 	}
 
 	/**
@@ -466,6 +484,7 @@ class Run {
 					page_navigation : convertPageList(pages),
 					post_navigation : convertPostList(posts),
 					photo_navigation : convertPhotoList(photos),
+					googleAnalyticsScript : convertAnalytics(),
 					content: html
 				};
 				createWithGenTemplate(App.EXPORT_FOLDER, 'index.html', template, templateObj);
@@ -480,6 +499,7 @@ class Run {
 				page_navigation : convertPageList(pages, '../../'),
 				post_navigation : convertPostList(posts, '../../'),
 				photo_navigation : convertPhotoList(photos, '../../'),
+				googleAnalyticsScript : convertAnalytics(),
 				content: html
 			};
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${folder}', 'index.html', template, templateObj);
@@ -500,6 +520,7 @@ class Run {
 						page_navigation : convertPageList(pages, '../../'),
 						post_navigation : convertPostList(posts, '../../'),
 						photo_navigation : convertPhotoList(photos, '../../'),
+						googleAnalyticsScript : convertAnalytics(),
 						backgroundimage: backgroundImage,
 						parallaximage: parallaxImage,
 						content: postHtml
@@ -684,16 +705,17 @@ class Run {
 		var _arr = [];
 		for ( i in 0 ... arr.length ) {
 			var fileOrFolder = arr[i];
-			if(fileOrFolder.startsWith(".")) continue; 			// ignore invisible (OSX) files like ".DS_Store"
-			if(fileOrFolder.startsWith('_')) continue; 			// ignore files starting with "_"
+			if(fileOrFolder.startsWith(".")) continue; 				// ignore invisible (OSX) files like ".DS_Store"
+			if(fileOrFolder.startsWith('_')) continue; 				// ignore files starting with "_"
 
 			// [mck] ignore these files/folders
 			if(fileOrFolder == App.EXPORT_FOLDER) continue;			// ignore export (www) folder
 			if(fileOrFolder == App.PAGES) continue;					// ignore pages folder
 			if(fileOrFolder == App.POSTS) continue;					// ignore post folder
 			if(fileOrFolder == App.THUMB) continue;					// ignore thumb folder
-			if(fileOrFolder == 'config.json') continue;			// ignore config.json
-			if(fileOrFolder.startsWith('theme')) continue;		// ignore any folder that starts with "theme"
+			if(fileOrFolder == App.STATICS) continue;				// ignore statics folder
+			if(fileOrFolder == 'config.json') continue;				// ignore config.json
+			if(fileOrFolder.startsWith('theme')) continue;			// ignore any folder that starts with "theme"
 
 			// add an array with extensions you want to ignore
 			if(ignoreArr != null && ignoreArr.length != 0){
@@ -754,6 +776,15 @@ class Run {
 
 	// ____________________________________ create !!! ____________________________________
 
+	/**
+	 *  create dummy images
+	 *
+	 *  @param path - where do you want the file
+	 *  @param label - a value you want written in the image
+	 *  @param filename - file name is self explainable
+	 *  @param color - color discription like "white" / "green"
+	 *  @param size - size will be translated to:  width:size in px and height:size/2 in pixels
+	 */
 	function createDummyImage(path:String, label:String, filename:String, ?color:String = 'white', ?size:Int=3840){
 		Sys.command('convert',[
 						'-size', '${size}x${size/2}',
@@ -832,8 +863,7 @@ class Run {
 		Sys.println('\t+ file -> create: ${path.replace(projectFolder,'')}/$name');
 	}
 
-	function createFavicon() : Void
-	{
+	function createFavicon() {
 		if(!FileSystem.exists(projectFolder + App.EXPORT_FOLDER + '/favicon.ico')){
 			var bytes = haxe.Resource.getBytes('favicon');
 			var fo:FileOutput = sys.io.File.write(projectFolder + App.EXPORT_FOLDER + '/favicon.ico', true);
