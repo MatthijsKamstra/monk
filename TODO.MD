@@ -4,13 +4,19 @@ Make site better
 
 - [ ] sass
 - [ ] bootstrap verstion update
+- [ ] font awesome
 - [ ] init paralax better
 - [ ] mobile homepage css doesn't work
 - [ ] photo post back button with anchor
 - [ ] automate with npm
+- [ ] generate json for javascript
 - [x] social and seo added to the pages
 - [x] google analytics
 - [x] check javascript/paralax on mobile
+- [ ] footer for more extra info
+- [ ] more padding after and before paralax
+- [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
+- [ ] generate images last? first html and other lite stuff
 
 top priority
 
@@ -28,41 +34,10 @@ top priority
 - [ ] photo matthijs added to pages
 - [ ] make kamstra logo and implement
 
-
-
-```
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-1992499-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-```
-
 seo
 
 - [x] change Google index info
 - [x] update share info <https://moz.com/blog/meta-data-templates-123>
-
-```html
-<!-- Place this data between the <head> tags of your website -->
-<title>Page Title. Maximum length 60-70 characters</title>
-<meta name="description" content="Page description. No longer than 155 characters." />
-
-<!-- Twitter Card data -->
-<meta name="twitter:card" value="summary">
-
-<!-- Open Graph data -->
-<meta property="og:title" content="Title Here" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.example.com/" />
-<meta property="og:image" content="http://example.com/image.jpg" />
-<meta property="og:description" content="Description Here" />
-```
 
 bugs
 
@@ -197,4 +172,36 @@ https://perishablepress.com/a-killer-collection-of-global-css-reset-styles/
 	padding: 0;
 	margin: 0;
 }
+```
+
+
+
+```js
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1992499-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+```
+
+
+```html
+<!-- Place this data between the <head> tags of your website -->
+<title>Page Title. Maximum length 60-70 characters</title>
+<meta name="description" content="Page description. No longer than 155 characters." />
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" value="summary">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Title Here" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.example.com/" />
+<meta property="og:image" content="http://example.com/image.jpg" />
+<meta property="og:description" content="Description Here" />
 ```

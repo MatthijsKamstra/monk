@@ -13,6 +13,15 @@ Written in Haxe but eventually usuable for more languages.
 **Why Monk?** Writing a website like this is complex and slower then CMS, so it feld a little like the old European Monk copying books.
 But they are not as cool as Shaulin Monks so there might be some references to those monks.
 
+## summary
+
+- [Haxe](http://www.haxe.org) The Cross-platform Toolkit for transpiling to javascript [more](READ_HAXE.MD)
+- [Bootstrap v4.0.0](https://getbootstrap.com/) for css framework
+- [Fontawesome v5](https://fontawesome.com) for nice icons
+- [sass](http://sass-lang.com/) CSS with superpowers
+- [LiveReload chrome extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en)
+- [Neko webserver](README_NEKO.MD) is a Haxe related web server, but any server should works
+
 ## WIP
 
 I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).
@@ -21,6 +30,9 @@ This fixes a very specific need I have, not fixed by others generators. That doe
 
 I use a quick and dirty approach to get stuff done. Not readable, might change in the future.
 The more I work on it, the better it will become.
+
+
+
 
 ## sources
 
