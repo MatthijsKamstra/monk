@@ -10,11 +10,12 @@ Make site better
 - [ ] photo post back button with anchor
 - [ ] automate with npm
 - [ ] generate json for javascript
+- [ ] About needs an elevator pitch like description
 - [x] social and seo added to the pages
 - [x] google analytics
 - [x] check javascript/paralax on mobile
-- [ ] footer for more extra info
-- [ ] more padding after and before paralax
+- [x] footer for more extra info
+- [x] more padding after and before paralax
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
 - [ ] generate images last? first html and other lite stuff
 
@@ -30,8 +31,8 @@ top priority
 - [ ] normal post and photo post relationship
 - [ ] tags pages
 - [ ] local testing without server... should work : use `new Path()`
-- [ ] better images for about page
-- [ ] photo matthijs added to pages
+- [x] better images for about page
+- [x] photo matthijs added to pages
 - [ ] make kamstra logo and implement
 
 seo

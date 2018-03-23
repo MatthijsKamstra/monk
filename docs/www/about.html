@@ -1,88 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta name="description" content="Monk a static site generator">
     <meta name="author" content="Matthijs Kamstra">
-    <meta name="generator" content="MONK 0.1.4">
+    <meta name="generator" content="MONK 0.2.0">
 
     <link rel="icon" href="./favicon.ico">
 
     <title>MONK | about</title>
 
-    <!-- normalize.css -->
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">-->
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="MONK | about" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.matthijskamstra.nl" />
+    <meta property="og:image" content="http://www.matthijskamstra.nl/img/social.jpg" />
+    <meta property="og:description" content="Monk a static site generator" />
 
     <!-- Lato Roboto light -->
     <link href="https://fonts.googleapis.com/css?family=Lato:100i,300i,400i|Roboto:300" rel="stylesheet">
+    <!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- animate.css -->
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
 
     <!-- monk.css -->
     <link rel="stylesheet" href="theme0/monk.css">
+
+    
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1992499-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-XXXXXXX-X');
+	</script>
+
 
 </head>
 
 <body class="monk-page">
 
+    <div id="top" class="anchor"></div>
+
     <div id="brand">
-        <a href="/">
-            <p class="brand-name">Matthijs Kamstra</p>
-        </a>
+        <a href="/"><p class="brand-name">Matthijs Kamstra</p></a>
         <img src="https://pbs.twimg.com/profile_images/629553667339907073/mGoAh9j2.jpg" alt="logo">
     </div>
 
-    <nav class="navbar navbar-fixed-top navbar-inverse navbar-monk">
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg navbar-monk">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">projects <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="photos/00_ccc/index.html">00_ccc</a></li><li><a href="photos/01_bbb/index.html">01_bbb</a></li><li><a href="photos/02_aaa/index.html">02_aaa</a></li><li><a href="photos/monk/index.html">monk</a></li>
-                        </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <!-- need this to make work with bootstrap 4 -->
+                </ul>
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="toggle-text" title="Toggle description on pictures"><i class="fas fa-eye"></i></a>
                     </li>
 
-                    <li class="navbar-news"><a href="posts/index.html">news</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            projects
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="photos/00_ccc/index.html">00_ccc</a><a class="dropdown-item" href="photos/01_bbb/index.html">01_bbb</a><a class="dropdown-item" href="photos/02_aaa/index.html">02_aaa</a><a class="dropdown-item" href="photos/monk/index.html">monk</a>
+                        </div>
+                    </li>
 
-                    <li><a href="contact.html">contact</a></li><li><a href="about.html">about</a></li>
+                    <li class="nav-item navbar-news">
+                        <a href="posts/index.html">news</a>
+                    </li>
 
-                    <div class="pull-right">
-                        <li class="dropdown show-on-hover">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: transparent">
-                                <img src="theme0/img/logo/fonk.png" width="50px">
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="http://fonk.amsterdam/" target="_blank">Fonk</a></li>
-                                <li><a href="http://fonk.amsterdam/blog/" target="_blank">Fonk news</a></li>
-                            </ul>
-                        </li>
-                    </div>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">contact</a></li><li class="nav-item"><a class="nav-link" href="about.html">about</a></li>
+
+                    <!--
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg id="fonk_x5F_logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><style>.st0{fill:#fff}</style><path class="st0" d="M7 25c9.1-1.4 16.4-8.7 18-18 1.6 9.3 8.9 16.6 18 18-9.1 1.4-16.4 8.7-18 18-1.6-9.3-8.9-16.6-18-18z"/></svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="http://fonk.amsterdam/" target="_blank">Fonk</a></li>
+                            <a class="dropdown-item" href="http://fonk.amsterdam/blog/" target="_blank">Fonk news</a></li>
+                        </div>
+                    </li>
+                    -->
 
                 </ul>
-
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <!--/.navbar-monk-->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav><!--/.navbar-monk -->
 
     <div class="container">
         <div class="parallax-container">
@@ -90,26 +113,49 @@
 		<img src="https://dummyimage.com/1240x1755/9b59b6/8e44ad&text=1240x1755">
 	</div>
 </div>
-<h1>About Monk</h1>
+<h1>First heading</h1><ul><li><a href="#bottom">link to bottom</a></li><li><a href="#heading2">link to heading2</a></li></ul>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><div class="parallax-container">
 	<div class="parallax">
 		<img src="https://dummyimage.com/1200x600/e74c3c/c0392b&text=frutabomba">
 	</div>
-</div>
-<h1>About Monk</h1>
+</div><div id="heading2" class="anchor"></div>
+<h1>Second heading</h1>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
 <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 <p><img src="https://dummyimage.com/60x600/2ecc71/27ae60&amp;text=60x600" /></p><div class="parallax-container">
 	<div class="parallax">
 		<img src="https://dummyimage.com/1200x600/ecf0f1/bdc3c7&text=cloud+silver">
 	</div>
-</div>
+</div><div id="bottom" class="anchor"></div>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <footer class="footer">
+        <div class="container">
+            <p class="float-right"><a href="#top" class="scroll-to-content">Back to top <i class="fas fa-angle-up"></i></a></p>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <p class="text-muted">&copy; 2016-2018 Matthijs Kamstra aka [mck]</p>
+                </div>
+                <div class="col_auto social">
+                    <a href="https://www.instagram.com/matthijskamstra/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/matthijskamstra/" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://github.com/MatthijsKamstra" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Monk scripts -->
     <script src="theme0/monk.js"></script>
 </body>
