@@ -38,6 +38,7 @@ class Main {
 			} else {
 				initParallax();
 			}
+			initScrollTo();
 		});
 
 		new JQuery(window).resize(function (e){
@@ -164,6 +165,29 @@ class Main {
 				var img = new JQuery(_div).find('img').attr('src','${dataFolder}/${folderSizeName}/${dataImg}');
 			}
 		}
+	}
+
+	/**
+	 *  scroll smooth to an anchor
+	 *  add `.scroll-to-content` to the link
+	 */
+	function initScrollTo(){
+		var alist = new JQuery('a');
+		for ( i in 0 ... alist.length ) {
+			var ahref : js.html.AnchorElement = cast alist[i];
+			var link = ahref.getAttribute('href');
+			if(link.indexOf('#') != -1 && link.length > 1){
+				new JQuery(ahref).addClass ('scroll-to-content');
+			}
+		}
+
+		new JQuery('.scroll-to-content').click(function (e){
+			// e.preventDefault();
+			var anchor = js.Lib.nativeThis.getAttribute("href");
+			new JQuery('html, body').animate({
+				scrollTop: new JQuery(anchor.toString()).offset().top
+			});
+		});
 	}
 
 	function initParallax(){
