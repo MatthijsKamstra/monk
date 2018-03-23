@@ -368,7 +368,7 @@ class Run {
 		var nav = '';
 		for(page in pages){
 			var klass = '';
-			nav += '<li${klass}><a href="${path}${page.url}.html">${page.title}</a></li>';
+			nav += '<li class="nav-item"><a class="nav-link" href="${path}${page.url}.html">${page.title}</a></li>';
 		}
 		return nav;
 	}
@@ -408,7 +408,8 @@ class Run {
 			var klass = '';
 			// if(page.title == p.title) klass = ' class="active"';
 			// var temp = '';
-			nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
+			// nav_photo += '<li${klass}><a href="${folder}/index.html">${folder.split('/')[1]}</a></li>';
+			nav_photo += '<a class="dropdown-item" href="${folder}/index.html">${folder.split('/')[1]}</a>';
 		}
 		nav_photo = nav_photo.replace('${App.PHOTOS}/','${path}${App.PHOTOS}/');
 		return nav_photo;

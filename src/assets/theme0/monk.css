@@ -5,7 +5,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-style: normal;
-    padding-top: 49px;
+    padding-top: 59px;
     font-size: large;
 }
 
@@ -30,10 +30,6 @@ strong {
 -------------------------------------------- */
 
 .navbar-monk {
-    border: 0;
-    border-radius: 0px;
-    margin-bottom: 0px;
-    background-color: #212121;
     font-family: 'Lato';
     transition-timing-function: ease-out;
     transition: top 1s;
@@ -45,7 +41,7 @@ strong {
 }
 
 nav.hideup {
-    top: -50px;
+    top: -60px;
 }
 
 
@@ -76,14 +72,14 @@ body>nav>div>ul>li>a {
     position: fixed;
     top: 0;
     left: 0;
-    line-height: 50px;
+    line-height: 60px;
 }
 
 #brand>img {
     position: absolute;
     border-radius: 0px;
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
     left: 0px;
     top: 0px;
     transition-timing-function: ease-out;
@@ -93,8 +89,8 @@ body>nav>div>ul>li>a {
 
 #brand.brand-img-show>img {
     border-radius: 100px;
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
     left: 10px;
     top: 10px;
     border: 1px solid #444;
@@ -112,7 +108,7 @@ body>nav>div>ul>li>a {
 #brand>a>.brand-name {
     margin: 0;
     padding: 0;
-    left: 65px;
+    left: 80px;
     font-family: 'Lato';
     font-size: 1.6em;
     color: white;
@@ -125,7 +121,7 @@ body>nav>div>ul>li>a {
 }
 
 #brand>a>.brand-name:hover {
-    left: 55px;
+    left: 65px;
 }
 
 #brand>a>.brand-name-hide {
@@ -449,3 +445,65 @@ a.link:hover {
     position: relative;
     top: -70px;
 }
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	line-height: 60px; /* Vertically center the text there */
+	background-color: #343a40;
+}
+
+.footer p {
+    color: silver;
+	margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+.footer a {
+    color: white;
+}
+
+
+.social a{
+    color: white;
+    padding: 0 5px;
+}
+.social a:hover{
+    text-decoration:  none;
+    color: silver;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+/* // body > .container {
+// 	padding: 60px 15px 0;
+// } */
+
+.footer > .container {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+code {
+	font-size: 80%;
+}
+
+

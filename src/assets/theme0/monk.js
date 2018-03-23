@@ -45,10 +45,10 @@ var Main = function() {
 		e3.preventDefault();
 		console.log(e3);
 		if(Main.isTextVisible) {
-			$(e3.currentTarget).html("<span class=\"glyphicon glyphicon-eye-close\" aria-hidden=\"true\"></span>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash\"></i>");
 			$(".post").fadeTo(500,0);
 		} else {
-			$(e3.currentTarget).html("<span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"></span>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye\"></i>");
 			$(".post").fadeTo(500,1);
 		}
 		Main.isTextVisible = !Main.isTextVisible;
@@ -379,6 +379,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-23 16:41:36";
+monk_model_constants_App.BUILD = "2018-03-23 23:23:52";
 Main.main();
 })();

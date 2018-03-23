@@ -62,10 +62,10 @@ class Main {
 			e.preventDefault();
 			trace(e);
 			if(isTextVisible){
-				new JQuery(e.currentTarget).html('<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>');
+				new JQuery(e.currentTarget).html('<i class="fas fa-eye-slash"></i>');
 				new JQuery('.post').fadeTo(500,0);
 			} else {
-				new JQuery(e.currentTarget).html('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>');
+				new JQuery(e.currentTarget).html('<i class="fas fa-eye"></i>');
 				new JQuery('.post').fadeTo(500,1);
 			}
 			isTextVisible = !isTextVisible;
