@@ -24,6 +24,7 @@ var Main = function() {
 		} else {
 			_gthis.initParallax();
 		}
+		_gthis.initScrollTo();
 	});
 	$(window).resize(function(e1) {
 		window.console.debug("resized");
@@ -147,6 +148,28 @@ Main.prototype = {
 				var img1 = $(_div).find("img").attr("src","" + dataFolder + "/" + folderSizeName + "/" + dataImg);
 			}
 		}
+	}
+	,initScrollTo: function() {
+		var alist = $("a");
+		var _g1 = 0;
+		var _g = alist.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var ahref = alist[i];
+			var link = ahref.getAttribute("href");
+			if(link.indexOf("#") != -1 && link.length > 1) {
+				$(ahref).addClass("scroll-to-content");
+				console.log(link);
+				console.log(link.indexOf("#"));
+				console.log(link.length);
+				console.log(alist);
+				console.log("---");
+			}
+		}
+		$(".scroll-to-content").click(function(e) {
+			var anchor = this.getAttribute("href");
+			$("html, body").animate({ scrollTop : $(anchor.toString()).offset().top});
+		});
 	}
 	,initParallax: function() {
 		var padding = 0;
@@ -358,6 +381,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-23 10:22:06";
+monk_model_constants_App.BUILD = "2018-03-23 15:58:13";
 Main.main();
 })();

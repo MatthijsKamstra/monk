@@ -61,6 +61,12 @@ body>nav>div>ul>li>a {
 }
 
 
+.show-on-hover svg {
+    width: 40px;
+    padding-top: 4px;
+}
+
+
 /* brand
 -------------------------------------------- */
 
@@ -171,6 +177,11 @@ body.monk-info {
 
 .monk-page {}
 
+.profile_photo img {
+    border-radius: 50%;
+    height: 199px;
+    width: 199px;
+}
 
 /* monk-post
 -------------------------------------------- */
@@ -190,7 +201,14 @@ body.monk-info {
     height: 400px;
     width: 100%;
     left: 0;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
+
+.parallax-container:first-child{
+    margin-top: 0px;
+}
+
 
 .parallax {
     position: absolute;
@@ -421,4 +439,10 @@ a.link:hover {
     -ms-transition: opacity 0.5s ease-in;
     -o-transition: opacity 0.5s ease-in;
     transition: opacity 0.5s ease-in;
+}
+
+.anchor{
+    border: 0px solid pink;
+    position: relative;
+    top: -70px;
 }
