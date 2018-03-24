@@ -7,7 +7,7 @@ class Statics extends Content {
 	public var order(default, default) : Int = DEFAULT_ORDER;
 
 	public override function parse(pathAndFileName:String) : String {
-		var markdown:String = pathAndFileName;
+		var markdown:String = super.parse(pathAndFileName);
 		this.order = getOrder(markdown);
 		return markdown;
 	}

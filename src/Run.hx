@@ -86,6 +86,8 @@ class Run {
 		copyFiles('${projectFolder}/${config.monkTheme}', ['css','js','png','jpg', 'gif']);
 		// copy img folder (might need to be extended to photo-folder/page-folder/post-folder)
 		copyFiles('${projectFolder}/${App.IMG}', fileExtArr);
+		// copy statics
+		copyFiles('${projectFolder}/${App.STATICS}', ['html', 'htm', 'css','js','png','jpg', 'gif']);
 
 		// Start creating content files
 		var pages:Array<Page> = getPages(projectFolder);
@@ -116,10 +118,10 @@ class Run {
 		// create export files
 		createDir(App.EXPORT_FOLDER);
 		createDir(App.IMG);
-		createDir(App.STATICS);
 		createDummyImage(App.IMG,'test', 'test', 'green', 200);
 		createDummyImage(App.IMG,'social', 'social', 'white', 300); // should be minimal 280x150px
 		createFavicon();
+		setupStatics();
 		setupPostAndPages();
 		setupPhoto();
 		setupTheme('${App.THEME_FOLDER_DEFAULT}');
@@ -253,6 +255,18 @@ class Run {
 		createFile(App.POSTS, '_ignorepost.md' , '# This post will be ignored\n\nSo write what you want!');
 		createFile(App.POSTS, '00post.md' , haxe.Resource.getString('post0'));
 		createFile(App.POSTS, '01post.md' , haxe.Resource.getString('post1'));
+	}
+
+	/**
+	 *  (html) files that have no connection to Monk what-so-every
+	 */
+	function setupStatics(){
+		createDir(App.STATICS);
+
+		createFile(App.STATICS, 'fake.css', '/* this is totally fake\n-------------------------------------------- */');
+
+		createFile(App.STATICS, 'dashboard.html' , haxe.Resource.getString('staticDashboardTemplate'));
+		createFile(App.STATICS, 'cover.html' , haxe.Resource.getString('staticCoverTemplate'));
 	}
 
 	function setupTheme(name:String){
@@ -403,9 +417,11 @@ class Run {
 	 */
 	private function convertStaticsList(statics:Array<Statics>, path:String=''):String{
 		var nav = '';
-		for(post in statics){
+		for(stat in statics){
 			var klass = '';
-			nav += '<li${klass}><a href="${path}${post.url}.html">${post.title}</a></li>';
+			// nav += '<li${klass}><a href="${path}${post.url}.html">${post.title}</a></li>';
+			// nav += '<a class="dropdown-item" href="${path}${statics.url}.html">${statics.title}</a>';
+			nav += '<a class="dropdown-item" href="${path}${App.STATICS}/${stat.url}.html" target="_blank"><i class="fas fa-external-link-alt fa-xs"></i> ${stat.title}</a>';
 		}
 		return nav;
 	}
@@ -702,16 +718,23 @@ class Run {
 		return pages;
 	}
 
+	/**
+	 *  shallow scan from the `statics` folder
+	 *
+	 *  @param srcDir - source of the project folder (huuuu doesn't do anything??)
+	 *  @return Array<Statics>
+	 */
 	function getStatics(srcDir:String):Array<Statics> {
 		var statics:Array<Statics> = new Array<Statics>();
-		var _arr = ignoreFilesOrFolders(FileSystem.readDirectory('${projectFolder}/${App.STATICS}'),['html']);
-		for ( i in 0 ... _arr.length ) {
-			var file = '${projectFolder}/${App.STATICS}/${_arr[i]}';
+		// make sure it only get the `.html` files, so ignore the rest
+		var arr = ignoreFilesOrFolders(FileSystem.readDirectory('${projectFolder}/${App.STATICS}'),['css', 'js']);
+		for ( i in 0 ... arr.length ) {
+			var file = '${projectFolder}/${App.STATICS}/${arr[i]}';
 			var p = new Statics();
 			p.parse(file);
 			statics.push(p);
 
-			Sys.println('\t+ statics -> read: ${_arr[i]}');
+			Sys.println('\t+ statics -> read: ${arr[i]}');
 		}
 		sortStatics(statics);
 		return statics;
@@ -800,7 +823,7 @@ class Run {
 	 *  @param folder -
 	 *  @param fileArray -
 	 */
-	function copyFiles(folder:String,fileArray:Array<String>){
+	function copyFiles(folder:String, fileArray:Array<String>){
 
 		// trace(folder, fileArray);
 
@@ -917,6 +940,13 @@ class Run {
 		FileSystem.createDirectory(projectFolder + name);
 	}
 
+	/**
+	 *  create a file, with name and with content
+	 *
+	 *  @param path - where is the file created
+	 *  @param name - name of the file
+	 *  @param content - content of the file
+	 */
 	function createFile (path:String, name:String, content:String) {
 		// remove projectFolder from path, just to be sure
 		sys.io.File.saveContent(projectFolder + path.replace(projectFolder,'') + '/' + name, content);

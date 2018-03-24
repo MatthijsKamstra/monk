@@ -2,22 +2,25 @@
 
 Make site better
 
-- [ ] sass
-- [ ] bootstrap verstion update
-- [ ] font awesome
-- [ ] init paralax better
-- [ ] mobile homepage css doesn't work
-- [ ] photo post back button with anchor
-- [ ] automate with npm
-- [ ] generate json for javascript
-- [ ] About needs an elevator pitch like description
 - [x] social and seo added to the pages
 - [x] google analytics
 - [x] check javascript/paralax on mobile
 - [x] footer for more extra info
 - [x] more padding after and before paralax
-- [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
+- [x] bootstrap verstion update
+- [x] font awesome
+- [X] possible to have statics (sort specific product pages)
+- [x] toggle "eye" button only with photo and photo related index files
+- [ ] sass
+- [ ] init paralax better
+- [ ] mobile homepage css doesn't work
+- [ ] photo post back button with anchor
+- [ ] automate with npm
+- [ ] homepage random (for google still bots)
+- [ ] generate json for javascript
+- [ ] About needs an elevator pitch like description
 - [ ] generate images last? first html and other lite stuff
+- [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
 
 top priority
 
@@ -26,13 +29,13 @@ top priority
 - [x] create link to deep-post homepage
 - [x] http://matthijskamstra.nl/photos/generated/#buggr should be possible for deeplinking
 - [x] http://matthijskamstra.nl/photos/generated/#069_curved_bug works but maybe something visible from the outslide?
+- [x] better images for about page
+- [x] photo matthijs added to pages
 - [ ] news/post working
 - [ ] homepage news/posts with info about posts
 - [ ] normal post and photo post relationship
 - [ ] tags pages
 - [ ] local testing without server... should work : use `new Path()`
-- [x] better images for about page
-- [x] photo matthijs added to pages
 - [ ] make kamstra logo and implement
 
 seo
@@ -42,9 +45,10 @@ seo
 
 bugs
 
-- [ ] paralax strange 1px off
+- [x] paralax strange 1px off
 - [x] paralax on mobile should be working better!
 - [ ] paralax from lowest page to the top doesn't work
+- [ ] navbar is bigger then bootstrap gives some weird stuff in mobile
 
 nice-to-have
 
