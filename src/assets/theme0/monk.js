@@ -41,9 +41,12 @@ var Main = function() {
 			_gthis.scrollParallax();
 		}
 	});
+	var count = $(".post").length;
+	if(count <= 0) {
+		$("#toggle-text").hide();
+	}
 	$("#toggle-text").click(function(e3) {
 		e3.preventDefault();
-		console.log(e3);
 		if(Main.isTextVisible) {
 			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash fa-sm\"></i>");
 			$(".post").fadeTo(500,0);
@@ -379,6 +382,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-24 10:09:28";
+monk_model_constants_App.BUILD = "2018-03-24 13:54:10";
 Main.main();
 })();

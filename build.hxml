@@ -20,10 +20,15 @@
 
 # Resources like templates
 -resource src/assets/templates/google_analytics.html@googleAnalyticsTemplate
--resource src/assets/templates/index.html@indexTemplate
--resource src/assets/templates/info.html@infoTemplate
--resource src/assets/templates/post.html@postTemplate
--resource src/assets/templates/page.html@pagesTemplate
+
+-resource src/assets/templates/theme_mck/index.html@indexTemplate
+-resource src/assets/templates/theme_mck/info.html@infoTemplate
+-resource src/assets/templates/theme_mck/post.html@postTemplate
+-resource src/assets/templates/theme_mck/page.html@pagesTemplate
+
+-resource src/assets/templates/statics/cover.html@staticCoverTemplate
+-resource src/assets/templates/statics/dashboard.html@staticDashboardTemplate
+
 -resource src/assets/dummy/about.md@about
 -resource src/assets/dummy/contact.md@contact
 -resource src/assets/dummy/post0.md@post0
@@ -46,11 +51,11 @@
 -cmd echo 'MONK > haxelib run monk generate'
 -cmd haxelib run monk generate
 
--cmd cd ../../monk-example
--cmd echo 'MONK > haxelib run monk scaffold'
--cmd haxelib run monk scaffold
--cmd echo 'MONK > haxelib run monk generate'
--cmd haxelib run monk generate
+# -cmd cd ../../monk-example
+# -cmd echo 'MONK > haxelib run monk scaffold'
+# -cmd haxelib run monk scaffold
+# -cmd echo 'MONK > haxelib run monk generate'
+# -cmd haxelib run monk generate
 
 # -cmd haxelib run monk test
 # -cmd echo 'MONK > haxelib run monk foobar'

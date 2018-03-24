@@ -58,9 +58,10 @@ class Main {
 			}
 		});
 
+		var count = new JQuery('.post').length;
+		if(count <= 0) new JQuery('#toggle-text').hide(); // hide if there are no `.post` classes on the page
 		new JQuery('#toggle-text').click(function (e){
 			e.preventDefault();
-			trace(e);
 			if(isTextVisible){
 				new JQuery(e.currentTarget).html('<i class="fas fa-eye-slash fa-sm"></i>');
 				new JQuery('.post').fadeTo(500,0);
