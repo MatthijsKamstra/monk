@@ -6,15 +6,13 @@ class Page extends Content {
 
 	public var order(default, default) : Int = DEFAULT_ORDER;
 
-	public override function parse(pathAndFileName:String) : String
-	{
+	public override function parse(pathAndFileName:String) : String	{
 		var markdown:String = super.parse(pathAndFileName);
 		this.order = getOrder(markdown);
 		return markdown;
 	}
 
-	private static function getOrder(markdown:String) : Int
-	{
+	private static function getOrder(markdown:String) : Int	{
 		if (orderRegex.match(markdown))
 		{
 			var orderString:String = orderRegex.matched(1); // first group

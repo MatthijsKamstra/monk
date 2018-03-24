@@ -8,6 +8,7 @@ import monk.core.Config;
 import monk.core.Page;
 import monk.core.Post;
 import monk.core.Photo;
+import monk.core.Statics;
 import monk.model.constants.App;
 
 using StringTools;
@@ -90,12 +91,13 @@ class Run {
 		var pages:Array<Page> = getPages(projectFolder);
 		var posts:Array<Post> = getPosts(projectFolder);
 		var photos:Array<Photo> = getPhotos(projectFolder);
+		var statics:Array<Statics> = getStatics(projectFolder);
 		var tags:Array<String> = Post.getPostTags(posts);
 
 		Sys.println('\t+ tags -> list: ${tags}');
 
 		// Start HTML generation
-		generateHtmlPages(posts, pages, photos);
+		generateHtmlPages(posts, pages, photos, statics);
 		// generateRssFeed(posts, binDir, config);
 	}
 
@@ -114,6 +116,7 @@ class Run {
 		// create export files
 		createDir(App.EXPORT_FOLDER);
 		createDir(App.IMG);
+		createDir(App.STATICS);
 		createDummyImage(App.IMG,'test', 'test', 'green', 200);
 		createDummyImage(App.IMG,'social', 'social', 'white', 300); // should be minimal 280x150px
 		createFavicon();
@@ -288,13 +291,13 @@ class Run {
 
 	// ____________________________________ generate ____________________________________
 
-	function generateHtmlPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
-		generateHtmlFilesForPages(posts, pages, photos);
-		generateHtmlFilesForPosts(posts, pages, photos);
-		generatePhotos(posts, pages, photos);
+	function generateHtmlPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
+		generateHtmlFilesForPages(posts, pages, photos, statics);
+		generateHtmlFilesForPosts(posts, pages, photos, statics);
+		generatePhotos(posts, pages, photos, statics);
 	}
 
-	private function generateHtmlFilesForPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
+	private function generateHtmlFilesForPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
 		// var template = haxe.Resource.getString('pagesTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/page.html' );
 		for (page in pages) {
@@ -303,6 +306,7 @@ class Run {
 				page_navigation : convertPageList(pages),
 				post_navigation : convertPostList(posts),
 				photo_navigation : convertPhotoList(photos),
+				static_navigation : convertStaticsList(statics),
 				googleAnalyticsScript : convertAnalytics(),
 				content: page.content
 			};
@@ -310,7 +314,7 @@ class Run {
 		}
 	}
 
-	private function generateHtmlFilesForPosts(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>) {
+	private function generateHtmlFilesForPosts(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
 		createDir('${App.EXPORT_FOLDER}/${App.POSTS}');
 		// var str = haxe.Resource.getString('postTemplate');
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/post.html');
@@ -338,6 +342,7 @@ class Run {
 			page_navigation : convertPageList(pages,'../'),
 			post_navigation : convertPostList(posts, '../../'),
 			photo_navigation : convertPhotoList(photos,'../'),
+			static_navigation : convertStaticsList(statics,'../'),
 			googleAnalyticsScript : convertAnalytics(),
 			content: html
 		};
@@ -390,6 +395,22 @@ class Run {
 	}
 
 	/**
+	 *  convert the statics array to a navigation list
+	 *
+	 *  @param statics		array with `Post`
+	 *  @param path			hack the correct path
+	 *  @return String
+	 */
+	private function convertStaticsList(statics:Array<Statics>, path:String=''):String{
+		var nav = '';
+		for(post in statics){
+			var klass = '';
+			nav += '<li${klass}><a href="${path}${post.url}.html">${post.title}</a></li>';
+		}
+		return nav;
+	}
+
+	/**
 	 *  convert the photos array to a navigation list
 	 *
 	 *  @param photos 		array with `Photo`
@@ -426,7 +447,7 @@ class Run {
 	 *  @param photos -
 	 *  @param pages -
 	 */
-	private function generatePhotos(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>){
+	private function generatePhotos(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>){
 		createDir('${App.EXPORT_FOLDER}/${App.PHOTOS}');
 
 		var template = sys.io.File.getContent( '${projectFolder}/${config.monkTheme}/index.html');
@@ -485,6 +506,7 @@ class Run {
 					page_navigation : convertPageList(pages),
 					post_navigation : convertPostList(posts),
 					photo_navigation : convertPhotoList(photos),
+					static_navigation : convertStaticsList(statics),
 					googleAnalyticsScript : convertAnalytics(),
 					content: html
 				};
@@ -500,6 +522,7 @@ class Run {
 				page_navigation : convertPageList(pages, '../../'),
 				post_navigation : convertPostList(posts, '../../'),
 				photo_navigation : convertPhotoList(photos, '../../'),
+				static_navigation : convertStaticsList(statics, '../../'),
 				googleAnalyticsScript : convertAnalytics(),
 				content: html
 			};
@@ -521,6 +544,7 @@ class Run {
 						page_navigation : convertPageList(pages, '../../'),
 						post_navigation : convertPostList(posts, '../../'),
 						photo_navigation : convertPhotoList(photos, '../../'),
+						static_navigation : convertStaticsList(statics, '../../'),
 						googleAnalyticsScript : convertAnalytics(),
 						backgroundimage: backgroundImage,
 						parallaximage: parallaxImage,
@@ -596,8 +620,7 @@ class Run {
 		}
 	}
 
-	private function sortPosts(posts:Array<Post>) : Void
-	{
+	private function sortPosts(posts:Array<Post>) {
 		if (posts.length > 0) {
 			// Sorting by getTime() doesn't seem to work, for some reason; sorting by
 			// the stringified dates (yyyy-mm-dd format) does.
@@ -621,8 +644,7 @@ class Run {
 	}
 
 	// Performs a sort on pages itself. Orders by "order" field.
-	private function sortPages(pages:Array<Page>) : Void
-	{
+	private function sortPages(pages:Array<Page>) {
 		if (pages.length > 0) {
 			haxe.ds.ArraySort.sort(pages, function(a, b) {
 				var x = a.order;
@@ -631,12 +653,33 @@ class Run {
 				if (x < y ) { return -1; }
 				else if (x > y) { return 1; }
 				else {
-						// if tied, sort by title ascending
-						var m = a.title;
-						var n = b.title;
-						if (m < n) { return -1; }
-						else if (m > n) { return 1; }
-						else { return 0; };
+					// if tied, sort by title ascending
+					var m = a.title;
+					var n = b.title;
+					if (m < n) { return -1; }
+					else if (m > n) { return 1; }
+					else { return 0; };
+				}
+			});
+		}
+	}
+
+	// Performs a sort on statics itself. Orders by "order" field.
+	private function sortStatics(pages:Array<Statics>) {
+		if (pages.length > 0) {
+			haxe.ds.ArraySort.sort(pages, function(a, b) {
+				var x = a.order;
+				var y = b.order;
+
+				if (x < y ) { return -1; }
+				else if (x > y) { return 1; }
+				else {
+					// if tied, sort by title ascending
+					var m = a.title;
+					var n = b.title;
+					if (m < n) { return -1; }
+					else if (m > n) { return 1; }
+					else { return 0; };
 				}
 			});
 		}
@@ -658,6 +701,22 @@ class Run {
 		sortPages(pages);
 		return pages;
 	}
+
+	function getStatics(srcDir:String):Array<Statics> {
+		var statics:Array<Statics> = new Array<Statics>();
+		var _arr = ignoreFilesOrFolders(FileSystem.readDirectory('${projectFolder}/${App.STATICS}'),['html']);
+		for ( i in 0 ... _arr.length ) {
+			var file = '${projectFolder}/${App.STATICS}/${_arr[i]}';
+			var p = new Statics();
+			p.parse(file);
+			statics.push(p);
+
+			Sys.println('\t+ statics -> read: ${_arr[i]}');
+		}
+		sortStatics(statics);
+		return statics;
+	}
+
 
 	function getPhotos(srcDir:String):Array<Photo> {
 		var photos:Array<Photo> = new Array<Photo>();

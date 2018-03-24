@@ -36,8 +36,11 @@ strong {
     transition-delay: 1s;
 }
 
-.navbar-news {
-    display: none !important;
+.nav-monk-toggle,
+.nav-monk-projects,
+.nav-monk-products,
+.nav-monk-news{
+    /* display: none !important; */
 }
 
 nav.hideup {
