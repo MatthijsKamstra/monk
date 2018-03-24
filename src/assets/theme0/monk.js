@@ -15,7 +15,7 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " - version: " + "0.2.0" + " - build: " + monk_model_constants_App.BUILD);
+	window.console.log("MONK" + " - version: " + "0.2.1" + " - build: " + monk_model_constants_App.BUILD);
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
 		if($("body").hasClass("monk-homepage")) {
@@ -45,10 +45,10 @@ var Main = function() {
 		e3.preventDefault();
 		console.log(e3);
 		if(Main.isTextVisible) {
-			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash\"></i>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash fa-sm\"></i>");
 			$(".post").fadeTo(500,0);
 		} else {
-			$(e3.currentTarget).html("<i class=\"fas fa-eye\"></i>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye fa-sm\"></i>");
 			$(".post").fadeTo(500,1);
 		}
 		Main.isTextVisible = !Main.isTextVisible;
@@ -379,6 +379,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-24 09:47:19";
+monk_model_constants_App.BUILD = "2018-03-24 10:09:28";
 Main.main();
 })();

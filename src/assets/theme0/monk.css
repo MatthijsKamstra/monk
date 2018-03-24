@@ -36,11 +36,14 @@ strong {
     transition-delay: 1s;
 }
 
+/* easier to hide nav items */
 .nav-monk-toggle,
 .nav-monk-projects,
-.nav-monk-products,
+.nav-monk-products{
+    display: inherit;
+}
 .nav-monk-news{
-    /* display: none !important; */
+    display: none !important;
 }
 
 nav.hideup {

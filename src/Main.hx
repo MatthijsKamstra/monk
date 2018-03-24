@@ -62,10 +62,10 @@ class Main {
 			e.preventDefault();
 			trace(e);
 			if(isTextVisible){
-				new JQuery(e.currentTarget).html('<i class="fas fa-eye-slash"></i>');
+				new JQuery(e.currentTarget).html('<i class="fas fa-eye-slash fa-sm"></i>');
 				new JQuery('.post').fadeTo(500,0);
 			} else {
-				new JQuery(e.currentTarget).html('<i class="fas fa-eye"></i>');
+				new JQuery(e.currentTarget).html('<i class="fas fa-eye fa-sm"></i>');
 				new JQuery('.post').fadeTo(500,1);
 			}
 			isTextVisible = !isTextVisible;
