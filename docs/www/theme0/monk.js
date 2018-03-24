@@ -15,7 +15,7 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " - version: " + "0.2.0" + " - build: " + monk_model_constants_App.BUILD);
+	window.console.log("MONK" + " - version: " + "0.2.1" + " - build: " + monk_model_constants_App.BUILD);
 	$(window.document).ready(function(e) {
 		window.console.log("MONK" + " doc ready");
 		if($("body").hasClass("monk-homepage")) {
@@ -41,14 +41,17 @@ var Main = function() {
 			_gthis.scrollParallax();
 		}
 	});
+	var count = $(".post").length;
+	if(count <= 0) {
+		$("#toggle-text").hide();
+	}
 	$("#toggle-text").click(function(e3) {
 		e3.preventDefault();
-		console.log(e3);
 		if(Main.isTextVisible) {
-			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash\"></i>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye-slash fa-sm\"></i>");
 			$(".post").fadeTo(500,0);
 		} else {
-			$(e3.currentTarget).html("<i class=\"fas fa-eye\"></i>");
+			$(e3.currentTarget).html("<i class=\"fas fa-eye fa-sm\"></i>");
 			$(".post").fadeTo(500,1);
 		}
 		Main.isTextVisible = !Main.isTextVisible;
@@ -178,7 +181,7 @@ Main.prototype = {
 		margin += Std.parseInt($(".parallax-container").parent().css("margin-left"));
 		margin += Std.parseInt($(".parallax-container").parent().parent().css("margin-left"));
 		margin += Std.parseInt($(".parallax-container").parent().parent().parent().css("margin-left"));
-		$(".parallax-container").css("left","-" + (padding + margin) + "px");
+		$(".parallax-container").css("left","-" + (padding + margin + 1) + "px");
 		$(".parallax-container").css("width","" + $(window).width() + "px");
 		$(".parallax img").css({ "display" : "block", "transform" : "translate3d(-50%, 0px, 0px)"});
 		$(".parallax-container").attr("data-translate-y","0");
@@ -379,6 +382,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-23 23:31:48";
+monk_model_constants_App.BUILD = "2018-03-24 13:54:10";
 Main.main();
 })();
