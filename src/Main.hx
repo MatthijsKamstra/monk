@@ -207,7 +207,7 @@ class Main {
 		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().css('margin-left'));
 		margin += Std.parseInt(new JQuery('.parallax-container').parent().parent().parent().css('margin-left'));
 
-		new JQuery('.parallax-container').css('left','-${padding+margin}px');
+		new JQuery('.parallax-container').css('left','-${padding+margin+1}px');
 		new JQuery('.parallax-container').css('width','${new JQuery(window).width()}px');
 
 		new JQuery('.parallax img').css({'display': 'block', "transform": "translate3d(-50%, 0px, 0px)"});

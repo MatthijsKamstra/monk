@@ -178,7 +178,7 @@ Main.prototype = {
 		margin += Std.parseInt($(".parallax-container").parent().css("margin-left"));
 		margin += Std.parseInt($(".parallax-container").parent().parent().css("margin-left"));
 		margin += Std.parseInt($(".parallax-container").parent().parent().parent().css("margin-left"));
-		$(".parallax-container").css("left","-" + (padding + margin) + "px");
+		$(".parallax-container").css("left","-" + (padding + margin + 1) + "px");
 		$(".parallax-container").css("width","" + $(window).width() + "px");
 		$(".parallax img").css({ "display" : "block", "transform" : "translate3d(-50%, 0px, 0px)"});
 		$(".parallax-container").attr("data-translate-y","0");
@@ -379,6 +379,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-03-23 23:31:48";
+monk_model_constants_App.BUILD = "2018-03-24 09:47:19";
 Main.main();
 })();
