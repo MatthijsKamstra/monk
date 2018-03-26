@@ -21,6 +21,7 @@ Make site better
 - [ ] About needs an elevator pitch like description
 - [ ] generate images last? first html and other lite stuff
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
+- [ ] check if posts update `meta-publishedOn` are everytime... do not overwrite this value
 
 top priority
 

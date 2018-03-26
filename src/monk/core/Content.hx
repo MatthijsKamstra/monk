@@ -46,8 +46,6 @@ class Content {
 
 	// fileName doesn't include any path characters
 	public function parse(pathAndFileName:String) : String {
-
-
 		var fileName = pathAndFileName.substr(pathAndFileName.lastIndexOf('/') + 1);
 		var markdown = sys.io.File.getContent(pathAndFileName);
 		this.url = getUrl(fileName);
@@ -55,9 +53,6 @@ class Content {
 		this.title = getTitle(fileName, markdown);
 		this.content = getHtml(markdown);
 		this.id = getAndGenerateId(pathAndFileName);
-		trace(pathAndFileName);
-		trace(this.url);
-		trace(this.fileName);
 		return markdown;
   	}
 

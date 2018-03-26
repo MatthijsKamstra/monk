@@ -31,7 +31,7 @@ class Main {
 		console.log('${App.MONK} - version: ${App.VERSION} - build: ${App.BUILD}');
 
 		new JQuery(document).ready(function (e){
-			console.log('${App.MONK} doc ready');
+			// console.log('${App.MONK} doc ready');
 			if (new JQuery('body').hasClass('monk-homepage')){
 				isHomepage = true;
 				initHomepage();
