@@ -17,4 +17,10 @@ class Statics extends Content {
 		Statics.DEFAULT_ORDER++;
 		return counter;
 	}
+
+	// don't need to inject metatdata in the statics
+	private override function getAndGenerateId(fileName:String) : String {
+		return '';
+	}
+
 }
