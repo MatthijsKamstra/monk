@@ -38,6 +38,7 @@ class App {
 	public static inline var THUMB = 'thumb';
 	public static inline var IMG = 'img';
 	public static inline var STATICS = 'statics';
+	public static inline var DATA = 'data';
 
 	public static var BUILD : String = getBuildDate();
 

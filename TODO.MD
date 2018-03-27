@@ -11,17 +11,20 @@ Make site better
 - [x] font awesome
 - [X] possible to have statics (sort specific product pages)
 - [x] toggle "eye" button only with photo and photo related index files
+- [x] fix navbar problem
+- [x] statics get meta data injected... form extension... not really `Content.hx`
+- [x] check if posts update `meta-publishedOn` are everytime... do not overwrite this value
+- [x] generate json for javascript (basics are there)
+- [ ] meta data not only general
 - [ ] sass
 - [ ] init paralax better
 - [ ] mobile homepage css doesn't work
 - [ ] photo post back button with anchor
 - [ ] automate with npm
 - [ ] homepage random (for google still bots)
-- [ ] generate json for javascript
 - [ ] About needs an elevator pitch like description
 - [ ] generate images last? first html and other lite stuff
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
-- [ ] check if posts update `meta-publishedOn` are everytime... do not overwrite this value
 
 top priority
 
@@ -49,7 +52,7 @@ bugs
 - [x] paralax strange 1px off
 - [x] paralax on mobile should be working better!
 - [ ] paralax from lowest page to the top doesn't work
-- [ ] navbar is bigger then bootstrap gives some weird stuff in mobile
+- [x] navbar is bigger then bootstrap gives some weird stuff in mobile
 
 nice-to-have
 

@@ -22,6 +22,12 @@ But they are not as cool as Shaulin Monks so there might be some references to t
 - [LiveReload chrome extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en)
 - [Neko webserver](README_NEKO.MD) is a Haxe related web server, but any server should works
 
+## more stuff to install
+
+- imagemagick
+- jpegoptim
+
+
 ## WIP
 
 I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).

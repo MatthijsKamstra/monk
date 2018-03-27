@@ -309,6 +309,26 @@ class Run {
 		generateHtmlFilesForPages(posts, pages, photos, statics);
 		generateHtmlFilesForPosts(posts, pages, photos, statics);
 		generatePhotos(posts, pages, photos, statics);
+		generateJson(posts, pages, photos, statics);
+	}
+
+	private function generateJson(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
+		var path = '${App.EXPORT_FOLDER}/${App.DATA}';
+		var content = '';
+
+		createDir(path);
+
+		content += '"pages":[';
+		for (i in 0...pages.length){
+			var _pages : Page = pages[i];
+			content += '{"url": "${_pages.url}"},\n';
+		}
+		content += ']';
+
+		createFile (path, 'pages.json', '{${content}}');
+		createFile (path, 'posts.json', '{}');
+		createFile (path, 'photos.json', '{}');
+		createFile (path, 'statics.json', '{}');
 	}
 
 	private function generateHtmlFilesForPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
