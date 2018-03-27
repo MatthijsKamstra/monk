@@ -34,6 +34,7 @@ strong {
     transition-timing-function: ease-out;
     transition: top 1s;
     transition-delay: 1s;
+    font-size: 1rem;
 }
 
 /* easier to hide nav items */
@@ -78,14 +79,14 @@ body>nav>div>ul>li>a {
     position: fixed;
     top: 0;
     left: 0;
-    line-height: 60px;
+    line-height: 52px;
 }
 
 #brand>img {
     position: absolute;
     border-radius: 0px;
-    width: 59px;
-    height: 59px;
+    width: 56px;
+    height: 56px;
     left: 0px;
     top: 0px;
     transition-timing-function: ease-out;
