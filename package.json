@@ -7,11 +7,14 @@
 	"author": "Matthijs Kamstra aka [mck]",
 	"scripts": {
 		"prewatch": "haxe build_all.hxml",
+		"start": "npm run css",
+		"css" : "cleancss -o src/assets/theme0/monk.min.css src/assets/theme0/monk.css",
 		"watch": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' 'src/assets/*/*.css' 'src/assets/*/*.html' 'src/assets/*/*.md' -v -- haxe build_all.hxml"
 	},
 	"dependencies": {
 	},
 	"devDependencies": {
+		"clean-css-cli": "latest",
 		"livereload": "0.6.0",
 		"onchange": "3.0.2"
 	}
