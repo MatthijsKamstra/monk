@@ -265,6 +265,12 @@ class Run {
 
 		createFile(App.STATICS, 'fake.css', '/* this is totally fake\n-------------------------------------------- */');
 
+		createDir(App.STATICS + '/public');
+		createDir(App.STATICS + '/public/css');
+		createDir(App.STATICS + '/public/img');
+		createDir(App.STATICS + '/public/js');
+		createFile(App.STATICS + '/public/css/', 'fake.css', '/* this is totally fake\n-------------------------------------------- */');
+
 		createFile(App.STATICS, 'dashboard.html' , haxe.Resource.getString('staticDashboardTemplate'));
 		createFile(App.STATICS, 'cover.html' , haxe.Resource.getString('staticCoverTemplate'));
 	}
@@ -740,6 +746,7 @@ class Run {
 
 	/**
 	 *  shallow scan from the `statics` folder
+	 *  to create the links
 	 *
 	 *  @param srcDir - source of the project folder (huuuu doesn't do anything??)
 	 *  @return Array<Statics>
@@ -747,9 +754,13 @@ class Run {
 	function getStatics(srcDir:String):Array<Statics> {
 		var statics:Array<Statics> = new Array<Statics>();
 		// make sure it only get the `.html` files, so ignore the rest
-		var arr = ignoreFilesOrFolders(FileSystem.readDirectory('${projectFolder}/${App.STATICS}'),['css', 'js']);
+		var arr = ignoreFilesOrFolders(FileSystem.readDirectory('${projectFolder}/${App.STATICS}'),['css', 'js', 'gif', 'ico']);
 		for ( i in 0 ... arr.length ) {
 			var file = '${projectFolder}/${App.STATICS}/${arr[i]}';
+			if(FileSystem.isDirectory('$file')) continue;
+			if(file.indexOf('index.html') != -1 ) continue;
+
+			// otherwise just add it
 			var p = new Statics();
 			p.parse(file);
 			statics.push(p);
@@ -840,8 +851,8 @@ class Run {
 	/**
 	 *  copy files from original folder to www folder
 	 *
-	 *  @param folder -
-	 *  @param fileArray -
+	 *  @param folder - the root folder you want to copy
+	 *  @param fileArray -	the files you want to copy
 	 */
 	function copyFiles(folder:String, fileArray:Array<String>){
 

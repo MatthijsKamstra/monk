@@ -85,8 +85,10 @@ class Content {
 		}
 	}
 
+	/**
+	 *  remove all comments (most important the metadata at the top of the page)
+	 */
 	private function getHtml(markdown:String) : String {
-		// Remove meta-data lines
 		markdown = metaDataRegex.replace(markdown, "");
 		var html = Markdown.markdownToHtml(markdown);
 		return html;
