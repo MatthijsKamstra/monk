@@ -604,6 +604,11 @@ class Run {
 				"-resize", "200x200",
 				"-define", "filter:blur=5",
 				'${projectFolder}${photo.url}',
+				'-sampling-factor', '4:2:0',
+				'-strip',
+				'-quality', '85',
+				'-interlace', 'JPEG',
+				'-colorspace', 'sRGB',
 				'${projectFolder}/${App.EXPORT_FOLDER}/${photo.folders}/${App.THUMB}/${photo.fileName}.jpg'
 			]);
 			if(command == 0){
@@ -621,7 +626,12 @@ class Run {
 				var command = Sys.command('convert',[
 					"-resize", '${size}x${size}',
 					'${projectFolder}${photo.url}',
-					'${projectFolder}/${App.EXPORT_FOLDER}/${photo.folders}/${size}/${photo.fileName}.jpg'
+					'-sampling-factor', '4:2:0',
+					'-strip',
+					'-quality', '85',
+					'-interlace', 'JPEG',
+					'-colorspace', 'sRGB',
+					'${projectFolder}/${App.EXPORT_FOLDER}/${photo.folders}/${size}/${photo.fileName}.jpg',
 				]);
 				if(command == 0){
 					Sys.println('\t+ photo -> create ${size} for ${photo.fileName}');

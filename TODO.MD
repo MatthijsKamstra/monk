@@ -15,8 +15,10 @@ Make site better
 - [x] statics get meta data injected... form extension... not really `Content.hx`
 - [x] check if posts update `meta-publishedOn` are everytime... do not overwrite this value
 - [x] generate json for javascript (basics are there)
+- [x] implement https://www.imagemagick.org/script/convert.php
 - [ ] meta data not only general
 - [ ] sass
+- [ ] minify: html/css/js (check google for advise)
 - [ ] init paralax better
 - [ ] mobile homepage css doesn't work
 - [ ] photo post back button with anchor
@@ -25,6 +27,8 @@ Make site better
 - [ ] About needs an elevator pitch like description
 - [ ] generate images last? first html and other lite stuff
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
+- [ ] check img folder if all files are needed, introduce `_xxx` for not coping
+- [ ] don't resize images to bigger if that is not the original size
 
 top priority
 
