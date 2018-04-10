@@ -15,7 +15,7 @@ var Main = function() {
 	this.divMap = new haxe_ds_ObjectMap();
 	this.divArr = [];
 	var _gthis = this;
-	window.console.log("MONK" + " - version: " + "0.2.3" + " - build: " + monk_model_constants_App.BUILD);
+	window.console.log("MONK" + " - version: " + "0.2.4" + " - build: " + monk_model_constants_App.BUILD);
 	$(window.document).ready(function(e) {
 		if($("body").hasClass("monk-homepage")) {
 			_gthis.isHomepage = true;
@@ -381,6 +381,6 @@ Array.__name__ = true;
 Main.isTextVisible = true;
 haxe_ds_ObjectMap.count = 0;
 monk_model_constants_App.photoFileSizeArray = [3840,2560,1920,1280,1024,640];
-monk_model_constants_App.BUILD = "2018-04-10 00:23:14";
+monk_model_constants_App.BUILD = "2018-04-10 11:26:09";
 Main.main();
 })();
