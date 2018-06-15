@@ -9,7 +9,11 @@
 		"prewatch": "haxe build_all.hxml",
 		"start": "npm run css",
 		"css" : "cleancss -o src/assets/theme0/monk.min.css src/assets/theme0/monk.css",
-		"watch": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' 'src/assets/*/*.css' 'src/assets/*/*.html' 'src/assets/*/*.md' -v -- haxe build_all.hxml"
+		"watch": "onchange 'src/*.hx' 'src/*/*.hx' 'src/*/*/*.hx' 'src/*/*/*/*.hx' 'src/assets/*/*.css' 'src/assets/*/*.html' 'src/assets/*/*.md' -v -- haxe build_all.hxml",
+
+		"server:haxe"  : "cd 'docs/www' && open http://localhost:2000/ && nekotools server",
+
+		"test" : "echo 'test'"
 	},
 	"dependencies": {
 	},

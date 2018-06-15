@@ -20,7 +20,8 @@ class Main {
 	var divArr : Array<DivElement> = [];
 	var divMap : Map<DivElement,Bool> = new Map();
 
-	var isHomepage : Bool = false;
+	var isHomepage : Bool = false; // homepage is a collection of images
+	var isRoot = location.pathname == "/"; //Equals true if we're at the root (http://www.foobar.nl/)
 
 	var previousfromTop : Float = 0;
 	var scrollUpCounter : Int = 0;
@@ -35,6 +36,7 @@ class Main {
 			if (new JQuery('body').hasClass('monk-homepage')){
 				isHomepage = true;
 				initHomepage();
+				if(isRoot) loadData();
 			} else {
 				initParallax();
 			}
@@ -88,6 +90,33 @@ class Main {
 		scrollHomepage();
 	}
 
+	/**
+	 *  [Description]
+	 *  @param json -
+	 */
+	function rebuildHomepage(json:Dynamic){
+		var maxItems = 10; // how many items on the homepage random?
+		// trace (new JQuery("#main"));
+		new JQuery("#main").html('<!-- reset -->'); // reset the container from the static file
+		var itemArray = json.photos;
+		Random.shuffle(itemArray);
+		var divMain = '';
+		if(maxItems >= itemArray.length) maxItems = (itemArray.length);
+		for ( i in 0 ... maxItems ) {
+			divMain += itemArray[i].html;
+			// trace(i);
+		}
+		new JQuery("#main").html(divMain);
+		initHomepage();
+		// haxe.Timer.delay(function () {
+		// 	trace('wait 500 ms ');
+		// 	// [mck] start with first image
+		// 	updateHomepageImages(0, divArr[0]);
+		// 	// [mck] scroll homepage
+		// 	scrollHomepage();
+		// }, 500);
+	}
+
 	function scrollHomepage(){
 		var fromTop = new JQuery(document).scrollTop();
 		var navHeight = new JQuery('nav').height();
@@ -110,7 +139,7 @@ class Main {
 			var distance = previousfromTop - fromTop;
 			// trace('upscroll code (${scrollUpCounter})');
 			if(distance >= 100){
-				trace('show brand');
+				// trace('show brand');
 				new JQuery('.brand-name').removeClass('brand-name-hide');
 				new JQuery('#brand').removeClass('brand-img-show');
 				new JQuery('nav').removeClass('hideup');
@@ -289,7 +318,36 @@ class Main {
 		}
 	}
 
+	/**
+	 *  only loads with an server
+	 *
+	 *  `npm run server:haxe`
+	 */
+	function loadData(){
 
+		trace(isRoot);
+
+		var url = '/data/photos.json';
+		var req = new haxe.Http(url);
+		// req.setHeader('Content-Type', 'application/json');
+		// req.setHeader('auth', '${App.TOKEN}');
+		req.onData = function (data : String) {
+			try {
+				var json = haxe.Json.parse(data);
+				trace (json);
+				rebuildHomepage(json);
+			} catch (e:Dynamic){
+				trace(e);
+			}
+		}
+		req.onError = function (error : String) {
+			trace('error: $error');
+		}
+		req.onStatus = function (status : Int) {
+			trace('status: $status');
+		}
+		req.request(true);  // false=GET, true=POST
+	}
 
 
 

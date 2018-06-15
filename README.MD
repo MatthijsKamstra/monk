@@ -32,7 +32,7 @@ But they are not as cool as Shaulin Monks so there might be some references to t
 
 I use this to generate the homepage of [matthijskamstra.nl](http://www.matthijskamstra.nl).
 
-This fixes a very specific need I have, not fixed by others generators. That doesn't mean they aren't good, just not in this case.
+This fixes a very specific need I have, not fixed by others generators. That doesn't mean they aren't good, just not for my project.
 
 I use a quick and dirty approach to get stuff done. Not readable, might change in the future.
 The more I work on it, the better it will become.

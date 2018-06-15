@@ -1,4 +1,6 @@
 -lib markdown
+-lib random
+
 -cp src
 
 --each
@@ -12,6 +14,7 @@
 
 --next
 
+-lib uglifyjs
 -main Main
 -js src/assets/theme0/monk.js
 -dce full

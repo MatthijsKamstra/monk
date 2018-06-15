@@ -5,6 +5,9 @@ import haxe.macro.Context;
 class App {
 
 	/**
+	 * 0.3.0	generate a dynamic homepage with new stuff all the time, update js for that
+	 * 0.2.6	fix img upload folder with .min.jpg files
+	 * 0.2.5	glyphicon replaced with fontawesome
 	 * 0.2.4	imagemagic convert with better settings for jpg images, and thumbs
 	 * 0.2.3	statics navigation bug fixed
 	 * 0.2.2	bugfixing nav, top anchor, statics
@@ -26,7 +29,7 @@ class App {
 	 * 0.0.1	initial
 	 */
 	public static inline var MONK = 'MONK';
-	public static inline var VERSION = '0.2.4';
+	public static inline var VERSION = '0.3.0';
 
 	public static var photoFileSizeArray = [3840, 2560, 1920, 1280, 1024, 640];
 	public static var photoFolderArray = ['3840', '2560', '1920', '1280', '1024', '640', 'thumb'];

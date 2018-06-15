@@ -16,6 +16,9 @@ Make site better
 - [x] check if posts update `meta-publishedOn` are everytime... do not overwrite this value
 - [x] generate json for javascript (basics are there)
 - [x] implement https://www.imagemagick.org/script/convert.php
+- [x] restore `glyphicon glyphicon-link`
+- [x] add image minify option
+- [x] check img folder if all files are needed, introduce `_xxx` for not coping
 - [ ] meta data not only general
 - [ ] sass
 - [ ] minify: html/css/js (check google for advise)
@@ -23,12 +26,18 @@ Make site better
 - [ ] mobile homepage css doesn't work
 - [ ] photo post back button with anchor
 - [ ] automate with npm
-- [ ] homepage random (for google still bots)
+- [ ] looks like it generates the same files multible time
+- [x] homepage random (for google still bots)
+- [x] create json for random homepage
 - [ ] About needs an elevator pitch like description
 - [ ] generate images last? first html and other lite stuff
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
-- [ ] check img folder if all files are needed, introduce `_xxx` for not coping
 - [ ] don't resize images to bigger if that is not the original size
+- [x] optimize svg logo static page
+- [ ] update profile foto
+- [ ] `haxelib run monk generate` without `www` doesn't work
+- [ ] `haxelib run monk clear` doesn't work
+
 
 top priority
 

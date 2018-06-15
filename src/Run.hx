@@ -63,6 +63,8 @@ class Run {
 					initGenerate();
 				case 'update':
 					updateTheme();
+				case 'minify':
+					minifyImages(projectFolder);
 				default :
 					showHelp();
 			}
@@ -126,6 +128,7 @@ class Run {
 		setupPhoto();
 		setupTheme('${App.THEME_FOLDER_DEFAULT}');
 		setupConfig();
+		setupData();
 
 		// read rest folders
 		var _arr = FileSystem.readDirectory('${projectFolder}');
@@ -178,7 +181,7 @@ class Run {
 				imagePrepare('$folder/$fileOrFolder');
 			} else {
 				var fileName = fileOrFolder.split('.')[0];
-				var fileExt = fileOrFolder.split('.')[1].toLowerCase();
+				var fileExt = fileOrFolder.split('.')[fileOrFolder.split('.').length - 1].toLowerCase();
 
 				if(fileName.startsWith('_')) continue;
 				if(fileName.startsWith('.')) continue;
@@ -309,6 +312,12 @@ class Run {
 		createFile('', 'config.json', haxe.Json.stringify(obj));
 	}
 
+	function setupData(){
+		var path = '${App.EXPORT_FOLDER}/${App.DATA}';
+		createDir(path);
+		createFile(path, '.gitkeep', '');
+	}
+
 	// ____________________________________ generate ____________________________________
 
 	function generateHtmlPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
@@ -319,22 +328,88 @@ class Run {
 	}
 
 	private function generateJson(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
+
+		// trace('generateJson');
+		// trace('posts -> '+posts.length);
+		// trace('pages -> '+pages.length);
+		// trace('photos -> '+photos.length);
+		// trace('statics -> '+statics.length);
+
 		var path = '${App.EXPORT_FOLDER}/${App.DATA}';
-		var content = '';
+		var postsContent = '';
+		var pagesContent = '';
+		var photosContent = '';
+		var staticsContent = '';
+		var totalContent = '';
 
+
+		// trace('1');
 		createDir(path);
+		// trace('2');
 
-		content += '"pages":[';
+
+
+		postsContent += '\n"posts":[\n';
+		for (i in 0...posts.length){
+			var _posts : Post = posts[i];
+
+			// trace('${i} - ${_posts.id}');
+			Reflect.deleteField (_posts, 'projectFolder'); 	// folder is on my harddrive, don't need to share that
+			// postsContent += '\t{"url": "${_posts.url}"}';
+			postsContent += '\t${haxe.Json.stringify(_posts)}';
+			postsContent += (i != pages.length-1) ? ',\n' : '\n';
+		}
+		postsContent += ']\n';
+
+
+		pagesContent += '\n"pages":[\n';
 		for (i in 0...pages.length){
 			var _pages : Page = pages[i];
-			content += '{"url": "${_pages.url}"},\n';
+			Reflect.deleteField (_pages, 'projectFolder'); 	// folder is on my harddrive, don't need to share that
+			// pagesContent += '\t{"url": "${_pages.url}"}';
+			pagesContent += '\t${haxe.Json.stringify(_pages)}';
+			pagesContent += (i != pages.length-1) ? ',\n' : '\n';
 		}
-		content += ']';
+		pagesContent += ']\n';
 
-		createFile (path, 'pages.json', '{${content}}');
-		createFile (path, 'posts.json', '{}');
-		createFile (path, 'photos.json', '{}');
-		createFile (path, 'statics.json', '{}');
+		// trace('4');
+
+		photosContent += '\n"photos":[\n';
+		for (i in 0...photos.length){
+			var _photos : Photo = photos[i];
+			// _photos.path = '';
+			// _photos.projectFolder = '';
+			Reflect.deleteField (_photos, 'path');			 	// folder is on my harddrive, don't need to share that
+			Reflect.deleteField (_photos, 'projectFolder'); 	// folder is on my harddrive, don't need to share that
+			Reflect.setProperty (_photos, 'html',  generateHomepageBlock (_photos));
+			photosContent += '\t${haxe.Json.stringify(_photos)}';
+			photosContent += (i != photos.length-1) ? ',\n' : '\n';
+		}
+		photosContent += ']\n';
+
+		// trace('5');
+
+		staticsContent += '\n"statics":[\n';
+		for (i in 0...statics.length){
+			var _statics : Statics = statics[i];
+			Reflect.deleteField (_statics, 'projectFolder'); 	// folder is on my harddrive, don't need to share that
+			// staticsContent += '\t{"url": "${_statics.url}"}';
+			staticsContent += '\t${haxe.Json.stringify(_statics)}';
+			staticsContent += (i != statics.length-1) ? ',\n' : '\n';
+		}
+		staticsContent += ']\n';
+
+		totalContent += pagesContent + ',' + photosContent + ',' +  postsContent + ',' +  staticsContent;
+
+		// trace('6');
+
+		createFile (path, 'pages.json', '{${pagesContent}}');
+		createFile (path, 'posts.json', '{${postsContent}}');
+		createFile (path, 'photos.json', '{${photosContent}}');
+		createFile (path, 'statics.json', '{${staticsContent}}');
+		createFile (path, 'total.json', '{${totalContent}}');
+
+		// trace('7 end');
 	}
 
 	private function generateHtmlFilesForPages(posts:Array<Post>, pages:Array<Page>, photos:Array<Photo>, statics:Array<Statics>) {
@@ -368,7 +443,7 @@ class Run {
 			}
 			createWithGenTemplate('${App.EXPORT_FOLDER}/${App.POSTS}', '${post.url}.html', template, obj);
 			html += '<h1>${post.title}</h1>
-					<p><span class="glyphicon glyphicon-time"></span> ${post.createdOn}</p>
+					<p><i class="fas fa-link"></i> ${post.createdOn}</p>
 					<p>${post.content}</p>
 					<a href="${App.EXPORT_FOLDER}/${App.POSTS}/${post.url}.html" class="btn btn-link" role="button">Read more</a>
 					<hr>';
@@ -524,13 +599,13 @@ class Run {
 				// trace(photo.folders, folder, photo.fileName);
 				if (photo.folders == folder){
 					var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
-					var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>' : '';
+					var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <i class="fas fa-angle-right"></i></a></p>' : '';
 					html += '
 						<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);">
-							<a name="${photo.fileName}" class="internal"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+							<a name="${photo.fileName}" class="internal"><i class="fas fa-link"></i></a>
 							<div class="post" data-style="${(photo.style).urlEncode()}" ${photo.nostyle}>
 								<div class="content">
-									<a href="#${photo.fileName}" class="link"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+									<a href="#${photo.fileName}" class="link"><i class="fas fa-link"></i></a>
 									${photo.description} ${infoBtn}
 								</div>
 							</div>
@@ -538,6 +613,9 @@ class Run {
 							<br class="clearfix">
 						</div>
 					'.replace('\t','').replace('\n',''); // strip tabs and returns
+
+					// [mck] I am going to duplicate the code, sorry about that ... maybe it will be better later down the track
+					// changes need to be made in two functions
 				}
 			}
 
@@ -576,7 +654,7 @@ class Run {
 				var parallaxImage = '${App.photoFolderArray[0]}/${photo.fileName}.jpg';
 				var previewImage = '${App.photoFolderArray[3]}/${photo.fileName}.jpg';
 
-				var postHtml = '<a href="./index.html" role="button" class="bttn bttn-link"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back</a>';
+				var postHtml = '<a href="./index.html" role="button" class="bttn bttn-link"><i class="fas fa-angle-right"></i> Back</a>';
 				postHtml += photo.post;
 				postHtml += '<img src="${previewImage}" alt="${photo.fileName}">';
 
@@ -596,6 +674,62 @@ class Run {
 				}
 			}
 		}
+	}
+
+
+	function generateHomepageBlock (photo:Photo) : String {
+		var thumb = '${photo.folders}/${App.THUMB}/${photo.fileName}.jpg';
+		var infoBtn = (photo.post != '') ? '<p><a href="${photo.folders}/${photo.fileName}.html" class="btn btn-link">More info <i class="fas fa-angle-right"></i></a></p>' : '';
+		var html = '
+			<div class="slide" data-width="${photo.width}" data-height="${photo.height}" style="background-image: url($thumb);">
+				<a name="${photo.fileName}" class="internal"><i class="fas fa-link"></i></a>
+				<div class="post" data-style="${(photo.style).urlEncode()}" ${photo.nostyle}>
+					<div class="content">
+						<a href="#${photo.fileName}" class="link"><i class="fas fa-link"></i></a>
+						${photo.description} ${infoBtn}
+					</div>
+				</div>
+				<img src="${thumb}" class="full" data-folder="${photo.folders}" data-img="${photo.fileName}.jpg" width="${photo.width}" height="${photo.height}">
+				<br class="clearfix">
+			</div>
+		'.replace('\t','').replace('\n',''); // strip tabs and returns
+		return html;
+	}
+
+	function minifyImages(folder){
+		Sys.println('\t+ minifyimages -> ${folder}');
+
+		var arr = FileSystem.readDirectory(folder);
+		for ( i in 0 ... arr.length ) {
+			var fileOrFolder = arr[i];
+			if(FileSystem.isDirectory('$folder/$fileOrFolder')){
+				minifyImages('$folder/$fileOrFolder');
+			} else {
+				var fileName = fileOrFolder.split('.')[0];
+				var fileExt = fileOrFolder.split('.')[fileOrFolder.split('.').length - 1].toLowerCase();
+
+				// trace('$i, $fileOrFolder, $fileName, $fileExt');
+
+				// if(fileName.startsWith('_')) continue;
+				if(fileOrFolder.startsWith('.')) continue;
+				if(fileExt.endsWith('gif')) continue;
+				if(fileExt.startsWith('min')) continue;
+
+				// trace('----->> $i, $fileOrFolder, $fileName, $fileExt');
+
+				var command = Sys.command('convert',[
+					'${folder}${fileOrFolder}',
+					'-sampling-factor', '4:2:0',
+					'-strip',
+					'-quality', '85',
+					'-interlace', 'JPEG',
+					'-colorspace', 'sRGB',
+					'${folder}/${fileName}.min.jpg'
+				]);
+
+			}
+		}
+
 	}
 
 	function generateThumb (photo:Photo){
@@ -869,6 +1003,9 @@ class Run {
 		// trace(folder, fileArray);
 
 		var arr = FileSystem.readDirectory(folder);
+
+		// trace(arr);
+
 		for ( i in 0 ... arr.length ) {
 			var fileOrFolder = arr[i];
 			if(FileSystem.isDirectory('$folder/$fileOrFolder')){
@@ -876,10 +1013,14 @@ class Run {
 				copyFiles('$folder/$fileOrFolder',fileArray);
 			} else {
 				var fileName = fileOrFolder.split('.')[0];
-				var fileExt = fileOrFolder.split('.')[1].toLowerCase();
+				var fileExt = fileOrFolder.split('.')[fileOrFolder.split('.').length - 1].toLowerCase();
 
-				if(fileName.startsWith('_')) continue;
-				if(fileName.startsWith('.')) continue;
+				// trace('-------------> $fileOrFolder');
+
+				if(fileOrFolder.startsWith('_')) continue;
+				if(fileOrFolder.startsWith('.')) continue;
+				// trace('------------------------------> $fileOrFolder');
+				// trace('------------------------------> $fileExt');
 
 				if(fileArray.indexOf(fileExt) != -1){
 					var wwwFolder = '${projectFolder}/${App.EXPORT_FOLDER}/${folder.replace(projectFolder, '')}';
@@ -975,6 +1116,7 @@ class Run {
 			try {
 				Sys.println('\t+ folder - create: $name');
 			} catch(e:Dynamic){
+				trace('oeps something went wrong');
 				trace(e);
 			}
 		}
@@ -1020,6 +1162,7 @@ haxelib run monk [action] [options]
 		prepare		: generate .json and .md files for images (ignore _ and . files)
 		clear		: cleanup www folder
 		update		: update/overwrite default "theme0" folder
+		minify		: update images with minifed options
 
 	[options]
 		-force 		: overwrite existing files
