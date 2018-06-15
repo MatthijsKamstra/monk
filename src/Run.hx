@@ -242,9 +242,9 @@ class Run {
 		createDummyImage('${App.PHOTOS}/monk','pink image','pink', 'pink');
 		createDummyImage('${App.PHOTOS}/monk','ignore image','_ignore', 'Plum');
 
-		createDummyImage('${App.PHOTOS}/00_ccc','ccc','ccc', 'green');
-		createDummyImage('${App.PHOTOS}/01_bbb','bbb','bbb', 'green');
-		createDummyImage('${App.PHOTOS}/02_aaa','aaa','aaa', 'green');
+		createDummyImage('${App.PHOTOS}/00_ccc','ccc','ccc', 'Aqua');
+		createDummyImage('${App.PHOTOS}/01_bbb','bbb','bbb', 'CornflowerBlue');
+		createDummyImage('${App.PHOTOS}/02_aaa','aaa','aaa', 'DarkOrange');
 	}
 
 	function setupPostAndPages(){
