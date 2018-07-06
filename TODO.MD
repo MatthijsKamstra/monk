@@ -2,6 +2,7 @@
 
 Make site better
 
+
 - [x] social and seo added to the pages
 - [x] google analytics
 - [x] check javascript/paralax on mobile
@@ -23,7 +24,7 @@ Make site better
 - [ ] sass
 - [ ] minify: html/css/js (check google for advise)
 - [ ] init paralax better
-- [ ] mobile homepage css doesn't work
+- [x] mobile homepage css doesn't work
 - [ ] photo post back button with anchor
 - [ ] automate with npm
 - [ ] looks like it generates the same files multible time
@@ -34,10 +35,12 @@ Make site better
 - [ ] really basic theme needed (`theme0` -> is theme for me and `theme_basic` very basic one)
 - [ ] don't resize images to bigger if that is not the original size
 - [x] optimize svg logo static page
-- [ ] update profile foto
+- [x] update profile foto
 - [ ] `haxelib run monk generate` without `www` doesn't work
 - [ ] `haxelib run monk clear` doesn't work
-- [ ] mobile change the css for readable (absolute and display block, change bg patter)
+- [x] mobile change the css for readable (absolute and display block, change bg patter)
+- [x] replace old twitter image with new
+- [ ] image matthijs twitter not absolute (use local image)
 
 
 top priority

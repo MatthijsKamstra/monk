@@ -97,16 +97,18 @@ class Main {
 	function rebuildHomepage(json:Dynamic){
 		var maxItems = 10; // how many items on the homepage random?
 		// trace (new JQuery("#main"));
-		new JQuery("#main").html('<!-- reset -->'); // reset the container from the static file
+		// new JQuery("#main").html('<!-- reset -->'); // reset the container from the static file
 		var itemArray = json.photos;
 		Random.shuffle(itemArray);
 		var divMain = '';
 		if(maxItems >= itemArray.length) maxItems = (itemArray.length);
 		for ( i in 0 ... maxItems ) {
-			divMain += itemArray[i].html;
+			if(itemArray[i].html != null){
+				divMain += itemArray[i].html;
+			}
 			// trace(i);
 		}
-		new JQuery("#main").html(divMain);
+		if(divMain != '') new JQuery("#main").html(divMain);
 		initHomepage();
 		// haxe.Timer.delay(function () {
 		// 	trace('wait 500 ms ');
