@@ -37,6 +37,7 @@ Make site better
 - [ ] update profile foto
 - [ ] `haxelib run monk generate` without `www` doesn't work
 - [ ] `haxelib run monk clear` doesn't work
+- [ ] mobile change the css for readable (absolute and display block, change bg patter)
 
 
 top priority
