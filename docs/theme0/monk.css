@@ -377,7 +377,10 @@ body.monk-info {
     /* for some reason I can't get this slides seamless */
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
+
+
 
 .post {
     position: absolute;
@@ -409,6 +412,21 @@ body.monk-info {
         bottom: 10px;
     }
 }
+
+@media only screen and (max-width : 480px) {
+    .slide {
+        height: auto;
+        clear: both;
+        overflow: auto;
+        position: relative;
+        margin-bottom: 0px;
+    }
+    .post {
+        position: relative;
+    }
+}
+
+
 /* @media (min-width: 992px) {
   .post {
     width: 970px;
