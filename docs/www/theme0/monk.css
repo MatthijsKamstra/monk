@@ -30,7 +30,9 @@ strong {
 -------------------------------------------- */
 
 .navbar-monk {
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-style: italic;
     transition-timing-function: ease-out;
     transition: top 1s;
     transition-delay: 1s;
@@ -116,7 +118,9 @@ body>nav>div>ul>li>a {
     margin: 0;
     padding: 0;
     left: 80px;
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-style: italic;
     font-size: 1.6em;
     color: white;
     position: absolute;
